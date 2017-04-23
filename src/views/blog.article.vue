@@ -1,164 +1,167 @@
 <template>
-  <div class="article animated fadeIn container">
-    <div class="row">
-      <div id="article" class="col-lg-9">
-        <div class="article-detail">
-          <!--文章-->
-          <div class="paper" :class="{'loading':isLoading}">
-            <section class="paper-header">
-              <ol class="breadcrumb  hidden-xs">
-                <li>
-                  <router-link :to="{ name: 'index'}" tag="a">首页</router-link>
-                </li>
-                <li>
-                  <router-link :to="{ name: 'blog'}" tag="a">博客</router-link>
-                </li>
-                <li class="active">文章</li>
-              </ol>
-              <h1>{{article.title}}</h1>
-            </section>
-            <section class="paper-info">
-              <div class="paper-info-span">
-                <i class="fa fa-calendar"></i>
-                <span>{{article.publish_time  | moment("from","now")}}</span>
-              </div>
-              <div class="paper-info-span">
-                <i class="fa fa-book"></i>
-                阅读数
-                <span>{{article.read_num}}</span>
-              </div>
-              <a href="#comment" class="paper-info-span">
-                <i class="fa fa-comments"></i>
-                评论数
-                <span>{{recountCommentNum}}</span>
-              </a>
-              <!--hidden-xs-->
-              <div class="paper-info-span hidden-xs" v-for="tag of article.tags">
-                <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
-              </div>
-            </section>
-            <section class="paper-content">
-              <div class="paper-content-inner markdown-body hljs" v-html="article.html">
-                <!--{{{article.content}}}-->
-              </div>
-              <!--page-->
-            </section>
-
-            <!--the end-->
-          </div>
-          <!--评论-->
-          <section id="comment" class="commentbox">
-            <!--标题-->
-            <div class="commentbox-header">
-              <h3><span class="commentbox-header--Comments">Comments</span><span class="commentbox-header-count">{{recountCommentNum}}</span>
-              </h3>
-            </div>
-            <!--提问题-->
-            <!--hidden-xs-->
-            <div class="commentbox-question " @click="replyBtn('')">
-              <comment-box :article-id="article._id" :pre-id="article._id"></comment-box>
-            </div>
-
-            <!--问题盒子-->
-            <div class="commentbox-inner">
-              <div class="comments" v-for="comment of commentList">
-                <!--{{comment._id}}{{'&#45;&#45;'}}{{chain.selectId ==comment._id}}{{'&#45;&#45;'}}{{toggle}}{{'&#45;&#45;'}}{{chain.selectId}}-->
-                <div class="comments-ask">
-                  <div class="comments-ask-header">
-                    <span class="name">{{comment.name}}</span>&ensp;·&ensp;
-                    <span>{{comment.time | moment("from","now")}}</span>
-                    <!--hidden-xs-->
-                    <span class="">&ensp;·&ensp;<span class="reply"
-                                                      @click="replyBtn(comment._id)">回复</span></span>
-                  </div>
-                  <div class="comments-ask-content">
-                    <span>{{comment.content}}</span>
-                  </div>
+  <div class="article animated fadeIn">
+    <div class="container">
+      <div class="row">
+        <div id="article" class="col-lg-9">
+          <div class="article-detail">
+            <!--文章-->
+            <div class="paper" :class="{'loading':isLoading}">
+              <section class="paper-header">
+                <ol class="breadcrumb  hidden-xs">
+                  <li>
+                    <router-link :to="{ name: 'index'}" tag="a">首页</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'blog'}" tag="a">博客</router-link>
+                  </li>
+                  <li class="active">文章</li>
+                </ol>
+                <h1>{{article.title}}</h1>
+              </section>
+              <section class="paper-info">
+                <div class="paper-info-span">
+                  <i class="fa fa-calendar"></i>
+                  <span>{{article.publish_time  | moment("from","now")}}</span>
                 </div>
-                <div class="comments-reply" :class="{'active':(comment._id==selectId && toggle)}">
-                  <div class="commentbox-question">
-                    <comment-box :article-id="comment.article_id" :pre-id="comment._id"></comment-box>
+                <div class="paper-info-span">
+                  <i class="fa fa-book"></i>
+                  阅读数
+                  <span>{{article.read_num}}</span>
+                </div>
+                <a href="#comment" class="paper-info-span">
+                  <i class="fa fa-comments"></i>
+                  评论数
+                  <span>{{recountCommentNum}}</span>
+                </a>
+                <!--hidden-xs-->
+                <div class="paper-info-span hidden-xs" v-for="tag of article.tags">
+                  <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
+                </div>
+              </section>
+              <section class="paper-content">
+                <div class="paper-content-inner markdown-body hljs" v-html="article.html">
+                  <!--{{{article.content}}}-->
+                </div>
+                <!--page-->
+              </section>
+
+              <!--the end-->
+            </div>
+            <!--评论-->
+            <section id="comment" class="commentbox">
+              <!--标题-->
+              <div class="commentbox-header">
+                <h3><span class="commentbox-header--Comments">Comments</span><span class="commentbox-header-count">{{recountCommentNum}}</span>
+                </h3>
+              </div>
+              <!--提问题-->
+              <!--hidden-xs-->
+              <div class="commentbox-question " @click="replyBtn('')">
+                <comment-box :article-id="article._id" :pre-id="article._id"></comment-box>
+              </div>
+
+              <!--问题盒子-->
+              <div class="commentbox-inner">
+                <div class="comments" v-for="comment of commentList">
+                  <!--{{comment._id}}{{'&#45;&#45;'}}{{chain.selectId ==comment._id}}{{'&#45;&#45;'}}{{toggle}}{{'&#45;&#45;'}}{{chain.selectId}}-->
+                  <div class="comments-ask">
+                    <div class="comments-ask-header">
+                      <span class="name">{{comment.name}}</span>&ensp;·&ensp;
+                    <span>{{comment.time | moment("from","now")}}</span>
+                      <!--hidden-xs-->
+                      <span class="">&ensp;·&ensp;<span class="reply"
+                                                        @click="replyBtn(comment._id)">回复</span></span>
+                    </div>
+                    <div class="comments-ask-content">
+                      <span>{{comment.content}}</span>
+                    </div>
                   </div>
-                  <div class="comments-reply-each" v-for="reply of comment.next_id">
-                    <div class="comments-reply-header">
+                  <div class="comments-reply" :class="{'active':(comment._id==selectId && toggle)}">
+                    <div class="commentbox-question">
+                      <comment-box :article-id="comment.article_id" :pre-id="comment._id"></comment-box>
+                    </div>
+                    <div class="comments-reply-each" v-for="reply of comment.next_id">
+                      <div class="comments-reply-header">
                       <span
                         class="name">{{reply.name}}</span>&ensp;·&ensp;
                       <span>{{reply.time | moment("from","now")}}</span>
-                    </div>
-                    <div class="comments-reply-content">
-                      <span>{{reply.content}}</span>
+                      </div>
+                      <div class="comments-reply-content">
+                        <span>{{reply.content}}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
+          </div>
+          <copyright></copyright>
         </div>
-        <copyright></copyright>
-      </div>
-      <div class="col-lg-3 visible-lg clearfix">
-        <aside class="article-aside">
-          <!--最新排行 for 10-->
-          <div class="topBar">
-            <div class="topBar--title">
-              <h3 class="topBar--title__h3">RECENT
+        <div class="col-lg-3 visible-lg clearfix">
+          <aside class="article-aside">
+            <!--最新排行 for 10-->
+            <div class="topBar">
+              <div class="topBar--title">
+                <h3 class="topBar--title__h3">RECENT
                 <small>Top{{topNum}}</small>
-              </h3>
-            </div>
-            <ul class="topBar--ul">
-              <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
-              <li v-show="articleTop.latest.length>0" class="topArticle--li animated fadeIn"
-                  v-for="article of articleTop.latest">
-                <router-link target="_blank" :to="{ name: 'article',params: { articleId: article._id }}"
-                             activeClass="active" tag="a">{{article.title}}
+                </h3>
+              </div>
+              <ul class="topBar--ul">
+                <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
+                <li v-show="articleTop.latest.length>0" class="topArticle--li animated fadeIn"
+                    v-for="article of articleTop.latest">
+                  <router-link target="_blank" :to="{ name: 'article',params: { articleId: article._id }}"
+                               activeClass="active" tag="a">{{article.title}}
                 </router-link>
-                <span>({{article.read_num}})</span>
-              </li>
-            </ul>
-          </div>
-          <!--阅读排行 for 10-->
-          <div class="topBar">
-            <div class="topBar--title">
-              <h3 class="topBar--title__h3">READ
+                  <span>({{article.read_num}})</span>
+                </li>
+              </ul>
+            </div>
+            <!--阅读排行 for 10-->
+            <div class="topBar">
+              <div class="topBar--title">
+                <h3 class="topBar--title__h3">READ
                 <small>Top{{topNum}}</small>
-              </h3>
-            </div>
-            <ul class="topBar--ul">
-              <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
-              <li v-show="articleTop.read.length>0" class="topArticle--li animated fadeIn"
-                  v-for="article of articleTop.read">
-                <router-link target="_blank" :to="{ name: 'article',params: { articleId: article._id }}"
-                             activeClass="active" tag="a">{{article.title}}
+                </h3>
+              </div>
+              <ul class="topBar--ul">
+                <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
+                <li v-show="articleTop.read.length>0" class="topArticle--li animated fadeIn"
+                    v-for="article of articleTop.read">
+                  <router-link target="_blank" :to="{ name: 'article',params: { articleId: article._id }}"
+                               activeClass="active" tag="a">{{article.title}}
                 </router-link>
-                <span>({{article.read_num}})</span>
-              </li>
-            </ul>
-          </div>
-          <!--标签 最多10个-->
-          <div class="topBar">
-            <div class="topBar--title">
-              <h3 class="topBar--title__h3">TAGS
+                  <span>({{article.read_num}})</span>
+                </li>
+              </ul>
+            </div>
+            <!--标签 最多10个-->
+            <div class="topBar">
+              <div class="topBar--title">
+                <h3 class="topBar--title__h3">TAGS
                 <!--<small>Top10</small>-->
-              </h3>
-            </div>
-            <ul class="topBar--ul">
-              <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
-              <li v-show="articleTop.tag.length>0" class="topTag--li  animated fadeIn" v-for="tag of articleTop.tag">
-                <router-link :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
-                             activeClass="active" tag="a">
-                  {{tag.name}}({{tag.used_num}})
+                </h3>
+              </div>
+              <ul class="topBar--ul">
+                <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
+                <li v-show="articleTop.tag.length>0" class="topTag--li  animated fadeIn" v-for="tag of articleTop.tag">
+                  <router-link :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
+                               activeClass="active" tag="a">
+                    {{tag.name}}({{tag.used_num}})
                 </router-link>
-              </li>
-            </ul>
-          </div>
-        </aside>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <!--返回最上层-->
+      <div id="toTop" class="backToTop">
+        <i class="fa fa-arrow-up"></i>
       </div>
     </div>
-    <!--返回最上层-->
-    <div id="toTop" class="backToTop">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+
   </div>
 
 </template>
@@ -308,7 +311,7 @@
 
   .article-detail {
     /*width: 780px;*/
-    max-width: 980px;
+    //max-width: 980px;
     /*width: 52%;*/
     margin: 0 auto;
     margin-left: -35px;
@@ -636,9 +639,21 @@
     }
   }
 
+  @include media(">desktop_small", "<=desktop") {
+    .article {
+      padding: 35px 20px 0px 65px;
+      .container {
+        width: 100%;
+      }
+    }
+  }
+
   @include media("<=desktop_small") {
     .article {
       padding-top: 60px;
+      .container {
+        width: 100%;
+      }
     }
   }
 
