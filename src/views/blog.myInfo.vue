@@ -1,17 +1,15 @@
 <template>
-
-  <!--<div class="myinfo" :class="{ 'showMyWords': isShowMyWords}">-->
-  <div id="myinfo" class="myinfo">
+  <div id="myinfo" class="my-info">
     <!--我的信息列表-->
     <section class="detail text-center">
       <section class="detail__1">
-        <section class="detail__imgBox" @click="setMyWordStatus">
-          <div class="imgBox">
+        <section class="detail-imgbox" @click="setMyWordStatus">
+          <div class="imgbox">
             <img class="img-circle" :src="imgPrefix(myinfo.img_url)">
             <!--<img class="img-circle" :src="myinfo.img_url | addImgPrefix" v-err-src.literal="">-->
           </div>
         </section>
-        <section class="detail__info">
+        <section class="detail-info">
           <p class="name text-shadow"> {{myinfo.full_name || 'X-SONGTAO'}}</p>
           <p class="job text-shadow"> {{myinfo.position || '前端工程师&&Nodejs工程师'}}</p>
           <p class="address text-shadow hidden-xs">
@@ -67,13 +65,13 @@
 
   $animationTime_1: 500ms;
   $animationTime_2: 200ms;
-  .showMyWords {
+  .show-mywords {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
   }
 
-  .showMyWords-active {
+  .show-mywords-active {
     @include media(">desktop") {
       width: 100% !important;
       .mywords {
@@ -114,20 +112,20 @@
     }
   }
 
-  .myinfo {
+  .my-info {
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.6);
     color: #fff;
     .detail {
       box-sizing: content-box;
       .detail__1 {
-        .detail__imgBox {
+        .detail-imgbox {
           width: 160px;
           height: 160px;
           margin: 0 auto;
           cursor: pointer;
 
-          .imgBox {
+          .imgbox {
             width: 160px;
             height: 160px;
             margin: 0 auto;
@@ -168,7 +166,7 @@
             }
           }
         }
-        .detail__info {
+        .detail-info {
           overflow: hidden;
           .name {
             color: #fff;
@@ -321,7 +319,7 @@
 
   /*响应式处理*/
   @include media(">desktop") {
-    .myinfo {
+    .my-info {
       width: 25%;
       height: 100%;
       display: flex;
@@ -343,10 +341,10 @@
           justify-content: center;
           align-items: center;
           margin-bottom:15px;
-          .detail__imgBox {
+          .detail-imgbox {
             width: 100%;
           }
-          .detail__info {
+          .detail-info {
             width: 100%;
           }
         }
@@ -391,7 +389,7 @@
   }
 
   @include media("<=desktop") {
-    .myinfo {
+    .my-info {
       width: 100%;
       height: 100%;
       display: flex;
@@ -413,10 +411,10 @@
           flex-direction: row;
           justify-content: center;
           align-items: center;
-          .detail__imgBox {
+          .detail-imgbox {
             width: 225px;
           }
-          .detail__info {
+          .detail-info {
             width: 265px;
           }
         }
@@ -463,7 +461,7 @@
   }
 
   @include media(">desktop_small", "<=desktop") {
-    .myinfo {
+    .my-info {
       height: 270px;
       .detail {
       }
@@ -471,7 +469,7 @@
   }
 
   @include media("<=desktop_small") {
-    .myinfo {
+    .my-info {
       height: 315px;
       .detail {
         padding: 45px 0 0 0;
@@ -484,7 +482,7 @@
   }
 
   @include media("<=phone") {
-    .myinfo {
+    .my-info {
       justify-content: center;
       height: 190px;
       .detail {
@@ -495,12 +493,12 @@
         .detail__1 {
           margin: 5px 0;
           flex-direction: row;
-          .detail__imgBox {
+          .detail-imgbox {
             margin: 0 5px;
             display: flex;
             justify-content: center;
             align-items: center;
-            .imgBox {
+            .imgbox {
               width: 70px;
               height: 70px;
               &:hover {
@@ -512,7 +510,7 @@
             width: 80px;
             height: 80px;
           }
-          .detail__info {
+          .detail-info {
             margin: 0 5px;
             width: auto;
             .name {
@@ -551,39 +549,7 @@
   import {addImgPrefix} from "../utils/filters.js";
   import {GetMyInfo} from '../api/api_myinfo'
   import {mapState, mapActions} from 'vuex';
-  // Vue.directive('err-src', {
-  //   bind: function () {
-  //     let scope = this;
-  //     let element = $(scope.el);
-  //     let errSrc = scope.expression;
-  //     element.css({"opacity": 0});
-  //     var emptyTransparent = "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==";
-  //     //如果失败
-  //     element.on('error', function () {
-  //       if (!!errSrc) {
-  //         element.attr('src', errSrc);
-  //       } else {
-  //         element.attr('src', emptyTransparent);
-  //       }
-  //       element.css({"opacity": 1, "transition": "opacity ease 300ms"});
-  //       element.off()
-  //     });
-  //     //如果成功
-  //     element.on('load', function () {
-  //       element.css({"opacity": 1, "transition": "opacity ease 300ms"});
-  //     });
-  //     // 准备工作
-  //     // 例如，添加事件处理器或只需要运行一次的高耗任务
-  //   },
-  //   update: function (newValue, oldValue) {
-  //     // 值更新时的工作
-  //     // 也会以初始值为参数调用一次
-  //   },
-  //   unbind: function () {
-  //     // 清理工作
-  //     // 例如，删除 bind() 添加的事件监听器
-  //   }
-  // });
+
   export default {
     //replace: true,
     data: function () {
@@ -598,10 +564,10 @@
         var $myinfo = $("#myinfo")
         if (val) {
           //true
-          $myinfo.addClass('showMyWords showMyWords-active')
+          $myinfo.addClass('show-mywords show-mywords-active')
         } else {
           //false
-          $myinfo.removeClass('showMyWords-active');
+          $myinfo.removeClass('show-mywords-active');
         }
       }
     },
@@ -635,7 +601,7 @@
       var _this = this;
       $myinfo.on('transitionend',function (event) {
         if(event.target.id === 'myinfo' && !_this.isShowMyWords){
-          $myinfo.removeClass('showMyWords');
+          $myinfo.removeClass('show-mywords');
         }
       })
     }

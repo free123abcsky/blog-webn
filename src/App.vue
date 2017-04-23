@@ -1,7 +1,7 @@
 <!--内容区-->
 <template>
   <div>
-    <div class="app__content">
+    <div class="app-content">
       <!--导航条-->
       <blog-nav></blog-nav>
       <!-- 路由外链 -->
@@ -153,7 +153,7 @@
   }
 
   /*内容区*/
-  .app__content {
+  .app-content {
     width: 100%;
   }
 </style>

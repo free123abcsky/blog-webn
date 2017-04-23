@@ -49,6 +49,8 @@
     @import "../theme/cataBox.scss";
     width: 780px;
     margin: 0 auto;
+    .cataBox{
+      border-radius:4px;
     .itemBox {
       @include display-flex;
       @include justify-content(flex-start);
@@ -134,7 +136,7 @@
 
         }
       }
-    }
+    }}
   }
 
   @include media("<=tablet") {

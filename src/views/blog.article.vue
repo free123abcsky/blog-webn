@@ -1,11 +1,11 @@
 <template>
   <div class="article animated fadeIn container">
     <div class="row">
-      <div id="article" class="col-lg-8">
+      <div id="article" class="col-lg-9">
         <div class="article-detail">
           <!--文章-->
           <div class="paper" :class="{'loading':isLoading}">
-            <section class="paper__header">
+            <section class="paper-header">
               <ol class="breadcrumb  hidden-xs">
                 <li>
                   <router-link :to="{ name: 'index'}" tag="a">首页</router-link>
@@ -17,28 +17,28 @@
               </ol>
               <h1>{{article.title}}</h1>
             </section>
-            <section class="paper__info">
-              <div class="paper__info--span">
+            <section class="paper-info">
+              <div class="paper-info-span">
                 <i class="fa fa-calendar"></i>
                 <span>{{article.publish_time  | moment("from","now")}}</span>
               </div>
-              <div class="paper__info--span">
+              <div class="paper-info-span">
                 <i class="fa fa-book"></i>
                 阅读数
                 <span>{{article.read_num}}</span>
               </div>
-              <a href="#comment" class="paper__info--span">
+              <a href="#comment" class="paper-info-span">
                 <i class="fa fa-comments"></i>
                 评论数
                 <span>{{recountCommentNum}}</span>
               </a>
               <!--hidden-xs-->
-              <div class="paper__info--span hidden-xs" v-for="tag of article.tags">
+              <div class="paper-info-span hidden-xs" v-for="tag of article.tags">
                 <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
               </div>
             </section>
-            <section class="paper__content">
-              <div class="paper__content--inner markdown-body hljs" v-html="article.html">
+            <section class="paper-content">
+              <div class="paper-content-inner markdown-body hljs" v-html="article.html">
                 <!--{{{article.content}}}-->
               </div>
               <!--page-->
@@ -49,43 +49,43 @@
           <!--评论-->
           <section id="comment" class="commentbox">
             <!--标题-->
-            <div class="commentbox__header">
-              <h3><span class="commentbox__header--Comments">Comments</span><span class="commentbox__header--count">{{recountCommentNum}}</span>
+            <div class="commentbox-header">
+              <h3><span class="commentbox-header--Comments">Comments</span><span class="commentbox-header-count">{{recountCommentNum}}</span>
               </h3>
             </div>
             <!--提问题-->
             <!--hidden-xs-->
-            <div class="commentBox__question " @click="replyBtn('')">
+            <div class="commentbox-question " @click="replyBtn('')">
               <comment-box :article-id="article._id" :pre-id="article._id"></comment-box>
             </div>
 
             <!--问题盒子-->
-            <div class="commentbox__inner">
+            <div class="commentbox-inner">
               <div class="comments" v-for="comment of commentList">
                 <!--{{comment._id}}{{'&#45;&#45;'}}{{chain.selectId ==comment._id}}{{'&#45;&#45;'}}{{toggle}}{{'&#45;&#45;'}}{{chain.selectId}}-->
-                <div class="comments__ask">
-                  <div class="comments__ask__header">
+                <div class="comments-ask">
+                  <div class="comments-ask-header">
                     <span class="name">{{comment.name}}</span>&ensp;·&ensp;
                     <span>{{comment.time | moment("from","now")}}</span>
                     <!--hidden-xs-->
                     <span class="">&ensp;·&ensp;<span class="reply"
                                                       @click="replyBtn(comment._id)">回复</span></span>
                   </div>
-                  <div class="comments__ask__content">
+                  <div class="comments-ask-content">
                     <span>{{comment.content}}</span>
                   </div>
                 </div>
-                <div class="comments__reply" :class="{'active':(comment._id==selectId && toggle)}">
-                  <div class="commentBox__question">
+                <div class="comments-reply" :class="{'active':(comment._id==selectId && toggle)}">
+                  <div class="commentbox-question">
                     <comment-box :article-id="comment.article_id" :pre-id="comment._id"></comment-box>
                   </div>
-                  <div class="comments__reply__each" v-for="reply of comment.next_id">
-                    <div class="comments__reply__header">
+                  <div class="comments-reply-each" v-for="reply of comment.next_id">
+                    <div class="comments-reply-header">
                       <span
                         class="name">{{reply.name}}</span>&ensp;·&ensp;
                       <span>{{reply.time | moment("from","now")}}</span>
                     </div>
-                    <div class="comments__reply__content">
+                    <div class="comments-reply-content">
                       <span>{{reply.content}}</span>
                     </div>
                   </div>
@@ -97,7 +97,7 @@
         </div>
         <copyright></copyright>
       </div>
-      <div class="col-lg-4 visible-lg clearfix">
+      <div class="col-lg-3 visible-lg clearfix">
         <aside class="article-aside">
           <!--最新排行 for 10-->
           <div class="topBar">
@@ -179,18 +179,19 @@
     .article-aside {
       position: fixed;
       /*padding-left: 20px;*/
-      width: 370px;
+      width: 350px;
       box-sizing: border-box;
       color: #333;
 
       .topBar {
         width: 100%;
-
         /*border: 1px solid transparent;*/
         margin-bottom: 15px;
         box-sizing: border-box;
         .topBar--title {
-          padding: 18px 0 8px;
+          border-radius:4px 4px 0 0;
+          padding: 12px 0 8px;
+          //padding: 18px 0 8px;
           background: rgba(0, 0, 0, 0.5);
           .topBar--title__h3 {
             border-left: 5px solid $base-theme-color;
@@ -307,10 +308,10 @@
 
   .article-detail {
     /*width: 780px;*/
-    min-width: 740px;
     max-width: 980px;
     /*width: 52%;*/
     margin: 0 auto;
+    margin-left: -35px;
     color: $base-word-color;
     box-sizing: border-box;
     position: relative;
@@ -322,21 +323,21 @@
       overflow: hidden;
       margin-bottom: 30px;
       &.loading {
-        .paper__header {
+        .paper-header {
           h1 {
             background: #eee;
           }
         }
-        .paper__info {
-          .paper__info--span {
+        .paper-info {
+          .paper-info-span {
             opacity: 0.3;
             background: #fff;
             min-width: 70px;
             text-decoration: none;
           }
         }
-        .paper__content {
-          .paper__content--inner {
+        .paper-content {
+          .paper-content-inner {
             background-image: url(../assets/pleasehole-img.png);
             background-repeat: no-repeat;
             background-size: 100% auto;
@@ -347,7 +348,7 @@
         }
 
       }
-      .paper__header {
+      .paper-header {
         border: 1px solid transparent;
         padding: 35px 35px 0;
         background: #fff;
@@ -365,7 +366,7 @@
           margin: 20px 0 10px;
         }
       }
-      .paper__info {
+      .paper-info {
         @include display-flex;
         @include justify-content(flex-end);
         @include align-items(center);
@@ -373,7 +374,7 @@
         padding: 10px 35px;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8) inset;
         transition: all ease 200ms;
-        .paper__info--span {
+        .paper-info-span {
           color: #eee;
           margin-left: 20px;
           font-size: 14px;
@@ -385,11 +386,11 @@
           color: $base-theme-color;
         }
       }
-      .paper__content {
+      .paper-content {
         padding: 35px;
         background: #fff;
         //min-height: 800px;
-        .paper__content--inner {
+        .paper-content-inner {
           padding: 5px 0 0;
           //border-bottom: 1px dashed #464646;
         }
@@ -447,7 +448,7 @@
         height: 0;
       }
 
-      .commentbox__header {
+      .commentbox-header {
         padding: 0 10px;
         //border-bottom: 1px solid #fff;
         margin-bottom: 0;
@@ -459,12 +460,12 @@
           @include justify-content(flex-end);
           @include align-items(center);
 
-          .commentbox__header--Comments {
+          .commentbox-header-comments {
             font-size: 50px;
             color: #fff;
             margin-right: 10px;
           }
-          .commentbox__header--count {
+          .commentbox-header-count {
             top: 2px;
             background: $base-theme-color;
             font-size: 20px;
@@ -484,15 +485,15 @@
       }
 
       //问题盒子
-      .commentBox__question {
+      .commentbox-question {
         padding: 0 35px;
       }
       //用户评论内容盒子
-      .commentbox__inner {
+      .commentbox-inner {
         padding: 0 35px 35px 35px;
         .comments {
           margin-bottom: 10px;
-          .comments__ask {
+          .comments-ask {
             box-sizing: content-box;
             padding: 10px;
             margin-bottom: 5px;
@@ -516,7 +517,7 @@
             /*<!--color: $base-theme-color-o;-->*/
             /*}*/
             /*}*/
-            .comments__ask__header {
+            .comments-ask-header {
               font-size: 14px;
               line-height: 130%;
               padding: 5px 0;
@@ -531,16 +532,16 @@
               }
 
             }
-            .comments__ask__content {
+            .comments-ask-content {
               font-size: 14px;
               line-height: 150%;
               padding: 5px 0;
               color: #fff;
             }
           }
-          .comments__reply {
+          .comments-reply {
             padding-left: 80px;
-            .commentBox__question {
+            .commentbox-question {
               display: block;
               height: 0;
               opacity: 0;
@@ -550,7 +551,7 @@
             &.active {
               //height: 100px;
               //margin-top: 10px;
-              .commentBox__question {
+              .commentbox-question {
                 display: block;
                 height: auto;
                 opacity: 1;
@@ -563,7 +564,7 @@
                 }
               }
             }
-            .comments__reply__each {
+            .comments-reply-each {
               padding: 5px;
               margin-bottom: 0;
               border-bottom: 1px solid #1b1b1b;
@@ -578,7 +579,7 @@
                 border-top: 1px solid #6f6f6f;
 
               }
-              .comments__reply__header {
+              .comments-reply-header {
                 font-size: 14px;
                 line-height: 130%;
                 padding: 3px 0;
@@ -588,7 +589,7 @@
                   color: $base-theme-color;
                 }
               }
-              .comments__reply__content {
+              .comments-reply-content {
                 font-size: 14px;
                 line-height: 150%;
                 padding: 3px 0;
@@ -630,6 +631,9 @@
     .backToTop {
       margin-left: 0;
     }
+    .article-detail{
+      margin-left:0px;
+    }
   }
 
   @include media("<=desktop_small") {
@@ -660,7 +664,7 @@
       .article-detail {
         .paper {
           margin-bottom: 10px;
-          .paper__header {
+          .paper-header {
             padding: 30px 10px 10px;
             h1 {
               font-size: 28px;
@@ -670,63 +674,63 @@
               min-height: inherit;
             }
           }
-          .paper__info {
+          .paper-info {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             padding: 8px 0px;
             background: rgba(0, 0, 0, 0.5);
-            .paper__info--span {
+            .paper-info-span {
               margin: 0 10px;
               font-size: 12px;
             }
           }
-          .paper__content {
+          .paper-content {
             padding: 20px 10px 20px;
-            .paper__content--inner {
+            .paper-content-inner {
               font-size: 14px !important;
             }
           }
         }
         .commentbox {
           margin-bottom: 10px;
-          .commentbox__header {
+          .commentbox-header {
             h3 {
-              .commentbox__header--Comments {
+              .commentbox-header-comments {
                 font-size: 30px;
                 margin-right: 8px;
               }
-              .commentbox__header--count {
+              .commentbox-header-count {
                 font-size: 16px;
                 min-width: 26px;
                 min-height: 26px;
               }
             }
           }
-          .commentBox__question {
+          .commentbox-question {
             padding: 0 10px;
           }
 
-          .commentbox__inner {
+          .commentbox-inner {
             padding: 0 10px 20px 10px;
             .comments {
-              .comments__ask {
-                .comments__ask__header {
+              .comments-ask {
+                .comments-ask-header {
                   padding: 5px 0 0 0;
                 }
-                .comments__ask__content {
+                .comments-ask-content {
                   padding: 5px 0 0 0;
                   font-size: 14px;
                 }
               }
-              .comments__reply {
+              .comments-reply {
                 padding-left: 30px;
-                .comments__reply__each {
+                .comments-reply-each {
                   padding: 5px 0 0 0;
-                  .comments__reply__header {
+                  .comments-reply-header {
                     /*padding: 3px 0 0 0;*/
                   }
-                  .comments__reply__content {
+                  .comments-reply-content {
                     /*padding: 3px 0 0 0;*/
                     font-size: 14px;
                   }

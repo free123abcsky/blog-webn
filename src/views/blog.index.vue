@@ -1,5 +1,5 @@
 <template>
-    <div id="indexBox" class="indexBox animated fadeIn">
+    <div id="indexBox" class="index-box animated fadeIn">
         <div class="index-content">
             <div class="head-wrap">
                 <h3 class="text-center services">前端工程师 - Nodejs工程师</h3>
@@ -18,11 +18,11 @@
                 </div>
                 <div class="text-center cat">一个记录时光的博客</div>
             </div>
-            <section class="index-btnBox">
-                <router-link class="index-btnBox-each text-center" :to="{ name: 'blog',query: { listType: 'latest' }}"
+            <section class="index-btnbox">
+                <router-link class="index-btnbox-each text-center" :to="{ name: 'blog',query: { listType: 'latest' }}"
                              activeClass="active" tag="div">我的博客
                 </router-link>
-                <router-link class="index-btnBox-each text-center" :to="{ name: 'music'}" activeClass="active"
+                <router-link class="index-btnbox-each text-center" :to="{ name: 'music'}" activeClass="active"
                              tag="div">我的音乐
                 </router-link>
             </section>
@@ -37,7 +37,7 @@
     @import "../theme/theme.scss";
     //首次进入页面,主页展示切换文字
     /*index的内容*/
-    .indexBox {
+    .index-box {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -116,7 +116,7 @@
             //底部的两个按钮
 
         }
-        .index-btnBox {
+        .index-btnbox {
             user-select: none;
             -webkit-user-select: none;
             width: 224px;
@@ -131,7 +131,7 @@
             @include display-flex;
             @include justify-content(space-around);
             @include align-items(center);
-            .index-btnBox-each {
+            .index-btnbox-each {
                 min-width: 62px;
                 color: #fff;
                 border: 1px solid $base-theme-color;
@@ -157,7 +157,7 @@
     }
 
     @include media("<=phone") {
-        .indexBox {
+        .index-box {
 
             .index-content {
                 padding-top: 45px;

@@ -3,8 +3,8 @@
     <my-info></my-info>
     <!-- 路由外链 -->
     <transition name="fade">
-      <div class="blog__content" v-show="!isShowMyWords">
-        <div class="blog__content--inner">
+      <div class="blog-content" v-show="!isShowMyWords">
+        <div class="blog-content-inner">
           <transition name="blogTrans">
               <router-view></router-view>
           </transition>
@@ -21,7 +21,7 @@
 
   .blog {
     position: relative;
-    .blog__content {
+    .blog-content {
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -29,8 +29,8 @@
       transition: opacity ease 500ms;
       /*opacity:1;*/
 
-      .blog__content--inner {
-        max-width: 780px;
+      .blog-content-inner {
+        max-width: 950px;
         width: 100%;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -53,10 +53,10 @@
   @include media(">desktop") {
     .blog {
       width: 100%;
-      .blog__content {
+      .blog-content {
         z-index: 2;
-        width: 63%;
-        padding-left: 36%;
+        width: 75%;
+        padding-left: 25%;
         position: relative;
       }
     }
@@ -64,9 +64,9 @@
 
   @include media(">desktop_small", "<=desktop") {
     .blog {
-      .blog__content {
-        padding-top: 270px;
-        .blog__content--inner {
+      .blog-content {
+        padding: 270px 20px 0px 65px;
+        .blog-content-inner {
 
         }
       }
@@ -76,9 +76,9 @@
   @include media("<=desktop_small") {
     .blog {
       /*padding-top: 45px;*/
-      .blog__content {
-        padding-top: 315px;
-        .blog__content--inner {
+      .blog-content {
+        padding: 315px 20px 0px 20px;
+        .blog-content-inner {
         }
       }
     }
@@ -86,11 +86,11 @@
 
   @include media("<=tablet") {
     .blog {
-      .blog__content {
+      .blog-content {
         padding-left: 15px;
         padding-right: 15px;
         /*padding-top: 270px;*/
-        .blog__content--inner {
+        .blog-content-inner {
 
         }
       }
@@ -99,14 +99,14 @@
 
   @include media("<=phone") {
     .blog {
-      .blog__content {
+      .blog-content {
         padding-left: 6px;
         padding-right: 6px;
         padding-top: 190px;
         width: 100%;
         /*overflow: hidden;*/
         box-sizing: border-box;
-        .blog__content--inner {
+        .blog-content-inner {
           padding-top: 6px;
         }
       }

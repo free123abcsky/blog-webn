@@ -45,6 +45,8 @@
   }
 
   .tagList {
+    .cataBox{
+      border-radius:4px;
     .itemBox {
       padding: 10px 40px;
       margin-bottom: 10px;
@@ -98,7 +100,7 @@
           }
         }
       }
-    }
+    }}
     @import "../theme/cataBox.scss";
     width: 780px;
     margin: 0 auto;

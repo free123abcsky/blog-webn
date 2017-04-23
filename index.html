@@ -1,5 +1,4 @@
 <!doctype html>
-<!--<html lang="zh-cn"  manifest = "app.manifest">-->
 <html lang="zh-cn" class="background">
 <head>
   <!--<base href="/">-->
@@ -10,19 +9,17 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="shortcut icon" href="//xiangsongtao.com/favicon.ico">
-  <!--manifest-->
-  <!--<link rel="manifest" href="app.manifest">-->
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="format-detection" content="telephone=no email=no">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="X-SONGTAO@VUE">
+  <meta name="application-name" content="BLOG_WEB">
   <link rel="icon" sizes="192x192" href="//xiangsongtao.com/favicon.ico">
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="X-SONGTAO@VUE">
+  <meta name="apple-mobile-web-app-title" content="BLOG_WEB">
   <!--<link rel="apple-touch-icon" href="favicon.ico">-->
   <link rel="apple-touch-icon-precomposed" href="//xiangsongtao.com/favicon.ico">
   <!--<link rel="apple-touch-startup-image" href="320-640.jpg" />-->
@@ -39,8 +36,6 @@
       padding: 0;
       min-height: 100%;
       background-color: #333;
-      /*background: #333;*/
-      /*transition: all ease 500ms;*/
     }
 
     .background:before {
@@ -65,10 +60,23 @@
 
     }
 
-    /*不要滚动条*/
-    html ::-webkit-scrollbar {
-      display: none;
+    .define-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
     }
+
+    .define-scrollbar::-webkit-scrollbar-track-piece {
+      background: #eee
+    }
+
+    .define-scrollbar::-webkit-scrollbar-thumb:vertical {
+      background: #666
+    }
+
+    /*不要滚动条*/
+    /*html ::-webkit-scrollbar {*/
+      /*display: none;*/
+    /*}*/
 
     /*动画*/
     @-webkit-keyframes ball-grid-pulse-loading {
@@ -213,7 +221,7 @@
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-    .pageLoaded {
+    .page-loaded {
       opacity: 0 !important;
       z-index: 0 !important;
     }
@@ -222,7 +230,7 @@
       /*outline:1px solid #eee;*/
     }
 
-    #loading .loadingCenter {
+    #loading .loading-center {
       width: 200px;
       height: 200px;
       display: flex;
@@ -232,7 +240,7 @@
 
     }
 
-    #loading .loadingCenter .loading__balls {
+    #loading .loading-center .loading-balls {
       padding: 20px;
       border-radius: 100%;
       box-sizing: border-box;
@@ -240,7 +248,7 @@
       height: 100px !important;
     }
 
-    #loading .loadingCenter .loading__notice {
+    #loading .loading-center .loading-text {
       font-size: 20px;
       padding: 0;
       margin: 0;
@@ -252,20 +260,20 @@
   <script>
     window.hideLoadingPage = function hideLoadingPage() {
       var $loading = document.getElementById('loading');
-      $loading.className += 'pageLoaded';
+      $loading.className += 'page-loaded';
       setTimeout(function () {
         $loading.className += ' hide';
       }, 500)
     };
   </script>
 </head>
-<body>
+<body class="define-scrollbar">
 <!--blog -->
 <div id="app"></div>
 <!--Loading-->
 <div id="loading">
-  <section class="loadingCenter">
-    <div class="loading__balls ball-grid-pulse-loading">
+  <section class="loading-center">
+    <div class="loading-balls ball-grid-pulse-loading">
       <div></div>
       <div></div>
       <div></div>
@@ -276,7 +284,7 @@
       <div></div>
       <div></div>
     </div>
-    <p class="loading__notice">
+    <p class="loading-text">
       Loading
     </p>
   </section>

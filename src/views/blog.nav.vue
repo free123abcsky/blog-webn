@@ -1,12 +1,12 @@
 <!--导航条-->
 <template>
-  <div class="blogNav ">
-    <nav class="nav__top">
+  <div class="blog-nav ">
+    <nav class="nav-top">
       <a v-if="isMobile && this.$route.name=='article'" @click="navBack" class="nav-item " title="后退">
-        <i class="fa fa-arrow-left  fa-fw fa-lg blue blackBG"></i>
+        <i class="fa fa-arrow-left  fa-fw fa-lg blue black-bg"></i>
       </a>
       <a v-else class="nav-item " data-toggle="tooltip" data-placement="right" title="SongTao">
-        <span class="siteLogo"></span>
+        <span class="site-logo"></span>
       </a>
       <router-link class="nav-item " :to="{ name: 'index'}" exact data-toggle="tooltip" activeClass="active"
                    data-placement="right"
@@ -22,12 +22,12 @@
                    data-placement="right"
                    title="音乐">
         <i class="fa fa-music fa-fw fa-lg"></i>
-        <section class="rightBottomStatus">
+        <section class="right-bottom-status">
           <i class="fa fa-lg" :class="{true:'fa-pause-circle-o',false:' fa-play-circle-o playing'}[!isPlaying]"></i>
         </section>
       </router-link>
     </nav>
-    <nav class="nav__bottom">
+    <nav class="nav-bottom">
       <router-link v-show="isLogin" class="nav-item  animated fadeIn hidden-xs"
                    :to="{ name: 'admin-dashboard'}" activeClass="active" data-toggle="tooltip" data-placement="right"
                    title="控制台">
@@ -58,7 +58,7 @@
       <a class="nav-item  fa-stack fa-lg hidden-xs" data-toggle="tooltip" data-placement="right" title="切换背景"
          @click="changeBG()">
         <i class="fa fa-photo fa-fw fa-lg"></i>
-        <section class="rightBottomStatus">
+        <section class="right-bottom-status">
           <i class="fa fa-lg fa-refresh" :class="{true:'',false:'fa-spin'}[!isChangeBG]"></i>
         </section>
       </a>
@@ -78,12 +78,12 @@
   // base
   @import "../theme/theme.scss";
 
-  .blackBG {
+  .black-bg {
     background: #000;
   }
 
   //default for desktop
-  .blogNav {
+  .blog-nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;;
@@ -102,11 +102,11 @@
       text-shadow: 0px 1px 1px #3b3b3b;
     }
     /*导航上面结构*/
-    .nav__top {
+    .nav-top {
 
     }
     /*导航下面结构*/
-    .nav__bottom {
+    .nav-bottom {
 
     }
     a {
@@ -126,7 +126,7 @@
       float: left;
       cursor: pointer;
       position: relative;
-      .siteLogo {
+      .site-logo {
         display: inline-block;
         height: 45px;
         width: 45px;
@@ -151,17 +151,17 @@
       }
       &.active {
         color: $base-theme-color !important;
-        .rightBottomStatus {
+        .right-bottom-status {
           color: inherit;
         }
       }
       &:hover {
         color: $base-theme-color;
-        .rightBottomStatus {
+        .right-bottom-status {
           color: inherit;
         }
       }
-      .rightBottomStatus {
+      .right-bottom-status {
         display: block;
         position: absolute;
         font-size: 14px;
@@ -194,7 +194,7 @@
 
   /*响应式*/
   @include media("<=desktop_small") {
-    .blogNav {
+    .blog-nav {
       width: 100%;
       height: 45px;
       display: flex;
@@ -212,23 +212,22 @@
   }
 
   @include media(">desktop_small") {
-    .blogNav {
+    .blog-nav {
       width: 45px;
       height: 100%;
       /*导航上面结构*/
-      .nav__top {
+      .nav-top {
         width: 100%;
       }
       /*导航下面结构*/
-      .nav__bottom {
+      .nav-bottom {
         width: 100%;
       }
     }
-
   }
 
   @include media(">desktop_large") {
-    .blogNav {
+    .blog-nav {
       /*width: 100px;*/
       height: 100%;
     }
@@ -386,6 +385,5 @@
       // _this.tooltip();
     }
   }
-
 
 </script>
