@@ -374,7 +374,7 @@
   import {addImgPrefix} from "../utils/filters.js";
   import {setLoginState} from '../vuex/actions'
 
-  import {ImageUpload} from "../api/api_upload";
+  import {UploadAvatar} from "../api/api_upload";
   import {mapActions} from 'vuex';
 
 
@@ -388,6 +388,7 @@
     },
     computed:{
       loginInInfo: function () {
+
         if(!!this.myInfo && !!this.myInfo.login_info){
           return _.orderBy(this.myInfo.login_info.slice(0, 15), ['login_time'],['desc'])
         }else{
@@ -408,6 +409,7 @@
         setLoginState: 'setLoginState'
       }),
       addImgPrefix: function (val) {
+
         return addImgPrefix(val)
       },
       save: function () {
@@ -489,8 +491,8 @@
         if (!file.type.match('image.*')) {
           return null;
         }
-        ImageUpload(file).then(function (imageName) {
-          _this.myInfo.img_url = imageName;
+        UploadAvatar(file).then(function (data) {
+          _this.myInfo.img_url = data.imgUrl;
         }, function () {
           alert("upload error");
         })

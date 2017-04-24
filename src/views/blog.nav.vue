@@ -209,22 +209,22 @@
         width: 45px;
       }
     }
-  }
+  }  @include media(">desktop_small") {
+       .blog-nav {
+         width: 45px;
+         height: 100%;
+         /*导航上面结构*/
+         .nav-top {
+           width: 100%;
+         }
+         /*导航下面结构*/
+         .nav-bottom {
+           width: 100%;
+         }
+       }
+     }
 
-  @include media(">desktop_small") {
-    .blog-nav {
-      width: 45px;
-      height: 100%;
-      /*导航上面结构*/
-      .nav-top {
-        width: 100%;
-      }
-      /*导航下面结构*/
-      .nav-bottom {
-        width: 100%;
-      }
-    }
-  }
+
 
   @include media(">desktop_large") {
     .blog-nav {

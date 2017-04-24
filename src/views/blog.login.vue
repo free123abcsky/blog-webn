@@ -118,7 +118,7 @@
   module.exports = {
     data: function () {
       return {
-        username: '990080536@qq.com',
+        email: '990080536@qq.com',
         password: '123456abc',
         errText: '',
       }

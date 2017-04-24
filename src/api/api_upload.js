@@ -17,7 +17,29 @@ export const ImageUpload = function (_file) {
     // 2. 将img值进行方向矫正,裁剪压缩
     imageResize(_file, function (_form) {
       // 3. 文件上传
-      Vue.http.post(API.imgUpload, _form).then(function (result) {
+      Vue.http.post(API.imgUpload, _form).then((response) => {
+          // success callback
+          let data = response.data;
+          let status = response.status;
+          if (parseInt(status.code) === 0) {
+            resolve(data);
+          } else {
+            reject(status);
+          }
+      }).catch(function(error){
+          console.log(error)
+      });
+    })
+  });
+};
+//图片上传
+export const UploadAvatar = function (_file) {
+  //1. 传入filer参数
+  return new Promise(function (resolve, reject) {
+    // 2. 将img值进行方向矫正,裁剪压缩
+    imageResize(_file, function (_form) {
+      // 3. 文件上传
+      Vue.http.post(API.uploadAvatar, _form).then((response) => {
           // success callback
           let data = response.data;
           let status = response.status;
