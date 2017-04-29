@@ -364,6 +364,7 @@
       // }
     },
     created: function () {
+
       const _this = this;
       /**
        * 背景初始化

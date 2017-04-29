@@ -12,7 +12,8 @@
         color: #eee;
         font-size: 12px;
         p {
-            overflow: hidden;
+          margin: 10px 0px;
+          overflow: hidden;
         }
     }
 </style>

@@ -12,11 +12,11 @@ export const GetArticleById = function (articleId) {
   return new Promise(function (resolve, reject) {
     let url = API.getArticleById.replace('id', articleId);
     let tmp = Vue.$sessionStorage[url];
-    if (!!tmp) {
-      console.log("文章详情" + articleId + "数据使用缓存!")
-      resolve(tmp);
-      return;
-    }
+    // if (!!tmp) {
+    //   console.log("文章详情" + articleId + "数据使用缓存!")
+    //   resolve(tmp);
+    //   return;
+    // }
     Vue.http.get(url).then((response) => {
         // success callback
         let data = response.data;

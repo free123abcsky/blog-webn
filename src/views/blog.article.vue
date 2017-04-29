@@ -1,336 +1,235 @@
 <template>
-  <div class="article animated fadeIn">
-    <div class="container">
-      <div class="row">
-        <div id="article" class="col-lg-9">
-          <div class="article-detail">
-            <!--文章-->
-            <div class="paper" :class="{'loading':isLoading}">
-              <section class="paper-header">
-                <ol class="breadcrumb  hidden-xs">
-                  <li>
-                    <router-link :to="{ name: 'index'}" tag="a">首页</router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{ name: 'blog'}" tag="a">博客</router-link>
-                  </li>
-                  <li class="active">文章</li>
-                </ol>
-                <h1>{{article.title}}</h1>
-              </section>
-              <section class="paper-info">
-                <div class="paper-info-span">
-                  <i class="fa fa-calendar"></i>
-                  <span>{{article.publish_time  | moment("from","now")}}</span>
-                </div>
-                <div class="paper-info-span">
-                  <i class="fa fa-book"></i>
-                  阅读数
-                  <span>{{article.read_num}}</span>
-                </div>
-                <a href="#comment" class="paper-info-span">
-                  <i class="fa fa-comments"></i>
-                  评论数
-                  <span>{{recountCommentNum}}</span>
-                </a>
-                <!--hidden-xs-->
-                <div class="paper-info-span hidden-xs" v-for="tag of article.tags">
-                  <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
-                </div>
-              </section>
-              <section class="paper-content">
-                <div class="paper-content-inner markdown-body hljs" v-html="article.html">
-                  <!--{{{article.content}}}-->
-                </div>
-                <!--page-->
-              </section>
-
-              <!--the end-->
-            </div>
-            <!--评论-->
-            <section id="comment" class="commentbox">
-              <!--标题-->
-              <div class="commentbox-header">
-                <h3><span class="commentbox-header--Comments">Comments</span><span class="commentbox-header-count">{{recountCommentNum}}</span>
-                </h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="article-detail">
+          <div class="article-section" :class="{'loading':isLoading}">
+            <header class="article-header">
+              <h1 class="article-title">{{article.title}}</h1>
+              <div class="meta">
+                  <span class="time">
+                    <span class="time-icon">
+                      <i class="fa fa-calendar-o"></i>
+                    </span>
+                    <span class="time-text">发表于</span>
+                    <span title="publish time" datetime="2017-03-21T20:18:32+08:00">
+                      {{article.publish_time  | moment("from","now")}}
+                    </span>
+                  </span>
+                <span class="comments-count">
+                    <span class="meta-divider">|</span>
+                    <span class="comments-icon">
+                      <i class="fa fa-comment-o"></i>
+                    </span>
+                    <span class="comments-num"></span>
+                  </span>
+                <span class="leancloud_visitors">
+                    <span class="post-meta-divider">|</span>
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="read-text">阅读次数 </span>
+                    <span class="read-count">43</span>
+                  </span>
               </div>
-              <!--提问题-->
-              <!--hidden-xs-->
-              <div class="commentbox-question " @click="replyBtn('')">
-                <comment-box :article-id="article._id" :pre-id="article._id"></comment-box>
+            </header>
+            <!--              <section class="paper-info">
+                            <div class="paper-info-span">
+                              <i class="fa fa-calendar"></i>
+                              <span>{{article.publish_time  | moment("from","now")}}</span>
+                            </div>
+                            <div class="paper-info-span">
+                              <i class="fa fa-book"></i>
+                              阅读数
+                              <span>{{article.read_num}}</span>
+                            </div>
+                            <a href="#comment" class="paper-info-span">
+                              <i class="fa fa-comments"></i>
+                              评论数
+                              <span>{{recountCommentNum}}</span>
+                            </a>
+                            &lt;!&ndash;hidden-xs&ndash;&gt;
+                            <div class="paper-info-span hidden-xs" v-for="tag of article.tags">
+                              <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
+                            </div>
+                          </section>-->
+            <section class="paper-content">
+              <div class="paper-content-inner markdown-body hljs" v-html="article.html">
+                <!--{{{article.content}}}-->
               </div>
-
-              <!--问题盒子-->
-              <div class="commentbox-inner">
-                <div class="comments" v-for="comment of commentList">
-                  <!--{{comment._id}}{{'&#45;&#45;'}}{{chain.selectId ==comment._id}}{{'&#45;&#45;'}}{{toggle}}{{'&#45;&#45;'}}{{chain.selectId}}-->
-                  <div class="comments-ask">
-                    <div class="comments-ask-header">
-                      <span class="name">{{comment.name}}</span>&ensp;·&ensp;
-                    <span>{{comment.time | moment("from","now")}}</span>
-                      <!--hidden-xs-->
-                      <span class="">&ensp;·&ensp;<span class="reply"
-                                                        @click="replyBtn(comment._id)">回复</span></span>
-                    </div>
-                    <div class="comments-ask-content">
-                      <span>{{comment.content}}</span>
-                    </div>
-                  </div>
-                  <div class="comments-reply" :class="{'active':(comment._id==selectId && toggle)}">
-                    <div class="commentbox-question">
-                      <comment-box :article-id="comment.article_id" :pre-id="comment._id"></comment-box>
-                    </div>
-                    <div class="comments-reply-each" v-for="reply of comment.next_id">
-                      <div class="comments-reply-header">
-                      <span
-                        class="name">{{reply.name}}</span>&ensp;·&ensp;
-                      <span>{{reply.time | moment("from","now")}}</span>
-                      </div>
-                      <div class="comments-reply-content">
-                        <span>{{reply.content}}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <!--page-->
             </section>
 
+            <footer class="article-footer">
+              <div class="article-tags"><i class="fa fa-tags"></i>
+                <a href="" rel="tag" title="查看关于 网络配色 的文章">网站配色</a>
+                <a href="" rel="tag"  title="">配色工具</a>
+                <a href="" rel="tag" title="">配色方案</a>
+              </div>
+            </footer>
+            <!--the end-->
           </div>
-          <copyright></copyright>
-        </div>
-        <div class="col-lg-3 visible-lg clearfix">
-          <aside class="article-aside">
-            <!--最新排行 for 10-->
-            <div class="topBar">
-              <div class="topBar--title">
-                <h3 class="topBar--title__h3">RECENT
-                <small>Top{{topNum}}</small>
-                </h3>
-              </div>
-              <ul class="topBar--ul">
-                <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
-                <li v-show="articleTop.latest.length>0" class="topArticle--li animated fadeIn"
-                    v-for="article of articleTop.latest">
-                  <router-link target="_blank" :to="{ name: 'article',params: { articleId: article._id }}"
-                               activeClass="active" tag="a">{{article.title}}
-                </router-link>
-                  <span>({{article.read_num}})</span>
-                </li>
-              </ul>
+
+          <section class="comments-section">
+            <ol class="commentlist">
+              <li class="comment">
+                <img class="c-avatar" src="../assets/avatar.jpg"/>
+                <div class="c-main">
+                  这是我的评论1
+                  <div class="c-meta">
+                  <span class="c-author">呃呃呃1</span>
+                  2016-10-18 00:35
+                  <span class="c-reply">回复</span>
+                </div>
+                </div>
+              </li>
+              <li class="comment">
+                <img class="c-avatar" src="../assets/avatar.jpg"/>
+                <div class="c-main">
+                  这是我的评论2
+                  <div class="c-meta">
+                  <span class="c-author">呃呃呃2</span>
+                  2016-10-18 00:35
+                  <span class="c-reply">回复</span>
+                </div>
+                </div>
+              </li>
+              <li class="comment">
+                <img class="c-avatar" src="../assets/avatar.jpg"/>
+                <div class="c-main">
+                  这是我的评论3
+                  <div class="c-meta">
+                  <span class="c-author">呃呃呃3</span>
+                  2016-10-18 00:35
+                  <span class="c-reply">回复</span>
+                </div>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <!--评论-->
+          <!--<section id="comment" class="commentbox">
+            &lt;!&ndash;标题&ndash;&gt;
+            <div class="commentbox-header">
+              <h3><span class="commentbox-header&#45;&#45;Comments">Comments</span><span class="commentbox-header-count">{{recountCommentNum}}</span>
+              </h3>
             </div>
-            <!--阅读排行 for 10-->
-            <div class="topBar">
-              <div class="topBar--title">
-                <h3 class="topBar--title__h3">READ
-                <small>Top{{topNum}}</small>
-                </h3>
-              </div>
-              <ul class="topBar--ul">
-                <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
-                <li v-show="articleTop.read.length>0" class="topArticle--li animated fadeIn"
-                    v-for="article of articleTop.read">
-                  <router-link target="_blank" :to="{ name: 'article',params: { articleId: article._id }}"
-                               activeClass="active" tag="a">{{article.title}}
-                </router-link>
-                  <span>({{article.read_num}})</span>
-                </li>
-              </ul>
+            &lt;!&ndash;提问题&ndash;&gt;
+            &lt;!&ndash;hidden-xs&ndash;&gt;
+            <div class="commentbox-question " @click="replyBtn('')">
+              <comment-box :article-id="article._id" :pre-id="article._id"></comment-box>
             </div>
-            <!--标签 最多10个-->
-            <div class="topBar">
-              <div class="topBar--title">
-                <h3 class="topBar--title__h3">TAGS
-                <!--<small>Top10</small>-->
-                </h3>
+
+            &lt;!&ndash;问题盒子&ndash;&gt;
+            <div class="commentbox-inner">
+              <div class="comments" v-for="comment of commentList">
+                &lt;!&ndash;{{comment._id}}{{'&#45;&#45;'}}{{chain.selectId ==comment._id}}{{'&#45;&#45;'}}{{toggle}}{{'&#45;&#45;'}}{{chain.selectId}}&ndash;&gt;
+                <div class="comments-ask">
+                  <div class="comments-ask-header">
+                    <span class="name">{{comment.name}}</span>&ensp;·&ensp;
+                  <span>{{comment.time | moment("from","now")}}</span>
+                    &lt;!&ndash;hidden-xs&ndash;&gt;
+                    <span class="">&ensp;·&ensp;<span class="reply"
+                                                      @click="replyBtn(comment._id)">回复</span></span>
+                  </div>
+                  <div class="comments-ask-content">
+                    <span>{{comment.content}}</span>
+                  </div>
+                </div>
+                <div class="comments-reply" :class="{'active':(comment._id==selectId && toggle)}">
+                  <div class="commentbox-question">
+                    <comment-box :article-id="comment.article_id" :pre-id="comment._id"></comment-box>
+                  </div>
+                  <div class="comments-reply-each" v-for="reply of comment.next_id">
+                    <div class="comments-reply-header">
+                    <span
+                      class="name">{{reply.name}}</span>&ensp;·&ensp;
+                    <span>{{reply.time | moment("from","now")}}</span>
+                    </div>
+                    <div class="comments-reply-content">
+                      <span>{{reply.content}}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <ul class="topBar--ul">
-                <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
-                <li v-show="articleTop.tag.length>0" class="topTag--li  animated fadeIn" v-for="tag of articleTop.tag">
-                  <router-link :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
-                               activeClass="active" tag="a">
-                    {{tag.name}}({{tag.used_num}})
-                </router-link>
-                </li>
-              </ul>
             </div>
-          </aside>
+          </section>-->
+
         </div>
       </div>
-      <!--返回最上层-->
-      <div id="toTop" class="backToTop">
-        <i class="fa fa-arrow-up"></i>
+      <div class="col-lg-3 visible-lg clearfix">
+        <sidebar></sidebar>
       </div>
     </div>
-
+    <!--返回最上层-->
+    <div id="toTop" class="backToTop">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
-
 </template>
 <style scoped lang="scss">
   //base
   @import "../theme/theme.scss";
 
-  * {
-    /*outline: 1px solid #eee;*/
-  }
-
-  .article {
-    padding-top: 35px;
-    position: relative;
-    .article-detail {
-
-    }
-    .article-aside {
-      position: fixed;
-      /*padding-left: 20px;*/
-      width: 350px;
-      box-sizing: border-box;
-      color: #333;
-
-      .topBar {
-        width: 100%;
-        /*border: 1px solid transparent;*/
-        margin-bottom: 15px;
-        box-sizing: border-box;
-        .topBar--title {
-          border-radius:4px 4px 0 0;
-          padding: 12px 0 8px;
-          //padding: 18px 0 8px;
-          background: rgba(0, 0, 0, 0.5);
-          .topBar--title__h3 {
-            border-left: 5px solid $base-theme-color;
-            padding: 0 0 0 10px;
-            margin: 0;
-            color: #fff;
-            margin-left: 10px;
-            @include display-flex;
-            @include justify-content(flex-start);
-            @include align-items(center);
-            transition: all ease 200ms;
-            small {
-              color: $base-theme-color;
-              margin-left: 7px;
-            }
-          }
-        }
-        .topBar--ul {
-          padding: 8px 20px;
-          background: #fff;
-          list-style-type: none;
-          position: relative;
-          min-height: 150px;
-          margin: 0;
-          .topBar--loading {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 135px;
-          }
-          .topArticle--li {
-            color: #777;
-            position: relative;
-            padding: 4px 0;
-            font-size: 14px;
-            &:before {
-              color: #ccc;
-              content: "\f0da";
-              font-size: 12px;
-              margin-right: 6px;
-              font-family: FontAwesome;
-              transition: all ease 200ms;
-            }
-            a {
-              color: inherit;
-              text-decoration: none;
-              transition: all ease 200ms;
-            }
-            span {
-              cursor: pointer;
-              transition: all ease 200ms;
-            }
-            &:hover {
-              color: $base-theme-color;
-              a {
-                color: $base-theme-color;
-              }
-              &:before {
-                color: $base-theme-color;
-              }
-              span {
-                color: $base-theme-color;
-              }
-            }
-          }
-          .topTag--li {
-            border: 1px solid #ccc;
-            display: inline-block;
-            margin: 4px;
-            color: #777;
-            padding: 2px 8px;
-            transition: all ease 200ms;
-            cursor: pointer;
-            a {
-              color: #777;
-              text-decoration: none;
-              transition: all ease 200ms;
-              span {
-                font-size: 12px;
-                color: #fff;
-                min-width: 10px;
-                padding: 1px 7px;
-                font-weight: bold;
-                line-height: 1;
-                white-space: nowrap;
-                text-align: center;
-                background-color: #969696;
-                border-radius: 10px;
-                transition: all ease 200ms;
-              }
-            }
-            &:hover {
-              color: $base-theme-color;
-              border-color: $base-theme-color;
-              a {
-                color: $base-theme-color;
-                span {
-                  background-color: $base-theme-color;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .tagTop10 {
-        width: 100%;
-      }
-    }
-
-  }
-
   .article-detail {
-    /*width: 780px;*/
-    //max-width: 980px;
-    /*width: 52%;*/
     margin: 0 auto;
     margin-left: -35px;
+    line-height: 1.2;
+    font-size: 2em;
+    font-weight: 500;
     color: $base-word-color;
     box-sizing: border-box;
     position: relative;
     z-index: 999;
-    .paper {
-      background-color: transparent;
+    .article-section {
+      //background-color: transparent;
+      background: #fff;
       /*margin-bottom: 30px;*/
       /*border-radius: 4px;*/
       overflow: hidden;
       margin-bottom: 30px;
-      &.loading {
-        .paper-header {
-          h1 {
-            background: #eee;
+      .article-header {
+        text-align: center;
+        padding: 2px 20px 12px;
+        border-bottom: 1px solid #eee;
+        h1 {
+          color: #444;
+          font-weight: normal;
+          font-size: 30px;
+          line-height: 60px;
+          padding: 5px 0;
+        }
+        .meta{
+          margin: 3px 0 15px 0;
+          color: #999;
+          font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+      .article-footer {
+        background-color: #fff;
+        border-top: 1px solid #f7f7f7;
+        padding: 15px 20px;
+        overflow: hidden;
+        .article-tags {
+          float: left;
+          font-size: 15px;
+          display: inline-block;
+          padding: 2px 6px 3px;
+          margin: 0 2px;
+          color: #fff;
+         /* background-color: #4a4a4a;*/
+          opacity: .7;
+          i {
+            margin-right: 10px;
+            color: #bbb;
           }
         }
+      }
+      &.loading {
+
         .paper-info {
           .paper-info-span {
             opacity: 0.3;
@@ -430,6 +329,76 @@
 
       }
 
+    }
+    .comments-section {
+      position: relative;
+      background-color: #fff;
+      .commentlist {
+        padding: 12px 20px 0 20px;
+        margin: 0;
+        list-style: none;
+        .comment {
+          padding: 12px 0 10px 0;
+          line-height: 20px;
+          display: list-item;
+          text-align: -webkit-match-parent;
+          img {
+            display: block;
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border-radius: 2px;
+            webkit-transition: all 300ms ease-in-out;
+            -o-transition: all 300ms ease-in-out;
+            -moz-transition: all 300ms ease-in-out;
+            -ms-transition: all 300ms ease-in-out;
+            -webkit-transition: all .3s ease-out;
+          }
+          .c-main {
+            padding: 10px 15px;
+            line-height: 25px;
+            margin-top: -2px;
+            margin-left: 72px;
+            border-radius: 3px;
+            position: relative;
+            background: #fbfdfb;
+            border: 1px #eee solid;
+            font-size: 15px;
+            word-wrap: break-word;
+            &:before {
+              content: '';
+              display: inline-block;
+              border-top: 9px solid transparent;
+              border-bottom: 9px solid transparent;
+              border-right: 9px solid #eee;
+              position: absolute;
+              top: 15px;
+              left: -9px;
+            }
+            &:after {
+              content: '';
+              display: inline-block;
+              border-top: 7px solid transparent;
+              border-bottom: 7px solid transparent;
+              border-right: 7px solid #fbfdfb;
+              position: absolute;
+              top: 17px;
+              left: -7px;
+            }
+            .c-meta {
+              color: #bbb;
+              font-size: 14px;
+              .c-author {
+                margin-right: 10px;
+              }
+              .comment-reply{
+                margin-left: 6px;
+                color: #00a67c;
+              }
+            }
+          }
+        }
+      }
     }
     .commentbox {
       background-color: $base-background-color;
@@ -539,7 +508,7 @@
               font-size: 14px;
               line-height: 150%;
               padding: 5px 0;
-              color: #fff;
+              color: #555;
             }
           }
           .comments-reply {
@@ -640,20 +609,20 @@
   }
 
   @include media(">desktop_small", "<=desktop") {
-    .article {
+    .article-detail {
       padding: 35px 20px 0px 65px;
-      .container {
-        width: 100%;
-      }
+    }
+    .container {
+      width: 100%;
     }
   }
 
   @include media("<=desktop_small") {
-    .article {
+    .article-detail {
       padding-top: 60px;
-      .container {
-        width: 100%;
-      }
+    }
+    .container {
+      width: 100%;
     }
   }
 
@@ -771,7 +740,7 @@
   import "../theme/codeHighLight.css";
   import "../theme/markdown.scss";
   import "bootstrap/scss/bootstrap/_breadcrumbs.scss";
-  import copyright from '../components/copyright.vue';
+  import sidebar from '../components/sidebar.vue';
   import Toast from 'Toast';
   module.exports = {
     replace: true,
@@ -935,8 +904,8 @@
     },
     components: {
       'comment-box': commentReplyBox,
-      copyright,
-      loading
+      loading,
+      sidebar
     },
   }
 

@@ -17,7 +17,8 @@
 <script type="text/javascript">
   import Vue from "vue";
   import API from "./config";
-  import blogNav from "./views/blog.nav";
+  //import blogNav from "./views/blog.nav";
+  import blogNav from "./components/navbar";
   import socialInfo from "./components/socialInfo.vue";
   import doLogout from "./components/doLogout.vue";
   import store from './vuex/store'

@@ -1,14 +1,13 @@
 <template>
-  <div class="adminBox">
-    <!--<section class="adminBox-footer text-center text-overflow"  ng-include="'web/tpl/copyright.footer.tpl.html'"></section>-->
-    <div class="adminBox-content" :class="{'preview':isShowBigAdmin}" id="adminBox-content">
-      <div class="adminBox-content-header">
-        <h1 class="text-right textItem"><span class="blue">X</span>-SONGTAO
+  <div class="admin-container">
+    <div class="admin-box" :class="{'preview':isShowBigAdmin}" id="admin-box">
+      <div class="box-header">
+        <h1 class="text-right textItem">
           <small class="blue">后台管理</small>
         </h1>
       </div>
       <!--修改信息的内部-->
-      <div class="adminBox-content-innerBox">
+      <div class="box-content">
         <router-view></router-view>
       </div>
     </div>
@@ -20,11 +19,11 @@
 <style scoped lang="scss">
   @import "../theme/theme.scss";
   //后台整个页面的盒子
-  .adminBox {
-    overflow-y: scroll;
+  .admin-container {
+    margin-top: 65px;
     -webkit-overflow-scrolling: touch;
     height: 100%;
-    .adminBox-content {
+    .admin-box {
       width: 780px;
       padding: 0 30px;
       box-sizing: border-box;
@@ -32,15 +31,12 @@
       position: relative;
       border-radius: 3px;
       border-bottom: 2px solid #00b2e2;
-      margin-top: 50px;
       margin-left: auto;
-      margin-bottom: 15px;
       margin-right: auto;
+      margin-bottom: 15px;
       user-select: none;
       min-height:90vh;
-      /*-webkit-user-select: none;*/
-      /*-webkit-user-select: none;*/
-      .adminBox-content-header h1 {
+      .box-header h1 {
         display: inline-block;
         float: right;
         padding: 20px 30px 10px 0;
@@ -52,21 +48,11 @@
         border-top-right-radius: 3px;
       }
 
-      .adminBox-content-innerBox {
+      .box-content {
         width: 100%;
         padding-top: 50px;
         height: 100%;
       }
-    }
-    .adminBox-footer {
-      position: absolute;
-      width: 100%;
-      bottom: 1%;
-      left: 50%;
-      color: #eee;
-      font-size: 12px;
-      transform: translate3d(-50%, 0, 0);
-
     }
   }
 
@@ -78,16 +64,16 @@
     color: #fff;
   }
 
-  .adminBox-content {
+  .admin-box {
     &.preview {
       width: 1530px;
     }
   }
 
   @include media("<=tablet") {
-    .adminBox {
+    .admin-container {
       padding-top: 10px;
-      .adminBox-content {
+      .admin-box {
         max-width: 780px;
         min-width: inherit;
         width: auto;

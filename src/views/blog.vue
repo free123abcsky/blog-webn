@@ -1,16 +1,12 @@
 <template>
-  <div class="blog animated fadeIn">
-    <my-info></my-info>
+  <div class="blog-container animated fadeIn">
     <!-- 路由外链 -->
     <transition name="fade">
-      <div class="blog-content" v-show="!isShowMyWords">
-        <div class="blog-content-inner">
-          <transition name="blogTrans">
-              <router-view></router-view>
-          </transition>
-        </div>
-      </div>
+        <router-view></router-view>
     </transition>
+    <section class="copyright animated fadeIn">
+      <copyright></copyright>
+    </section>
   </div>
 </template>
 <style scoped lang="scss">
@@ -18,104 +14,19 @@
   //base
   @import "../theme/theme.scss";
 
+  * {
+    /*outline: 1px solid #eee;*/
+  }
 
-  .blog {
+  .blog-container {
+    margin-top: 65px;
     position: relative;
-    .blog-content {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      box-sizing: content-box;
-      transition: opacity ease 500ms;
-      /*opacity:1;*/
-
-      .blog-content-inner {
-        max-width: 950px;
-        width: 100%;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        /*overflow: hidden;*/
-        padding-top: 15px;
-        position: relative;
-      }
-      .copyright {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 15px;
-      }
-    }
   }
 
-
-  @include media(">desktop") {
-    .blog {
-      width: 100%;
-      .blog-content {
-        z-index: 2;
-        width: 75%;
-        padding-left: 25%;
-        position: relative;
-      }
-    }
-  }
-
-  @include media(">desktop_small", "<=desktop") {
-    .blog {
-      .blog-content {
-        padding: 270px 20px 0px 65px;
-        .blog-content-inner {
-
-        }
-      }
-    }
-  }
-
-  @include media("<=desktop_small") {
-    .blog {
-      /*padding-top: 45px;*/
-      .blog-content {
-        padding: 315px 20px 0px 20px;
-        .blog-content-inner {
-        }
-      }
-    }
-  }
-
-  @include media("<=tablet") {
-    .blog {
-      .blog-content {
-        padding-left: 15px;
-        padding-right: 15px;
-        /*padding-top: 270px;*/
-        .blog-content-inner {
-
-        }
-      }
-    }
-  }
-
-  @include media("<=phone") {
-    .blog {
-      .blog-content {
-        padding-left: 6px;
-        padding-right: 6px;
-        padding-top: 190px;
-        width: 100%;
-        /*overflow: hidden;*/
-        box-sizing: border-box;
-        .blog-content-inner {
-          padding-top: 6px;
-        }
-      }
-    }
-  }
 </style>
 <script type="text/javascript">
   import Vue from "vue";
-  import myInfo from './blog.myInfo.vue'
+  import copyright from '../components/copyright.vue'
   import {mapState} from 'vuex';
   module.exports = {
     data: function () {
@@ -128,7 +39,7 @@
       }),
     },
     components: {
-      myInfo
+      copyright
     },
   }
 

@@ -28,19 +28,23 @@ const routes = [
   {
     path: '/blog',
     name: 'blog',
-    // 跳转到文章列表并携带参数
+    //跳转到文章列表并携带参数
     redirect: {
-      name: 'artList',
-      query: {
-        listType: 'latest'
-      }
+      name: 'artList'
     },
     component: require('./views/blog.vue'),
     children: [
       {
-        path: 'art-list',
+        path: 'articles',
         name: 'artList',
         component: require('./views/blog.articleList.vue'),
+      },
+      {
+        path: 'article/:articleId',
+        name: 'article',
+        component: function (resolve) {
+          require(['./views/blog.article.vue'], resolve)
+        },
       },
       {
         path: 'his-list',
@@ -70,13 +74,6 @@ const routes = [
     ]
   },
   {
-    path: '/article/:articleId',
-    name: 'article',
-    component: function (resolve) {
-      require(['./views/blog.article.vue'], resolve)
-    },
-  },
-  {
     path: '/admin',
     name: 'admin',
     component: function (resolve) {
@@ -85,7 +82,7 @@ const routes = [
     meta: {requiresAuth: true},
     children: [
       {
-        path: 'admin-dashboard',
+        path: 'dashboard',
         name: 'admin-dashboard',
         component: function (resolve) {
           require(['./views/admin.dashboard.vue'], resolve)
@@ -93,7 +90,7 @@ const routes = [
         meta: {requiresAuth: true},
       },
       {
-        path: 'admin-myinfo',
+        path: 'myinfo',
         name: 'admin-myinfo',
         component: function (resolve) {
           require(['./views/admin.myInfo.vue'], resolve)
@@ -101,7 +98,7 @@ const routes = [
         meta: {requiresAuth: true},
       },
       {
-        path: 'admin-tag',
+        path: 'tag',
         name: 'admin-tag',
         component: function (resolve) {
           require(['./views/admin.tagList.vue'], resolve)
@@ -109,7 +106,7 @@ const routes = [
         meta: {requiresAuth: true},
       },
       {
-        path: 'admin-articleManager',
+        path: 'articleManager',
         name: 'admin-articleManager',
         redirect: {
           name: 'admin-articleList'
@@ -138,7 +135,7 @@ const routes = [
         ]
       },
       {
-        path: 'admin-commentList',
+        path: 'comments',
         name: 'admin-commentList',
         component: function (resolve) {
           require(['./views/admin.commentList.vue'], resolve)

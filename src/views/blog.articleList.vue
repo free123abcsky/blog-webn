@@ -1,49 +1,64 @@
 <template>
-  <div class="main">
-    <div class="aritcleList"
-         v-infinite-scroll="loadMore"
-         infinite-scroll-disabled="infiniteDisabled"
-         infinite-scroll-distance="10">
-      <router-link class="article" v-for="article of articleList" :key="article._id"
-                   :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="article">
-        <div class="article-header">
-          <h2 class="article-header-title">{{article.title}}</h2>
-          <div class="article-header-content">
-            {{article.abstract}}
-          </div>
-        </div>
-        <div class="article-infobox">
-          <div class="article-info">
-            <div class="article-info-each">
-              <i class="fa fa-calendar"></i>
-              <span>{{article.publish_time  | moment("from","now")}}</span>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="aritcle-list"
+             v-infinite-scroll="loadMore"
+             infinite-scroll-disabled="infiniteDisabled"
+             infinite-scroll-distance="10">
+          <article class="article" v-for="article in articleList" :key="article._id">
+            <div class="article-header">
+              <h2 class="article-header-title">
+                <router-link :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="a">
+                  {{article.title}}
+                  </router-link>
+              </h2>
+              <div class="article-header-content">
+                {{article.abstract}}
+                </div>
             </div>
-            <div class="article-info-each">
-              <i class="fa fa-book"></i>
-              阅读数
-              <span class="article-readnum">{{article.read_num}}</span>
+            <div class="article-infobox">
+              <div class="article-info">
+                <div class="article-info-each">
+                  <i class="fa fa-calendar"></i>
+                  <span>{{article.publish_time  | moment("from","now")}}</span>
+                </div>
+                <div class="article-info-each">
+                  <i class="fa fa-book"></i>
+                  阅读数
+                  <span class="article-readnum">{{article.read_num}}</span>
+                </div>
+                <div class="article-info-each">
+                  <i class="fa fa-comments"></i>
+                  <router-link  class="article-comment" :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="span">
+                    评论数 {{article.comment_num}}
+                    </router-link>
+                </div>
+                <div class="article-info-each hidden-xs" v-for="tag of article.tags">
+                  <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
+                </div>
+              </div>
+              <div class="article-readmore hidden-xs">
+                <router-link :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="span">
+                  阅读更多
+                </router-link>
+              </div>
             </div>
-            <div class="article-info-each">
-              <i class="fa fa-comments"></i>评论数
-              <span class="article-comment">{{article.comment_num}}</span>
-            </div>
-            <div class="article-info-each hidden-xs" v-for="tag of article.tags">
-              <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
-            </div>
-          </div>
-          <div class="arrticle-readmore hidden-xs">
-            <span>阅读更多</span>
-          </div>
-        </div>
-      </router-link>
+          </article>
 
-      <no-data v-if="!hasData && !isLoading"></no-data>
-      <!--<no-data v-if="!hasData && !isLoading"></no-data>-->
-      <loading v-if="!!isLoading" class="loading" :number=9></loading>
+          <no-data v-if="!hasData && !isLoading"></no-data>
+          <!--<no-data v-if="!hasData && !isLoading"></no-data>-->
+          <loading v-if="!!isLoading" class="loading" :number=9></loading>
+        </div>
+      </div>
+      <div class="col-lg-3 visible-lg clearfix">
+        <sidebar></sidebar>
+      </div>
     </div>
-    <section class="copyright animated fadeIn" v-if="articleList.length!==0">
-      <copyright></copyright>
-    </section>
+    <!--返回最上层-->
+    <div id="toTop" class="backToTop">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -58,37 +73,32 @@
     margin:0 auto;
   }
 
-  /*内容区*/
-  .aritcleList {
-    //width: 950px;
+  .aritcle-list {
     margin: 0 auto;
-    /*position: relative;*/
+    margin-left: -35px;
+    color: $base-word-color;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 999;
 
     .article {
-      user-select: none;
-      -webkit-user-select: none;
       box-sizing: border-box;
-      margin-bottom: 30px;
-      cursor: pointer;
-      /*border-radius: 4px;*/
+      margin-bottom: 15px;
       overflow: hidden;
-
       &:hover .article-header .article-header-title {
         color: $base-theme-color;
+        cursor: pointer;
         &:after {
           border-top: 3px solid $base-theme-color;
         }
       }
-      &:hover .article-infobox .arrticle-readmore span {
-        background-color: $base-theme-color;
-      }
       //标题
       .article-header {
-        border-radius:4px 4px 0 0;
         padding: 35px;
         color: $base-word-color;
         font-size: 20px;
         line-height: 28px;
+        border-bottom: 1px solid #999;
         background: #fff;
         position: relative;
         //title
@@ -101,6 +111,9 @@
           font-size: 30px;
           font-weight: 500;
           line-height: 1.2;
+          a {
+            text-decoration:none;
+          }
           &:after {
             transition: color ease 200ms;
             content: '';
@@ -126,46 +139,80 @@
           }
         }
       }
-      //文章信息
-      .article-infobox {
-        border-radius:0 0 4px 4px;
+
+    }
+    //文章信息
+    .article-infobox {
+      @include display-flex;
+      @include justify-content(space-between);
+      @include align-items(center);
+      background: $base-background-color;
+      padding: 14px 35px;
+      transition: all ease 200ms;
+      .article-info {
         @include display-flex;
-        @include justify-content(space-between);
+        @include justify-content(flex-start);
         @include align-items(center);
-        background: $base-background-color;
-        padding: 14px 35px;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8) inset;
-        transition: all ease 200ms;
-        .article-info {
-          @include display-flex;
-          @include justify-content(flex-start);
-          @include align-items(center);
-          .article-info-each {
-            color: #eee;
-            margin-right: 20px;
-            font-size: 14px;
-            white-space: nowrap;
+        .article-info-each {
+          color: #999;
+          margin-right: 20px;
+          font-size: 14px;
+          white-space: nowrap;
+          .article-comment {
+            cursor: pointer;
           }
         }
-        //阅读更多
-        .arrticle-readmore {
-          span {
-            border: 1px solid $base-theme-color;
-            transition: all ease 200ms;
-            border-radius: 34px;
-            color: #eee;
-            padding: 4px 22px;
-            font-size: 16px;
-          }
 
+      }
+      //阅读更多
+      .article-readmore {
+        span {
+          background-color: #ccc;
+          border: 1px solid #ccc;
+          transition: all ease 200ms;
+          border-radius: 34px;
+          color: #eee;
+          padding: 4px 22px;
+          font-size: 16px;
+          &:hover {
+            cursor: pointer;
+            border: 1px solid $base-theme-color;
+            background-color: $base-theme-color;
+          }
         }
       }
+    }
+  }
 
+  @include media("<=desktop") {
+    .backToTop {
+      margin-left: 0;
+    }
+    .aritcle-list{
+      margin-left:0px;
+    }
+  }
+
+  @include media(">desktop_small", "<=desktop") {
+    .aritcle-list {
+      padding: 35px 20px 0px 65px;
+    }
+    .container {
+      width: 100%;
+    }
+  }
+
+  @include media("<=desktop_small") {
+    .aritcle-list {
+      padding-top: 60px;
+    }
+    .container {
+      width: 100%;
     }
   }
 
   @include media("<=tablet") {
-    .aritcleList {
+    .aritcle-list {
       max-width: 780px;
       width: 100%;
       .article {
@@ -180,7 +227,7 @@
   }
 
   @include media("<=phone") {
-    .aritcleList {
+    .aritcle-list {
       max-width: 780px;
       width: 100%;
       .article {
@@ -227,7 +274,7 @@
   import API from "../config.js"
   import noData from "../components/nodata.vue"
   import loading from "../components/loading.vue"
-  import copyright from '../components/copyright.vue'
+  import sidebar from '../components/sidebar.vue';
   import {GetArticleListForFrontEnd} from "../api/api_article"
   import Vue from 'vue'
   import InfiniteScroll from 'InfiniteScroll';
@@ -259,7 +306,7 @@
          * 不同的type进行不同的url搜索
          * */
         console.log('get article list');
-        let listType = _this.$route.query.listType;
+        let listType = _this.$route.query.listType || 'latest';
         let url;
         switch (listType) {
           case 'latest':
@@ -300,7 +347,7 @@
     destroyed: function () {
     },
     components: {
-      noData, copyright, loading,
+      noData, loading,sidebar
     },
   }
 </script>
