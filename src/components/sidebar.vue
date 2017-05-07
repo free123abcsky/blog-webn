@@ -5,7 +5,7 @@
       <div class="title">
         <h2>最新排行Top{{topNum}}</h2>
       </div>
-      <ul class="widget">
+      <ul>
         <loading :number="3" color="#38b7ea" class="widget-loading" v-if="!articleTop.latest"></loading>
         <li v-show="articleTop.latest.length>0" class="article-li animated fadeIn"
             v-for="article of articleTop.latest">
@@ -21,7 +21,7 @@
       <div class="title">
         <h2>阅读排行Top{{topNum}}</h2>
       </div>
-      <ul class="widget">
+      <ul>
         <loading :number="3" color="#38b7ea" class="widget-loading" v-if="!articleTop.read"></loading>
         <li v-show="articleTop.read.length>0" class="article-li animated fadeIn"
             v-for="article of articleTop.read">
@@ -33,16 +33,16 @@
       </ul>
     </div>
     <!--标签 最多10个-->
-    <div class="widget">
+    <div class="widget tag-cloud">
       <div class="title">
         <h2>标签云</h2>
       </div>
-      <ul class="widget">
+      <ul>
         <loading :number="3" color="#38b7ea" class="widget-loading" v-if="!articleTop.tag"></loading>
-        <li v-show="articleTop.tag.length>0" class="tag-li  animated fadeIn" v-for="tag of articleTop.tag">
+        <li v-show="articleTop.tag.length>0" class="meta-tags animated fadeIn" v-for="tag of articleTop.tag">
           <router-link :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
                        activeClass="active" tag="a">
-            {{tag.name}}({{tag.used_num}})
+            {{tag.name}}<span>{{tag.used_num}}</span>
                 </router-link>
         </li>
       </ul>
@@ -130,29 +130,68 @@
           }
         }
       }
-      .tag-li {
-        display: inline-block;
-        margin: 4px;
-        color: #777;
-        transition: all ease 200ms;
-        cursor: pointer;
-        a {
-          display: inline-block;
-          line-height: 21px;
-          padding: 4px 12px;
-          color: #666;
-          text-decoration: none;
-          border: 1px solid #f0f0f0;
-          transition: all ease 200ms;
-        }
-        &:hover {
-          a {
-            border-color: #666;
-            background: #666;
-            color: #fff!important
+    }
+  }
 
-          }
-        }
+  .tag-cloud {
+    ul {
+      margin-top:10px;
+    }
+  }
+
+  .meta-tags {
+    float: left;
+    font-size: 20px;
+    display: inline-block;
+    color: #999;
+    a {
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+      height: 24px;
+      margin-right:10px;
+      line-height: 24px;
+      padding: 0 8px 0 18px;
+      border-radius: 0 4px 4px 0;
+      background: #eee;
+      font-size: 12px;
+      color: #333;
+      text-decoration: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      span {
+        opacity: .3;
+        padding: 0 0 0 5px
+      }
+      &:before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-width: 12px 12px 12px 0;
+        border-color: #fff transparent;
+        border-style: solid
+      }
+      &:after {
+        position: absolute;
+        content: '';
+        width: 4px;
+        height: 4px;
+        top: 10px;
+        left: 8px;
+        border-radius: 100%;
+        background: #fff
+      }
+      &:hover {
+        background: #333;
+        color: #fff;
+        cursor: pointer;
       }
     }
   }

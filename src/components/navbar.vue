@@ -6,8 +6,8 @@
       <div class="container">
         <ul class="nav">
           <li>
-            <router-link class="nav-logo" :to="{ name: 'index'}" activeClass="active" title="首页">
-              <i class="l-icon l-icon-layLogo"></i><span>小剧客栈</span>
+            <router-link class="nav-logo" :to="{ name: 'index'}" activeClass="active" exact title="首页">
+              <i class="l-icon l-icon-layLogo"></i><span>爱知室</span>
             </router-link>
           </li>
           <li>
@@ -55,11 +55,6 @@
               <i class="fa fa-sign-out fa-lg"></i>
             </a>
           </li>
-          <li v-show="!isLogin">
-            <router-link :to="{ name: 'login'}" title="登录">
-              <i class="fa fa-sign-in fa-lg"></i>
-            </router-link>
-          </li>
           <li>
             <a class="changebg animated fadeIn" title="切换背景" @click="changeBG()">
               <i class="fa fa-photo fa-fw fa-lg"></i>
@@ -75,7 +70,7 @@
       </div>
     </div>
     <div class="nav-appname">
-      <i class="l-icon l-icon-layLogo"></i>小剧客栈
+      <i class="l-icon l-icon-layLogo"></i>爱知室
 	</div>
     <a class="nav-morebtn" href="javascript:void(0)" title="导航">
       <span class="nav-btn-ico nav-btn-ico_1"></span>
@@ -87,50 +82,6 @@
 <style scoped lang="scss">
   // base
   @import "../theme/theme.scss";
-
-  .nav-slidedown {
-    .nav-body {
-      top: 48px;
-      opacity: 1
-    }
-    .nav-mask {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1
-    }
-    .nav-appname {
-      color: #aaa
-    }
-    .nav-btn-ico_1 {
-      transform: translate(0,8px) rotate(-45deg);
-      -moz-transform: translate(0,8px) rotate(-45deg);
-      -webkit-transform: translate(0,8px) rotate(-45deg);
-      -o-transform: translate(0,8px) rotate(-45deg)
-    }
-    .nav-btn-ico_2 {
-      opacity: 0;
-      transform: translate(10px,0);
-      -moz-transform: translate(10px,0);
-      -webkit-transform: translate(10px,0);
-      -o-transform: translate(10px,0)
-    }
-    .nav-btn-ico_3 {
-      transform: translate(0,-8px) rotate(45deg);
-      -moz-transform: translate(0,-8px) rotate(45deg);
-      -webkit-transform: translate(0,-8px) rotate(45deg);
-      -o-transform: translate(0,-8px) rotate(45deg)
-    }
-    .app_container,.app-footer {
-      opacity: .4;
-      transform: translateY(100px);
-      -moz-transform: translateY(100px);
-      -webkit-transform: translateY(100px);
-      -o-transform: translateY(100px)
-    }
-  }
 
   .app-nav {
     position: fixed;
@@ -153,6 +104,7 @@
       z-index: 2;
       .nav {
         float: left;
+       /* padding: 0px;*/
         li {
           float: left;
           a {
@@ -225,7 +177,8 @@
     }
     a {
       text-decoration: none;
-      color: #333
+      color: #333;
+      cursor: pointer;
     }
   }
 
@@ -261,8 +214,10 @@
     }
   }
 
-  @media screen and (max-width: 660px) {
-    .app_container,.app-footer {
+
+
+  @media screen and (max-width: 1024px) {
+    .blog-container {
       transition:all .2s ease;
       -moz-transition: all .2s ease;
       -webkit-transition: all .2s ease;
@@ -272,107 +227,139 @@
     .app-nav {
       height: 50px;
       background: #fff;
-      box-shadow: 0 0 4px #000
+      box-shadow: 0 0 4px #000;
+      .nav-body {
+        width: 100%;
+        height: auto;
+        top: -600px;
+        left: 0;
+        border: 0;
+        box-shadow: 0 2px 2px rgba(0,0,0,.4);
+        opacity: 0;
+        z-index: 2;
+        transition: all .2s ease;
+        -moz-transition: all .2s ease;
+        -webkit-transition: all .2s ease;
+        -o-transition: all .2s ease;
+        .nav {
+          float: none;
+          margin: 20px 0;
+          li {
+            float: none;
+            a {
+              i {
+                display: inline-block;
+              }
+              span {
+                width: 5em;
+                padding-left: 5px;
+                font-size: 14px;
+                text-align: left;
+              }
+            }
+          }
+        }
+        .side {
+          float: none;
+          text-align: center;
+          border-top: 1px solid #eee;
+          li {
+            padding: 0 30px
+          }
+        }
+      }
+      .nav-appname {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        font-size: 20px;
+        background: #fff;
+        z-index: 2;
+        i {
+          margin-right: .5em
+        }
+      }
+      .nav-morebtn {
+        position: absolute;
+        display: block;
+        width: 40px;
+        height: 40px;
+        top: 5px;
+        right: 10px;
+        background: #fff;
+        z-index: 3;
+        .nav-btn-ico {
+          display: block;
+          position: absolute;
+          width: 26px;
+          height: 3px;
+          left: 9px;
+          border-radius: 2px;
+          background: #333;
+          transition: all .2s ease;
+          -moz-transition: all .2s ease;
+          -webkit-transition: all .2s ease;
+          -o-transition: all .2s ease
+        }
+        .nav-btn-ico_1 {
+          top: 10px
+        }
+        .nav-btn-ico_2 {
+          top: 18px
+        }
+        .nav-btn-ico_3 {
+          top: 26px
+        }
+      }
     }
+  }
 
-    .app-nav .side {
-      float: none;
-      text-align: center;
-      border-top: 1px solid #eee
+  .nav-slidedown {
+    .nav-body {
+      top: 48px;
+      opacity: 1
     }
-
-    .app-nav .side li {
-      padding: 0 30px
-    }
-
-    .nav-appname {
-      display: block;
-      position: absolute;
+    .nav-mask {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 48px;
-      line-height: 48px;
-      text-align: center;
-      font-size: 20px;
-      background: #fff;
-      z-index: 2
+      height: 100%;
+      z-index: 1
     }
-
-    .nav-appname i {
-      margin-right: .5em
+    .nav-appname {
+      color: #aaa
     }
-
-    .nav-body {
-      width: 100%;
-      height: auto;
-      top: -300px;
-      left: 0;
-      border: 0;
-      box-shadow: 0 2px 2px rgba(0,0,0,.4);
-      opacity: 0;
-      z-index: 2;
-      transition: all .2s ease;
-      -moz-transition: all .2s ease;
-      -webkit-transition: all .2s ease;
-      -o-transition: all .2s ease
-    }
-
-    .nav-body .nav {
-      float: none;
-      margin: 20px 0
-    }
-
-    .nav-body .nav li {
-      float: none
-    }
-
-    .nav-body .nav li a i {
-      display: inline-block
-    }
-
-    .nav-body .nav li a span {
-      width: 5em;
-      padding-left: 5px;
-      font-size: 14px;
-      text-align: left
-    }
-
-    .nav-morebtn {
-      position: absolute;
-      display: block;
-      width: 40px;
-      height: 40px;
-      top: 5px;
-      right: 10px;
-      background: #fff;
-      z-index: 3
-    }
-
-    .nav-btn-ico {
-      display: block;
-      position: absolute;
-      width: 22px;
-      height: 4px;
-      left: 9px;
-      border-radius: 4px;
-      background: #333;
-      transition: all .2s ease;
-      -moz-transition: all .2s ease;
-      -webkit-transition: all .2s ease;
-      -o-transition: all .2s ease
-    }
-
     .nav-btn-ico_1 {
-      top: 10px
+      transform: translate(0,8px) rotate(-45deg);
+      -moz-transform: translate(0,8px) rotate(-45deg);
+      -webkit-transform: translate(0,8px) rotate(-45deg);
+      -o-transform: translate(0,8px) rotate(-45deg)
     }
-
     .nav-btn-ico_2 {
-      top: 18px
+      opacity: 0;
+      transform: translate(10px,0);
+      -moz-transform: translate(10px,0);
+      -webkit-transform: translate(10px,0);
+      -o-transform: translate(10px,0)
     }
-
     .nav-btn-ico_3 {
-      top: 26px
+      transform: translate(0,-8px) rotate(45deg);
+      -moz-transform: translate(0,-8px) rotate(45deg);
+      -webkit-transform: translate(0,-8px) rotate(45deg);
+      -o-transform: translate(0,-8px) rotate(45deg)
+    }
+    .app_container,.app-footer {
+      opacity: .4;
+      transform: translateY(100px);
+      -moz-transform: translateY(100px);
+      -webkit-transform: translateY(100px);
+      -o-transform: translateY(100px)
     }
   }
 

@@ -1,5 +1,5 @@
 <template>
-    <div id="indexBox" class="index-box animated fadeIn">
+    <div id="appIndex" class="app-index animated fadeIn">
         <div class="index-content">
             <div class="head-wrap">
                 <h3 class="text-center services">前端工程师 - Nodejs工程师</h3>
@@ -26,9 +26,6 @@
                              tag="div">我的音乐
                 </router-link>
             </section>
-            <section class="index-copyright">
-                <copyright></copyright>
-            </section>
         </div>
     </div>
 </template>
@@ -37,7 +34,7 @@
     @import "../theme/theme.scss";
     //首次进入页面,主页展示切换文字
     /*index的内容*/
-    .index-box {
+    .app-index {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -147,17 +144,10 @@
                 }
             }
         }
-        .index-copyright {
-            position: absolute;
-            bottom: 1%;
-            text-align: center;
-            width: 100%;
-            left: 0;
-        }
     }
 
     @include media("<=phone") {
-        .index-box {
+        .app-index {
 
             .index-content {
                 padding-top: 45px;
@@ -172,7 +162,6 @@
     }
 </style>
 <script type="text/javascript">
-    import copyright from '../components/copyright.vue'
     module.exports = {
         data: function () {
             return {
@@ -189,9 +178,6 @@
         },
         destroyed: function () {
             clearInterval(this.clearInterval)
-        },
-        components: {
-            copyright
         }
     }
 

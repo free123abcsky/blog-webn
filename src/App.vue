@@ -6,6 +6,8 @@
       <blog-nav></blog-nav>
       <!-- 路由外链 -->
       <router-view></router-view>
+      <!--导航条-->
+      <blog-footer></blog-footer>
       <!--qq,微信弹出层-->
       <social-info></social-info>
       <!--退出弹层-->
@@ -17,15 +19,14 @@
 <script type="text/javascript">
   import Vue from "vue";
   import API from "./config";
-  //import blogNav from "./views/blog.nav";
   import blogNav from "./components/navbar";
+  import blogFooter from "./components/footer";
   import socialInfo from "./components/socialInfo.vue";
   import doLogout from "./components/doLogout.vue";
   import store from './vuex/store'
   import vStorage from './utils/vStorage.js'
   import vueMoment from 'vue-moment';
   import moment from 'moment';
-  //import VueResource from 'vue-resource';
   import axios from './utils/axios';
   import {num2MMM, uppercase, addImgPrefix} from "./utils/filters.js";
   import {Sign} from "./api/api_statistic";
@@ -34,7 +35,7 @@
    * 设置本地存储
    * */
   Vue.use(vStorage, {
-    storageKeyPrefix: 'xst-'
+    storageKeyPrefix: 'izl-'
   });
 
   /**
@@ -92,6 +93,7 @@
     components: {
       //小组件挂载集中挂载
       blogNav,
+      blogFooter,
       socialInfo,
       doLogout,
     },

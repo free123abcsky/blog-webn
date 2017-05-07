@@ -34,13 +34,17 @@
                     评论数 {{article.comment_num}}
                     </router-link>
                 </div>
-                <div class="article-info-each hidden-xs" v-for="tag of article.tags">
-                  <i class="fa fa-tag"></i> <span>{{tag.name}}</span>
+                <div class="meta-tags article-info-each hidden-xs" v-show="article.tags.length > 0">
+                  <i class="fa fa-tags"></i>
+                  <router-link v-for="tag of article.tags" :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
+                               tag="span">
+                    {{tag.name}}
+                </router-link>
                 </div>
               </div>
               <div class="article-readmore hidden-xs">
                 <router-link :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="span">
-                  阅读更多
+                  阅读全文
                 </router-link>
               </div>
             </div>
@@ -182,6 +186,52 @@
         }
       }
     }
+
+    .meta-tags {
+      float: left;
+      font-size: 20px;
+      display: inline-block;
+      height:24px;
+      line-height: 24px;
+      color: #999;;
+      span {
+        position: relative;
+        max-width: 100%;
+        margin-right: 10px;
+        padding: 0px 8px 0px 16px;
+        border-radius: 0 4px 4px 0;
+        background: #eee;
+        font-size: 12px;
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        &:before {
+          position: absolute;
+          content: "";
+          top: 0px;
+          left: 0px;
+          width: 0px;
+          height: 0px;
+          border-width: 8px 12px 12px 0px;
+          border-color: rgb(255, 255, 255) transparent;
+          border-style: solid;
+        }
+        &:after {
+          position: absolute;
+          content: "";
+          width: 3px;
+          height: 3px;
+          top: 7px;
+          left: 8px;
+          border-radius: 100%;
+          background: white;
+        }
+      }
+    }
   }
 
   @include media("<=desktop") {
@@ -203,9 +253,6 @@
   }
 
   @include media("<=desktop_small") {
-    .aritcle-list {
-      padding-top: 60px;
-    }
     .container {
       width: 100%;
     }

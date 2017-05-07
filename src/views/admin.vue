@@ -1,6 +1,6 @@
 <template>
-  <div class="admin-container">
-    <div class="admin-box" :class="{'preview':isShowBigAdmin}" id="admin-box">
+  <div class="app-container">
+    <div class="admin-box" :class="{'preview':isShowBigAdmin}">
       <div class="box-header">
         <h1 class="text-right textItem">
           <small class="blue">后台管理</small>
@@ -8,18 +8,18 @@
       </div>
       <!--修改信息的内部-->
       <div class="box-content">
-        <router-view></router-view>
+        <!-- 路由外链 -->
+        <transition name="fade">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
-    <section>
-      <copyright></copyright>
-    </section>
   </div>
 </template>
 <style scoped lang="scss">
   @import "../theme/theme.scss";
   //后台整个页面的盒子
-  .admin-container {
+  .app-container {
     margin-top: 65px;
     -webkit-overflow-scrolling: touch;
     height: 100%;
@@ -60,7 +60,7 @@
     color: $base-theme-color;
   }
 
-  .textItem {
+  .text-item {
     color: #fff;
   }
 
@@ -71,7 +71,7 @@
   }
 
   @include media("<=tablet") {
-    .admin-container {
+    .app-container {
       padding-top: 10px;
       .admin-box {
         max-width: 780px;
@@ -84,21 +84,16 @@
   }
 </style>
 <script type="text/javascript">
-  import copyright from "../components/copyright.vue";
   import {mapState} from 'vuex';
   export default{
     data(){
       return {
-        msg: 'hello vue'
       }
     },
     computed: {
       ...mapState({
         isShowBigAdmin: 'isShowBigAdmin',
       }),
-    },
-    components: {
-      copyright
     }
   }
 

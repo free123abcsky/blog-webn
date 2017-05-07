@@ -78,216 +78,164 @@
       /*display: none;*/
     /*}*/
 
-    /*动画*/
-    @-webkit-keyframes ball-grid-pulse-loading {
-      0% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-      }
-
-      50% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        opacity: 0.7;
-      }
-
-      100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    @keyframes ball-grid-pulse-loading {
-      0% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-      }
-
-      50% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        opacity: 0.7;
-      }
-
-      100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    .ball-grid-pulse-loading {
-      width: 57px;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(1) {
-      -webkit-animation-delay: -0.06s;
-      animation-delay: -0.06s;
-      -webkit-animation-duration: 0.72s;
-      animation-duration: 0.72s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(2) {
-      -webkit-animation-delay: 0.25s;
-      animation-delay: 0.25s;
-      -webkit-animation-duration: 1.02s;
-      animation-duration: 1.02s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(3) {
-      -webkit-animation-delay: -0.17s;
-      animation-delay: -0.17s;
-      -webkit-animation-duration: 1.28s;
-      animation-duration: 1.28s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(4) {
-      -webkit-animation-delay: 0.48s;
-      animation-delay: 0.48s;
-      -webkit-animation-duration: 1.42s;
-      animation-duration: 1.42s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(5) {
-      -webkit-animation-delay: 0.31s;
-      animation-delay: 0.31s;
-      -webkit-animation-duration: 1.45s;
-      animation-duration: 1.45s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(6) {
-      -webkit-animation-delay: 0.03s;
-      animation-delay: 0.03s;
-      -webkit-animation-duration: 1.18s;
-      animation-duration: 1.18s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(7) {
-      -webkit-animation-delay: 0.46s;
-      animation-delay: 0.46s;
-      -webkit-animation-duration: 0.87s;
-      animation-duration: 0.87s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(8) {
-      -webkit-animation-delay: 0.78s;
-      animation-delay: 0.78s;
-      -webkit-animation-duration: 1.45s;
-      animation-duration: 1.45s;
-    }
-
-    .ball-grid-pulse-loading > div:nth-child(9) {
-      -webkit-animation-delay: 0.45s;
-      animation-delay: 0.45s;
-      -webkit-animation-duration: 1.06s;
-      animation-duration: 1.06s;
-    }
-
-    .ball-grid-pulse-loading > div {
-      background-color: #38b7ea;
-      width: 15px;
-      height: 15px;
-      border-radius: 100%;
-      margin: 2px;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-      display: inline-block;
-      float: left;
-      -webkit-animation-name: ball-grid-pulse-loading;
-      animation-name: ball-grid-pulse-loading;
-      -webkit-animation-iteration-count: infinite;
-      animation-iteration-count: infinite;
-      -webkit-animation-delay: 0;
-      animation-delay: 0;
-    }
-
-    /*loading area*/
-    #loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      font-size: 40px;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      transition: all ease 500ms;
-      opacity: 1;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-    .page-loaded {
-      opacity: 0 !important;
-      z-index: 0 !important;
-    }
-
     * {
       /*outline:1px solid #eee;*/
     }
 
-    #loading .loading-center {
+    .app_mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5000;
+      background: #fff
+    }
+
+    .app_mask:before {
+      content: '';
+      position: absolute;
+      width: 104%;
+      height: 1px;
+      top: 50%;
+      left: -2%;
+      background: #aaa;
+      -webkit-transform: rotate(-15deg);
+      -moz-transform: rotate(-15deg);
+      -o-transform: rotate(-15deg);
+      transform: rotate(-15deg)
+    }
+
+    .app_mask .app_mask_cnt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52px;
+      height: 52px;
+      margin: -26px 0 0 -26px
+    }
+
+    .app_mask .app_mask_cnt span {
+      background: #fff
+    }
+
+    .app_mask.app_mask_out {
+      opacity: 0;
+      transition: all .2s ease-in;
+      -moz-transition: all .2s ease-in;
+      -webkit-transition: all .2s ease-in;
+      -o-transition: all .2s ease-in;
+      transition-delay: .6s;
+      -moz-transition-delay: .6s;
+      -webkit-transition-delay: .6s;
+      -o-transition-delay: .6s
+    }
+
+    .app_mask.app_mask_out .app_mask_cnt {
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+      -o-transform: scale(0);
+      transform: scale(0);
+      transition: all .15s ease-in;
+      -moz-transition: all .15s ease-in;
+      -webkit-transition: all .15s ease-in;
+      -o-transition: all .15s ease-in
+    }
+
+    .app_mask.app_mask_out:before {
+      width: 0;
+      left: 50%;
+      transition: all .3s ease;
+      -moz-transition: all .3s ease;
+      -webkit-transition: all .3s ease;
+      -o-transition: all .3s ease;
+      transition-delay: .2s;
+      -moz-transition-delay: .2s;
+      -webkit-transition-delay: .2s;
+      -o-transition-delay: .2s
+    }
+
+    .app_mask_cnt {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
       width: 200px;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-
+      height: 70px;
+      margin-left: -100px;
+      z-index: 1
     }
 
-    #loading .loading-center .loading-balls {
-      padding: 20px;
-      border-radius: 100%;
-      box-sizing: border-box;
-      width: 100px !important;
-      height: 100px !important;
+    .app_mask_cnt p {
+      padding-top: 20px;
+      font-size: 18px;
+      text-align: center
     }
 
-    #loading .loading-center .loading-text {
-      font-size: 20px;
-      padding: 0;
-      margin: 0;
-      line-height: 120%;
-      box-sizing: border-box;
-      font-weight: 800;
+    .l-loading {
+      position: relative;
+      display: block;
+      margin: auto;
+      height: 50px;
+      width: 50px;
+      border: 1px solid #555;
+      border-radius: 50%;
+      animation: loading-rond 2s infinite;
+      -webkit-animation: loading-rond 2s infinite
     }
+
+    .l-loading:after {
+      content: '';
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      top: -4px;
+      left: 50%;
+      margin-left: -4px;
+      background: #555;
+      border-radius: 100%
+    }
+
+    @keyframes loading-rond {
+      0% {
+        transform: rotate(0deg)
+      }
+
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+
+    @-webkit-keyframes loading-rond {
+      0% {
+        -webkit-transform: rotate(0deg)
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg)
+      }
+    }
+
   </style>
   <script>
     window.hideLoadingPage = function hideLoadingPage() {
-      var $loading = document.getElementById('loading');
-      $loading.className += 'page-loaded';
-      setTimeout(function () {
-        $loading.className += ' hide';
-      }, 500)
+
+      var app_mask = document.getElementById('app_mask');
+      app_mask.className += 'app_mask_out';
+      setTimeout(function(){
+        app_mask.remove();
+      }, 1000)
+
     };
   </script>
 </head>
 <body class="define-scrollbar">
 <!--blog -->
 <div id="app"></div>
-<!--Loading-->
-<div id="loading">
-  <section class="loading-center">
-    <div class="loading-balls ball-grid-pulse-loading">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <p class="loading-text">
-      Loading
-    </p>
-  </section>
+<div id="app_mask" class="app_mask">
+  <div class="app_mask_cnt">
+    <span class="l-loading"></span>
+  </div>
 </div>
+
 </body>
 </html>
