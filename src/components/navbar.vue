@@ -7,17 +7,17 @@
         <ul class="nav">
           <li>
             <router-link class="nav-logo" :to="{ name: 'index'}" activeClass="active" exact title="首页">
-              <i class="l-icon l-icon-layLogo"></i><span>爱知室</span>
+              <icon type="home"></icon><span>爱知室</span>
             </router-link>
           </li>
           <li>
             <router-link :to="{ name: 'blog'}" activeClass="active" title="博客">
-              <i class="fa fa-map-signs fa-fw fa-lg"></i><span>博客</span>
+              <icon type="map-signs"></icon><span>博客</span>
             </router-link>
           </li>
           <li>
             <router-link :to="{ name: 'music'}" activeClass="active" title="音乐">
-              <i class="fa fa-music fa-fw fa-lg"></i><span>音乐</span>
+              <icon type="music"></icon><span>音乐</span>
               <section class="right-bottom-status">
                 <i class="fa fa-lg" :class="{true:'fa-pause-circle-o',false:' fa-play-circle-o playing'}[!isPlaying]"></i>
               </section>
@@ -25,41 +25,41 @@
           </li>
           <li v-show="isLogin" >
             <router-link class="animated fadeIn" :to="{ name: 'admin-dashboard'}" activeClass="active" title="控制台">
-              <i class="fa fa-dashboard fa-lg"></i><span>控制台</span>
+              <icon type="dashboard"></icon><span>控制台</span>
             </router-link>
           </li>
           <li v-show="isLogin" >
             <router-link class="animated fadeIn" :to="{ name: 'admin-myinfo'}" activeClass="active" title="我的资料">
-              <i class="fa fa-user fa-lg"></i><span>我的资料</span>
+              <icon type="user"></icon><span>我的资料</span>
             </router-link>
           </li>
           <li v-show="isLogin">
             <router-link class="animated fadeIn" :to="{ name: 'admin-tag'}" activeClass="active" title="标签管理">
-              <i class="fa fa-tag fa-lg"></i><span>标签管理</span>
+              <icon type="tag"></icon><span>标签管理</span>
             </router-link>
           </li>
           <li v-show="isLogin">
             <router-link class="animated fadeIn" :to="{ name: 'admin-articleManager'}" activeClass="active" title="文章管理">
-              <i class="fa fa-list fa-lg"></i><span>文章管理</span>
+              <icon type="list"></icon><span>文章管理</span>
             </router-link>
           </li>
           <li v-show="isLogin">
             <router-link class="animated fadeIn" :to="{ name: 'admin-commentList'}" activeClass="active" title="文章评论">
-              <i class="fa fa-comments fa-lg"></i><span>文章评论</span>
+              <icon type="comments"></icon><span>文章评论</span>
             </router-link>
           </li>
         </ul>
         <ul class="side">
           <li v-show="isLogin">
             <a class="animated fadeIn" title="退出" @click="doLoginout()">
-              <i class="fa fa-sign-out fa-lg"></i>
+              <icon type="sign-out"></icon>
             </a>
           </li>
           <li>
             <a class="changebg animated fadeIn" title="切换背景" @click="changeBG()">
-              <i class="fa fa-photo fa-fw fa-lg"></i>
+              <icon type="photo"></icon>
               <section class="right-bottom-status">
-                <i class="fa fa-lg fa-refresh" :class="{true:'',false:'fa-spin'}[!isChangeBG]"></i>
+                <icon type="refresh" :class="{true:'',false:'fa-spin'}[!isChangeBG]"></icon>
               </section>
             </a>
           </li>
@@ -86,100 +86,97 @@
   .app-nav {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
     z-index: 1000;
-    .nav-mask {
-
-    }
-    .nav-body {
-      position: absolute;
-      border-top: 2px solid #f70;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 48px;
-      background: #fff;
-      box-shadow: 0 0 5px rgba(0,0,0,.4);
-      z-index: 2;
-      .nav {
-        float: left;
-       /* padding: 0px;*/
-        li {
-          float: left;
-          a {
-            display: block;
-            height: 48px;
-            padding: 0 15px;
-            outline: 0;
-            overflow: hidden;
-            line-height: 48px;
-            color: #333;
-            text-align: center;
-            font-size: 16px;
-            transition: all .2s linear;
-            -moz-transition: all .2s linear;
-            -webkit-transition: all .2s linear;
-            -o-transition: all .2s linear;
-            i {
-
-              display: inline-block;
-              vertical-align: middle;
-              height: 30px;
-              line-height: 30px;
-              margin-right: 6px;
-              text-align: center;
-              font-size: 24px;
-              display: none;
-            }
-            span {
-              display: inline-block;
-              vertical-align: middle;
-              height: 30px;
-              line-height: 30px
-            }
-            &:hover {
-              color: #f70
-            }
-          }
-          .active {
-            color: #f70
-          }
-          &:nth-child(1) a i {
-            display: inline-block
-          }
-
-        }
-      }
-      .side {
-        float: right;
-        height: 48px;
-        font-size: 0;
-        li {
-          display: inline-block;
-          height: 48px;
-          line-height: 48px;
-          padding: 0 10px;
-          a {
-            font-size: 12px
-          }
-          .active{
-            color: #f70;
-          }
-        }
-      }
-    }
-    .nav-appname {
-      display: none;
-    }
-    .nav-morebtn {
-      display: none
-    }
+    width: 100%;
     a {
       text-decoration: none;
       color: #333;
       cursor: pointer;
     }
+  }
+
+  .nav-mask {
+
+  }
+  .nav-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    border-top: 2px solid #59bfff;
+    box-shadow: 0 0 5px rgba(0,0,0,.4);
+    z-index: 2;
+    .nav {
+      float: left;
+      li {
+        float: left;
+        a {
+          display: block;
+          height: 48px;
+          line-height: 48px;
+          padding: 0 15px;
+          outline: 0;
+          overflow: hidden;
+          color: #333;
+          text-align: center;
+          font-size: 16px;
+          transition: all .2s linear;
+          -moz-transition: all .2s linear;
+          -webkit-transition: all .2s linear;
+          -o-transition: all .2s linear;
+          i {
+
+            display: inline-block;
+            vertical-align: middle;
+            height: 30px;
+            line-height: 30px;
+            margin-right: 6px;
+            text-align: center;
+            font-size: 24px;
+            display: none;
+          }
+          span {
+            display: inline-block;
+            vertical-align: middle;
+            height: 30px;
+            line-height: 30px
+          }
+          &:hover {
+            color: #f70
+          }
+        }
+        .active {
+          color: #f70
+        }
+        &:nth-child(1) a i {
+          display: inline-block
+        }
+
+      }
+    }
+    .side {
+      float: right;
+      font-size: 0;
+      li {
+        display: inline-block;
+        height: 48px;
+        line-height: 48px;
+        padding: 0 10px;
+        a {
+          font-size: 12px
+        }
+        .active{
+          color: #f70;
+        }
+      }
+    }
+  }
+  .nav-appname {
+    display: none;
+  }
+  .nav-morebtn {
+    display: none
   }
 
   .changebg {
@@ -274,11 +271,10 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 48px;
-        line-height: 48px;
+        height: 50px;
+        line-height: 50px;
         text-align: center;
         font-size: 20px;
-        background: #fff;
         z-index: 2;
         i {
           margin-right: .5em
@@ -291,7 +287,6 @@
         height: 40px;
         top: 5px;
         right: 10px;
-        background: #fff;
         z-index: 3;
         .nav-btn-ico {
           display: block;
@@ -365,7 +360,8 @@
 
 </style>
 <script type="text/javascript">
-  //    import 'bootstrap/js/tooltip.js'
+
+  import icon from './icon.vue'
   import API from '../config'
   import {mapState} from 'vuex';
   export default{
@@ -470,28 +466,7 @@
             _this.isChangeBG = false;
           }, 1000);
         });
-      },
-      /**
-       * 工具提示栏 Tooltip类，需要jQuery
-       * */
-      // tooltip: function tooltip() {
-      //   // 使用v-show显示隐藏按钮
-      //   let $tooltips = $('[data-toggle="tooltip"]');
-      //   let _clientWidth = parseInt(document.documentElement.clientWidth);
-      //   let _params = null;
-      //   if (_clientWidth <= 768) {
-      //   } else if (_clientWidth > 769 && _clientWidth < 991) {
-      //     $tooltips.tooltip({
-      //       trigger: 'hover',
-      //       placement: 'bottom'
-      //     })
-      //   } else if (_clientWidth > 991) {
-      //     $tooltips.tooltip({
-      //       trigger: 'hover',
-      //       placement: 'right'
-      //     })
-      //   }
-      // }
+      }
     },
     directives: {
       togglenav: {
@@ -525,10 +500,10 @@
     },
     mounted: function () {
       const _this = this;
-      /**
-       * 初始化工具提示栏
-       * */
-      // _this.tooltip();
+
+    },
+    components: {
+      icon
     }
   }
 

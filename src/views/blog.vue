@@ -12,7 +12,7 @@
   @import "../theme/theme.scss";
 
   .app-container {
-    padding-top: 65px;
+    padding-top: 15px;
     position: relative;
   }
   .unlogined {

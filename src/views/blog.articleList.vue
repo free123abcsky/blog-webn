@@ -20,22 +20,22 @@
             <div class="article-infobox">
               <div class="article-info">
                 <div class="article-info-each">
-                  <i class="fa fa-calendar"></i>
+                  <icon type="calendar"></icon>
                   <span>{{article.publish_time  | moment("from","now")}}</span>
                 </div>
                 <div class="article-info-each">
-                  <i class="fa fa-book"></i>
+                  <icon type="book"></icon>
                   阅读数
                   <span class="article-readnum">{{article.read_num}}</span>
                 </div>
                 <div class="article-info-each">
-                  <i class="fa fa-comments"></i>
+                  <icon type="comments"></icon>
                   <router-link  class="article-comment" :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="span">
                     评论数 {{article.comment_num}}
                     </router-link>
                 </div>
                 <div class="meta-tags article-info-each hidden-xs" v-show="article.tags.length > 0">
-                  <i class="fa fa-tags"></i>
+                  <icon type="tags"></icon>
                   <router-link v-for="tag of article.tags" :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
                                tag="span">
                     {{tag.name}}
@@ -59,10 +59,7 @@
         <sidebar></sidebar>
       </div>
     </div>
-    <!--返回最上层-->
-    <div id="toTop" class="backToTop">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    <backtop></backtop>
   </div>
 </template>
 <style scoped lang="scss">
@@ -235,9 +232,6 @@
   }
 
   @include media("<=desktop") {
-    .backToTop {
-      margin-left: 0;
-    }
     .aritcle-list{
       margin-left:0px;
     }
@@ -321,7 +315,9 @@
   import API from "../config.js"
   import noData from "../components/nodata.vue"
   import loading from "../components/loading.vue"
-  import sidebar from '../components/sidebar.vue';
+  import sidebar from '../components/sidebar.vue'
+  import backtop from '../components/back-top.vue'
+  import icon from '../components/icon.vue'
   import {GetArticleListForFrontEnd} from "../api/api_article"
   import Vue from 'vue'
   import InfiniteScroll from 'InfiniteScroll';
@@ -388,13 +384,11 @@
     },
     created: function () {
       const _this = this;
-      // $(window).scrollTop(0);// 滚到顶部
-      //_this.getArticleList();
     },
     destroyed: function () {
     },
     components: {
-      noData, loading,sidebar
+      noData, loading,sidebar,backtop, icon
     },
   }
 </script>

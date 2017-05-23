@@ -20,7 +20,7 @@
   @import "../theme/theme.scss";
   //后台整个页面的盒子
   .app-container {
-    margin-top: 65px;
+    margin-top: 15px;
     -webkit-overflow-scrolling: touch;
     height: 100%;
     .admin-box {

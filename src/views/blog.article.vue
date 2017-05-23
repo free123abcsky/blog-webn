@@ -9,7 +9,7 @@
               <div class="meta">
                   <span class="time">
                     <span class="time-icon">
-                      <i class="fa fa-calendar-o"></i>
+                      <icon type="calendar-o"></icon>
                     </span>
                     <span class="time-text">发表于</span>
                     <span title="publish time" datetime="2017-03-21T20:18:32+08:00">
@@ -19,14 +19,14 @@
                 <span class="comments-count">
                     <span class="meta-divider">|</span>
                     <span class="comments-icon">
-                      <i class="fa fa-comment-o"></i>
+                      <icon type="comment-o"></icon>
                     </span>
                     <span class="comments-num">{{article.comment_num}}</span>
                   </span>
                 <span class="leancloud_visitors">
                     <span class="post-meta-divider">|</span>
                     <span class="post-meta-item-icon">
-                      <i class="fa fa-eye"></i>
+                      <icon type="fa-eye"></icon>
                     </span>
                     <span class="read-text">阅读次数 </span>
                     <span class="read-count">{{article.read_num}}</span>
@@ -39,7 +39,7 @@
 
             <footer class="article-footer">
               <div class="meta-tags">
-                <i class="fa fa-tags"></i>
+                <icon type="tags"></icon>
                 <router-link v-for="tag of article.tags" :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
                              :title="'查看关于 ' + tag.name + ' 的文章'" activeClass="active" tag="span">
                   {{tag.name}}
@@ -52,7 +52,7 @@
           <section class="commentbox">
 
             <!--评论回复盒子 -->
-            <csend-box :article-id="article._id" :pre-id="article._id"></csend-box>
+            <sendbox :article-id="article._id" :pre-id="article._id"></sendbox>
             <div class="com-list">
               <div class="com-item" v-for="comment of commentList">
                 <div class="com-body">
@@ -64,13 +64,13 @@
                     <div class="text">{{comment.content}}</div>
                     <div class="footer">
                       <div class="time">{{comment.time | moment("from","now")}}</div>
-                      <a href="javascript:void(0)" class="btn-reply" @click="replyBtn(comment._id)">回复</a>
+                      <a href="javascript:void(0)" class="btn-reply" @click="replyBtn(comment._id)">{{(comment._id==selectId && toggle) ? '取消回复' : '回复'}}</a>
                     </div>
                   </div>
                 </div>
                 <div class="com-reply">
                   <div class="com-reply-box" :class="{'active':(comment._id==selectId && toggle)}">
-                    <csend-box :article-id="comment.article_id" :pre-id="comment._id"></csend-box>
+                    <sendbox :article-id="comment.article_id" :pre-id="comment._id"></sendbox>
                   </div>
                   <div class="com-reply-each" v-for="reply of comment.next_id">
                     <div class="com-body">
@@ -98,10 +98,7 @@
         <sidebar></sidebar>
       </div>
     </div>
-    <!--返回最上层-->
-    <div id="toTop" class="backToTop">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    <backtop></backtop>
   </div>
 </template>
 <style scoped lang="scss">
@@ -118,217 +115,215 @@
     box-sizing: border-box;
     position: relative;
     z-index: 999;
-    .article-section {
-      //background-color: transparent;
-      background: #fff;
-      /*margin-bottom: 30px;*/
-      /*border-radius: 4px;*/
-      overflow: hidden;
-      margin-bottom: 15px;
-      .article-header {
-        text-align: center;
-        padding: 2px 20px 12px;
-        border-bottom: 1px solid #eee;
-        h1 {
-          color: #444;
-          font-weight: normal;
-          font-size: 30px;
-          line-height: 60px;
-          padding: 5px 0;
-        }
-        .meta{
-          margin: 3px 0 15px 0;
-          color: #999;
-          font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
-          font-size: 12px;
-          text-align: center;
-        }
-      }
-      .article-footer {
-        background-color: #fff;
-        border-top: 1px solid #f7f7f7;
-        padding: 15px 30px;
-        overflow: hidden;
-        .meta-tags {
-          float: left;
-          font-size: 20px;
-          display: inline-block;
-          color: #999;
-          span {
-            position: relative;
-            display: inline-block;
-            max-width: 100%;
-            height: 24px;
-            margin-right:10px;
-            line-height: 24px;
-            padding: 0 8px 0 18px;
-            border-radius: 0 4px 4px 0;
-            background: #eee;
-            font-size: 12px;
-            color: #333;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            &:before {
-              position: absolute;
-              content: '';
-              top: 0;
-              left: 0;
-              width: 0;
-              height: 0;
-              border-width: 12px 12px 12px 0;
-              border-color: #fff transparent;
-              border-style: solid
-            }
-            &:after {
-              position: absolute;
-              content: '';
-              width: 4px;
-              height: 4px;
-              top: 10px;
-              left: 8px;
-              border-radius: 100%;
-              background: #fff
-            }
-            &:hover {
-              background: #333;
-              color: #fff;
-              cursor: pointer;
-            }
-          }
-        }
-      }
-      &.loading {
+  }
 
-        .article-main {
-          .article-main-inner {
-            background-image: url(../assets/body_placeholder.png);
-            background-repeat: no-repeat;
-            background-size: 100% auto;
-            background-position: center top;
-            min-height: 834px;
-            width: 100%;
-          }
-        }
-
-      }
+  .article-section {
+    background: #fff;
+    overflow: hidden;
+    margin-bottom: 15px;
+    &.loading {
       .article-main {
-        padding: 35px;
-        background: #fff;
-        //min-height: 800px;
         .article-main-inner {
-          padding: 5px 0 0;
-          //border-bottom: 1px dashed #464646;
+          background-image: url(../assets/body_placeholder.png);
+          background-repeat: no-repeat;
+          background-size: 100% auto;
+          background-position: center top;
+          min-height: 834px;
+          width: 100%;
         }
       }
 
     }
-
-    .commentbox {
-      background-color: $base-background-color;
-      padding: 0;
-      border-radius: 3px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 30px;
-      &::after {
-        /*content: '';*/
-        position: absolute;
-        top: 0;
-        right: 0;
-        border-top: 4px solid $base-theme-color;
-        border-top-right-radius: 3px;
-        width: 40%;
-        height: 0;
+    .article-main {
+      padding: 35px;
+      background: #fff;
+      //min-height: 800px;
+      .article-main-inner {
+        padding: 5px 0 0;
+        //border-bottom: 1px dashed #464646;
       }
     }
 
-    .com-item {
-      overflow: hidden;
-      background: #fff;
-      border-radius: 2px;
-      box-shadow: 0 0 2px rgba(0,0,0,.2);
-      .com-body {
+  }
+
+  .article-header {
+    text-align: center;
+    padding: 2px 20px 12px;
+    border-bottom: 1px solid #eee;
+    h1 {
+      color: #444;
+      font-weight: normal;
+      font-size: 30px;
+      line-height: 60px;
+      padding: 5px 0;
+    }
+    .meta{
+      margin: 3px 0 15px 0;
+      color: #999;
+      font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+
+  .article-footer {
+    background-color: #fff;
+    border-top: 1px solid #f7f7f7;
+    padding: 15px 30px;
+    overflow: hidden;
+    .meta-tags {
+      float: left;
+      font-size: 20px;
+      display: inline-block;
+      color: #999;
+      span {
         position: relative;
-        padding: 15px;
-        border-top: 1px solid #eee;
-        cursor: default;
+        display: inline-block;
+        max-width: 100%;
+        height: 24px;
+        margin-right:10px;
+        line-height: 24px;
+        padding: 0 8px 0 18px;
+        border-radius: 0 4px 4px 0;
+        background: #eee;
+        font-size: 12px;
+        color: #333;
         overflow: hidden;
-        transition: all .1s linear;
-        -moz-transition: all .1s linear;
-        -webkit-transition: all .1s linear;
-        -o-transition: all .1s linear;
-        &:nth-child(1) {
-          border: 0
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        &:before {
+          position: absolute;
+          content: '';
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 0;
+          border-width: 12px 12px 12px 0;
+          border-color: #fff transparent;
+          border-style: solid
+        }
+        &:after {
+          position: absolute;
+          content: '';
+          width: 4px;
+          height: 4px;
+          top: 10px;
+          left: 8px;
+          border-radius: 100%;
+          background: #fff
         }
         &:hover {
-          background: #fafafa
-        }
-        .avatar {
-          float: left;
-          width: 50px;
-          height: 50px;
-          border-radius: 12px;
-          overflow: hidden;
-          background: #ddd
-        }
-        .avatar img {
-          width: 100%;
-          height: 100%
-        }
-        .content {
-          margin-left: 60px
-        }
-        .caption {
-          margin-bottom: 10px;
-          line-height: 18px;
-          font-size: .85rem;
-          font-weight: 500
-        }
-        .text {
-          min-height: 20px;
-          margin-bottom: 10px;
-          line-height: 1.5;
-          font-size: .85rem;
-          color: #333;
-          word-wrap: break-word;
-          word-break: break-all
-        }
-        .footer {
-          height: 20px;
-          line-height: 20px;
-          font-size: .85rem
-        }
-        .footer .time {
-          float: left;
-          color: #aaa
-        }
-        .footer .btn-reply {
-          color: #aaa;
-          float: right
-        }
-        .footer .btn-reply:hover {
-          color: #333
-        }
-      }
-      .com-reply {
-        padding-left: 80px;
-        .com-reply-box {
-          display: none;
-          &.active {
-            display: block;
-          }
-        }
-        .avatar {
-          width:40px;
-          height: 40px;
+          background: #333;
+          color: #fff;
+          cursor: pointer;
         }
       }
     }
+  }
 
+  .commentbox {
+    background-color: $base-background-color;
+    padding: 0;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    &::after {
+      /*content: '';*/
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-top: 4px solid $base-theme-color;
+      border-top-right-radius: 3px;
+      width: 40%;
+      height: 0;
+    }
+  }
+
+  .com-item {
+    overflow: hidden;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,.2);
+    .com-body {
+      position: relative;
+      padding: 15px;
+      border-top: 1px solid #eee;
+      cursor: default;
+      overflow: hidden;
+      transition: all .1s linear;
+      -moz-transition: all .1s linear;
+      -webkit-transition: all .1s linear;
+      -o-transition: all .1s linear;
+      &:nth-child(1) {
+        border: 0
+      }
+      &:hover {
+        background: #fafafa
+      }
+      .avatar {
+        float: left;
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ddd
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%
+      }
+      .content {
+        margin-left: 60px
+      }
+      .caption {
+        margin-bottom: 10px;
+        line-height: 18px;
+        font-size: .85rem;
+        font-weight: 500
+      }
+      .text {
+        min-height: 20px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        font-size: .85rem;
+        color: #333;
+        word-wrap: break-word;
+        word-break: break-all
+      }
+      .footer {
+        height: 20px;
+        line-height: 20px;
+        font-size: .85rem
+      }
+      .footer .time {
+        float: left;
+        color: #aaa
+      }
+      .footer .btn-reply {
+        color: #aaa;
+        float: right
+      }
+      .footer .btn-reply:hover {
+        color: #333
+      }
+    }
+    .com-reply {
+      padding-left: 80px;
+      .com-reply-box {
+        display: none;
+        &.active {
+          display: block;
+        }
+      }
+      .avatar {
+        width:40px;
+        height: 40px;
+      }
+    }
   }
 
   .backToTop {
@@ -390,6 +385,19 @@
     .article-detail {
       .commentbox {
         margin-bottom: 10px;
+        .com-reply {
+          padding-left: 25px;
+          .com-reply-box {
+            display: none;
+            &.active {
+              display: block;
+            }
+          }
+          .avatar {
+            width:40px;
+            height: 40px;
+          }
+        }
       }
     }
 
@@ -400,8 +408,10 @@
   import API from "../config.js"
   import {GetArticleById, GetArticleTop} from "../api/api_article"
   import {GetArticleComments, SendComment} from "../api/api_comment"
-  import commentSendBox from '../components/commentSendBox.vue'
+  import sendbox from '../components/sendbox.vue'
   import loading from '../components/loading.vue'
+  import backtop from '../components/back-top.vue'
+  import icon from '../components/icon.vue'
   import "../theme/codeHighLight.css";
   import "../theme/markdown.scss";
   import "bootstrap/scss/bootstrap/_breadcrumbs.scss";
@@ -449,9 +459,6 @@
           this.toggle = true;
           this.selectId = id
         }
-      },
-      scrollTop: ()=> {
-        $(window).scrollTop(0);// 滚到顶部
       },
       /**
        * 获取数据
@@ -511,50 +518,11 @@
             });
           });
         }
-      },
-
-      /**
-       * 返回顶部的事件handler
-       * */
-      backToTopHandler: function () {
-        let _width = $(document).width()
-        if (_width >= 1200) {
-          if ($(this).scrollTop() > 0) {
-            $('#toTop').css({
-              "opacity": 1,
-              'left': $('#article').offset().left + $('#article').width(),
-            });
-          } else {
-            $('#toTop').css({
-              "opacity": 0
-            });
-          }
-        } else if (_width < 1200) {
-          if ($(this).scrollTop() > 0) {
-            $('#toTop').css({
-              "opacity": 1,
-              'left': $('#article').offset().left + $('#article').width() - $('#toTop').width(),
-            });
-          } else {
-            $('#toTop').css({
-              "opacity": 0
-            });
-          }
-        }
       }
     },
     created: function () {
       const _this = this;
       let articleId = _this.$route.params.articleId;
-
-      $(window).scrollTop(0);// 滚到顶部
-      // To Top
-      $(document)
-      .on('scroll', _this.backToTopHandler)
-      .on('click', '#toTop', function () {
-        $(window).scrollTop(0);
-        //$('body, html').animate({scrollTop: 0}, 600);
-      });
 
       // 获取文章
       _this.getArticleById(articleId);
@@ -565,12 +533,13 @@
       this.$emit('notice')
     },
     destroyed: function () {
-      $(document).off('scroll')
     },
     components: {
-      'csend-box': commentSendBox,
+      sendbox,
       loading,
-      sidebar
+      sidebar,
+      backtop,
+      icon
     },
   }
 

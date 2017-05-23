@@ -1,18 +1,18 @@
 <!--内容区-->
 <template>
-  <div>
-    <div class="app-content">
-      <!--导航条-->
-      <blog-nav></blog-nav>
-      <!-- 路由外链 -->
-      <router-view></router-view>
-      <!--导航条-->
-      <blog-footer></blog-footer>
-      <!--qq,微信弹出层-->
-      <social-info></social-info>
-      <!--退出弹层-->
-      <do-logout></do-logout>
-    </div>
+  <div class="app-content">
+    <!--导航条-->
+    <blog-nav></blog-nav>
+    <!-- 路由外链 -->
+    <router-view></router-view>
+    <!--导航条-->
+    <blog-footer></blog-footer>
+    <!--qq,微信弹出层-->
+    <social-info></social-info>
+    <!--退出弹层-->
+    <do-logout></do-logout>
+    <!--游客设置-->
+    <visitor-set></visitor-set>
   </div>
 </template>
 
@@ -23,6 +23,7 @@
   import blogFooter from "./components/footer";
   import socialInfo from "./components/socialInfo.vue";
   import doLogout from "./components/doLogout.vue";
+  import visitorSet from './components/visitorSet.vue'
   import store from './vuex/store'
   import vStorage from './utils/vStorage.js'
   import vueMoment from 'vue-moment';
@@ -96,6 +97,7 @@
       blogFooter,
       socialInfo,
       doLogout,
+      visitorSet
     },
   }
 
@@ -134,6 +136,12 @@
     .admin_btn {
       display: none;
     }
+  }
+
+  .app-content:before{
+    display: block;
+    content:'';
+    height:50px;
   }
 
   @include media(">desktop_small") {
