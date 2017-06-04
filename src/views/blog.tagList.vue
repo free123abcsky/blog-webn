@@ -24,9 +24,6 @@
         </div>
       </div>
     </div>
-    <section class="copyright animated fadeIn" v-if="tagList.length>0">
-      <copyright></copyright>
-    </section>
     <no-data v-if="!hasData && !isLoading"></no-data>
     <loading v-if="!!isLoading" class="loading" :number=9></loading>
   </div>
@@ -137,10 +134,9 @@
 
 </style>
 <script type="text/javascript">
-  import noData from "../components/nodata.vue"
-  import copyright from '../components/copyright.vue'
+  import noData from "../components/nodata"
   import {GetTagsListWithStructure} from '../api/api_tag'
-  import loading from "../components/loading.vue"
+  import loading from "../components/loading"
   export default{
     data: function () {
       return {
@@ -168,7 +164,7 @@
      _this.getTagsListWithStructure();
     },
     components: {
-      noData, copyright, loading
+      noData, loading
     }
   }
 </script>

@@ -7,6 +7,7 @@ export const SET_SHOWMYWORD_STATUS = 'SET_SHOWMYWORD_STATUS';//控制是否显�
 export const SET_SOCIALIMG = 'SET_SOCIALIMG';//设置我的社交弹出组件的img
 export const SET_LOGIN_STATUS = 'SET_LOGIN_STATUS';//设置是否登录
 export const SET_SHOW_BIGADMIN_STATUS = 'SET_SHOW_BIGADMIN_STATUS';//设置是否展开大号的admin页面,用于文章编辑预览,受体为admin.vue
+export const SET_VISITOR_SET_STATUS = 'SET_VISITOR_SET_STATUS';//设置-是否显示 ’留个名呗‘ 弹窗，全局性质
 export const SET_COMMENT_INFO_STATUS = 'SET_COMMENT_INFO_STATUS';//设置-文章评论是否设置了昵称和邮箱，全局性质
 
 

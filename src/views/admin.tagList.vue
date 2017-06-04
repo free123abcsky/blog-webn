@@ -2,12 +2,13 @@
   <div>
     <div class="animated fadeIn tags">
       <h3 class="title">
-        <i class="fa fa-fw fa-lg fa-tag"></i> 标签管理 / <span class="">TAGS</span>
+        <icon type="ios-pricetag"></icon>标签管理 / <span class="">TAGS</span>
       </h3>
       <!--增加-->
       <div class="btnBox text-right">
-        <button data-toggle="modal" data-target="#addTag" @click="addNewTagBtn()" class="btn btn-success"><i
-          class="fa fa-plus"></i></button>
+        <button data-toggle="modal" data-target="#addTag" @click="addNewTagBtn()" class="btn btn-success">
+          <icon type="android-add"></icon>
+        </button>
       </div>
       <div class="tableScrollBox">
         <div class="table-body">
@@ -52,10 +53,13 @@
               <td>{{tag.used_num}}</td>
               <td>{{tag.create_time | moment("YYYY/MM/DD")}}</td>
               <td>
-                <button data-toggle="modal" data-target="#editTag" @click="editTagBtn(tag)"
-                        class="btn btn-default btn-sm"><i class="fa fa-pencil"></i></button>
-                <button data-toggle="modal" data-target="#delTag" @click="delTagBtn(tag._id)"
-                        class="btn btn-danger btn-sm"><i class="fa fa-bitbucket"></i></button>
+                <button data-toggle="modal" data-target="#editTag" @click="editTagBtn(tag)" class="btn btn-default btn-sm">
+                  <icon type="edit"></icon>
+                </button>
+                <button data-toggle="modal" data-target="#delTag" @click="delTagBtn(tag._id)" class="btn btn-danger btn-sm">
+                        <i class="fa fa-bitbucket"></i>
+                  <icon type="ios-trash"></icon>
+                </button>
               </td>
             </tr>
             </tbody>
@@ -206,6 +210,7 @@
 <script type="text/javascript">
   import Vue from "vue";
   import _ from "lodash";
+  import icon from '../components/icon'
   import {
     GetTagsList,
     AddTag,
@@ -392,5 +397,8 @@
        * */
       this.getList();
     },
+    components: {
+        icon
+    }
   }
 </script>

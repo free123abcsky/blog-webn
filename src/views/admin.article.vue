@@ -470,8 +470,6 @@
   import {addImgPrefix} from "../utils/filters"
   import {autoTextarea} from "../utils/autoTextarea";
   import {setShowBigAdminStatus} from "../vuex/actions"
-  import copyright from '../components/copyright.vue'
-
 
   import {ImageUpload} from "../api/api_upload";
 
@@ -710,7 +708,6 @@
       this.setShowBigAdminStatus(false)
     },
     components: {
-      copyright,
       Multiselect,
     },
   }

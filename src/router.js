@@ -14,6 +14,11 @@ const routes = [
     component: require('./views/blog.index.vue'),
   },
   {
+    path: '/labs',
+    name: 'labs',
+    component: require('./views/blog.labs.vue')
+  },
+  {
     path: '/music',
     name: 'music',
     component: require('./views/blog.music.vue')
@@ -70,7 +75,7 @@ const routes = [
             component: require('./views/blog.articleList.vue'),
           },
         ]
-      },
+      }
     ]
   },
   {

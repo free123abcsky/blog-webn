@@ -9,7 +9,7 @@
     </div>
 </template>
 <style lang="scss">
-    @import "../theme/theme.scss";
+    @import "../../theme/theme.scss";
     .nodata {
         max-width:780px;
         width:100%;

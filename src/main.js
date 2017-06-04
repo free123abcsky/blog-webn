@@ -6,6 +6,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router.js'
+import kComps from './components/index'
 import "./theme/util.scss";
 import "bootstrap/scss/bootstrap.slim.scss";
 import "bootstrap/js/tooltip.js";
@@ -41,6 +42,9 @@ new attachFastClick(document.body);
 
 console.log = function () {}
 console.warn = function () {}
+
+
+Vue.use(kComps);
 
 new Vue({
   el: '#app',

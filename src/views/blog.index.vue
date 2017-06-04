@@ -1,5 +1,6 @@
 <template>
-  <div class="app-index">
+  <div class="app-container">
+    <div class="app-index">
 
     <section class="index-aboutme gallayer zoom-show">
       <div class="aboutme-body">
@@ -7,7 +8,7 @@
         <p>90后白羊男，前端工程师，全栈开发尝试者</p>
         <div class="my-sns-links">
           <a href="https://github.com/bh-lay?from=bh-lay" title="github">
-            <icon type="github-alt"></icon>
+            <icon type="social-octocat"></icon>
           </a>
           <a href="http://www.zhihu.com/people/imju-zhong-ren?from=bh-lay" title="知乎">
             知
@@ -40,14 +41,14 @@
       </div>
     </section>
     <section class="index-about-links">
-      <router-link :to="{ name: 'blog'}" title="我的博客" class="btn btn-warning">
-        <span>我的博客</span>
+      <router-link :to="{ name: 'blog'}" title="关于我" class="btn btn-warning">
+        <span>关于我</span>
       </router-link>
       <router-link :to="{ name: 'music'}" title="我的音乐" class="btn btn-default">
         <span>我的音乐</span>
       </router-link>
     </section>
-
+  </div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -429,7 +430,7 @@
 </style>
 <script type="text/javascript">
 
-    import icon from '../components/icon.vue'
+    import icon from '../components/icon'
 
     module.exports = {
         data: function () {

@@ -4,13 +4,13 @@
     <!--导航条-->
     <blog-nav></blog-nav>
     <!-- 路由外链 -->
-    <router-view></router-view>
+    <div class="app-container">
+      <router-view></router-view>
+    </div>
     <!--导航条-->
     <blog-footer></blog-footer>
     <!--qq,微信弹出层-->
     <social-info></social-info>
-    <!--退出弹层-->
-    <do-logout></do-logout>
     <!--游客设置-->
     <visitor-set></visitor-set>
   </div>
@@ -21,9 +21,8 @@
   import API from "./config";
   import blogNav from "./components/navbar";
   import blogFooter from "./components/footer";
-  import socialInfo from "./components/socialInfo.vue";
-  import doLogout from "./components/doLogout.vue";
-  import visitorSet from './components/visitorSet.vue'
+  import socialInfo from "./components/socialInfo";
+  import visitorSet from './components/visitor-set'
   import store from './vuex/store'
   import vStorage from './utils/vStorage.js'
   import vueMoment from 'vue-moment';
@@ -31,7 +30,7 @@
   import axios from './utils/axios';
   import {num2MMM, uppercase, addImgPrefix} from "./utils/filters.js";
   import {Sign} from "./api/api_statistic";
-  import {mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
   /**
    * 设置本地存储
    * */
@@ -65,10 +64,15 @@
     data: function () {
       return {}
     },
+    computed: {
+      ...mapState({
+        isLogin: 'isLogin',
+      })
+    },
     methods: {
       //vuex
       ...mapActions({
-        setLoginState: 'setLoginState',
+        setLoginState: 'setLoginState'
       }),
     },
     created: function () {
@@ -96,7 +100,6 @@
       blogNav,
       blogFooter,
       socialInfo,
-      doLogout,
       visitorSet
     },
   }
@@ -125,9 +128,8 @@
     width: 100%;
     box-sizing: border-box;
     font-family: $font-family-sans-serif !important;
+    background: #f4f4f4 url(./assets/mask.png);
     opacity: 1;
-    /*transition: all ease 500ms;*/
-
     &.isLogin {
       .admin_btn {
         display: block;
@@ -138,10 +140,19 @@
     }
   }
 
-  .app-content:before{
-    display: block;
-    content:'';
-    height:50px;
+  .app-content {
+    width: 100%;
+    min-height: 100%;
+/*    &:before{
+      display: block;
+      content:'';
+      height:50px;
+    }*/
+  }
+
+  .app-container {
+    position: relative;
+    overflow: hidden;
   }
 
   @include media(">desktop_small") {
@@ -161,10 +172,5 @@
       /*background:#fff;*/
     }
 
-  }
-
-  /*内容区*/
-  .app-content {
-    width: 100%;
   }
 </style>

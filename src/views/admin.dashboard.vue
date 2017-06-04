@@ -118,7 +118,6 @@
 </style>
 <script type="text/javascript">
   import Vue from "vue";
-  import copyright from '../components/copyright.vue'
   import {GetTotal, GetChart, GetMap} from "../api/api_statistic";
 
   // 引入 ECharts 主模块
@@ -298,7 +297,7 @@
       })
     },
     components: {
-      copyright
+
     },
   }
 

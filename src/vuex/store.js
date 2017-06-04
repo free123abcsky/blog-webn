@@ -10,6 +10,7 @@ import {
   SET_SOCIALIMG,
   SET_LOGIN_STATUS,
   SET_SHOW_BIGADMIN_STATUS,
+  SET_VISITOR_SET_STATUS,
   SET_COMMENT_INFO_STATUS,
   SET_PLAYING_STATUS,
   SET_MUSIC_DURATION,
@@ -33,7 +34,8 @@ export default new Vuex.Store({
     isShowMyWords: false,//是否显示我的简介
     isLogin: false,//是否登录
     socialImgUrl: '',//显示社交图片
-    isShowBigAdmin: false,//是否展开后台页面->用于文章编辑预览
+    isShowBigAdmin: false,//是否展开后台页面->
+    isShowVisitorSet: false, //是否显示 ’留个名呗‘ 弹窗
     hasCommentInfo:false,//设置-文章评论是否设置了昵称和邮箱，全局性质
 
     //音乐相关
@@ -64,6 +66,10 @@ export default new Vuex.Store({
     //设置我的社交弹出组件的img
     [SET_SHOW_BIGADMIN_STATUS] (state, status) {
       state.isShowBigAdmin = !!status;
+    },
+    //设置-是否显示 ’留个名呗‘ 弹窗，全局性质
+    [SET_VISITOR_SET_STATUS] (state, status) {
+      state.isShowVisitorSet = !!status;
     },
     //设置-文章评论是否设置了昵称和邮箱，全局性质
     [SET_COMMENT_INFO_STATUS] (state, status) {

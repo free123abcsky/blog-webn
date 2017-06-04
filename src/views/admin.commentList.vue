@@ -304,8 +304,7 @@
     SendComment,
   } from "../api/api_comment";
 
-  import copyright from '../components/copyright.vue'
-  import noData from "../components/nodata.vue"
+  import noData from "../components/nodata"
 
   import "bootstrap/js/dropdown.js";//放到它出现的位置
   import "bootstrap/scss/bootstrap/_dropdowns.scss";
@@ -477,7 +476,6 @@
     }
     ,
     components: {
-      copyright,
       noData,
     }
   }

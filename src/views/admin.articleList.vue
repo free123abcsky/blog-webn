@@ -13,7 +13,7 @@
       <div class="text-right">
         <router-link :to="{ name: 'admin-article',params: { articleId: 0 }}" activeClass="active" tag="button"
                      class="btn btn-success">
-          <i class="fa fa-plus"></i>
+          <icon type="android-add"></icon>
         </router-link>
       </div>
       <!--修改,启用禁用,查看-->
@@ -70,10 +70,11 @@
             <router-link :to="{ name: 'admin-article',params: { articleId: article._id }}" tag="button"
                          activeClass="active"
                          class="btn btn-default btn-sm">
-              <i class="fa fa-pencil"></i>
+              <icon type="edit"></icon>
             </router-link>
-            <button data-toggle="modal" data-target="#delArticle" @click="delArtBtn(article)"
-                    class="btn btn-danger btn-sm"><i class="fa fa-bitbucket"></i></button>
+            <button data-toggle="modal" data-target="#delArticle" @click="delArtBtn(article)" class="btn btn-danger btn-sm">
+                <icon type="ios-trash"></icon>
+            </button>
           </td>
           </tr>
         </tbody>
@@ -143,12 +144,12 @@
 <script type="text/javascript">
   import Vue from "vue";
   import _ from "lodash";
+  import icon from '../components/icon'
   import {
     GetArticleList,
     DeleteArticle,
   } from "../api/api_article";
 
-  import copyright from '../components/copyright.vue'
   module.exports = {
     data: function () {
       return {
@@ -195,7 +196,7 @@
       })
     },
     components: {
-      copyright
+      icon
     },
   }
 

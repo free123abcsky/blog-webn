@@ -9,7 +9,7 @@
               <div class="meta">
                   <span class="time">
                     <span class="time-icon">
-                      <icon type="calendar-o"></icon>
+                      <icon type="ios-calendar-outline"></icon>
                     </span>
                     <span class="time-text">发表于</span>
                     <span title="publish time" datetime="2017-03-21T20:18:32+08:00">
@@ -19,14 +19,14 @@
                 <span class="comments-count">
                     <span class="meta-divider">|</span>
                     <span class="comments-icon">
-                      <icon type="comment-o"></icon>
+                      <icon type="chatbubble"></icon>
                     </span>
                     <span class="comments-num">{{article.comment_num}}</span>
                   </span>
                 <span class="leancloud_visitors">
                     <span class="post-meta-divider">|</span>
                     <span class="post-meta-item-icon">
-                      <icon type="fa-eye"></icon>
+                      <icon type="ios-eye"></icon>
                     </span>
                     <span class="read-text">阅读次数 </span>
                     <span class="read-count">{{article.read_num}}</span>
@@ -39,7 +39,7 @@
 
             <footer class="article-footer">
               <div class="meta-tags">
-                <icon type="tags"></icon>
+                <icon type="ios-pricetag"></icon>
                 <router-link v-for="tag of article.tags" :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
                              :title="'查看关于 ' + tag.name + ' 的文章'" activeClass="active" tag="span">
                   {{tag.name}}
@@ -408,14 +408,14 @@
   import API from "../config.js"
   import {GetArticleById, GetArticleTop} from "../api/api_article"
   import {GetArticleComments, SendComment} from "../api/api_comment"
-  import sendbox from '../components/sendbox.vue'
-  import loading from '../components/loading.vue'
-  import backtop from '../components/back-top.vue'
-  import icon from '../components/icon.vue'
+  import sendbox from '../components/sendbox'
+  import loading from '../components/loading'
+  import backtop from '../components/back-top'
+  import icon from '../components/icon'
   import "../theme/codeHighLight.css";
   import "../theme/markdown.scss";
   import "bootstrap/scss/bootstrap/_breadcrumbs.scss";
-  import sidebar from '../components/sidebar.vue';
+  import sidebar from '../components/sidebar';
   import Toast from 'Toast';
   module.exports = {
     replace: true,

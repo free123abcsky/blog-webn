@@ -24,18 +24,18 @@
                   <span>{{article.publish_time  | moment("from","now")}}</span>
                 </div>
                 <div class="article-info-each">
-                  <icon type="book"></icon>
+                  <icon type="ios-book"></icon>
                   阅读数
                   <span class="article-readnum">{{article.read_num}}</span>
                 </div>
                 <div class="article-info-each">
-                  <icon type="comments"></icon>
+                  <icon type="chatbubble"></icon>
                   <router-link  class="article-comment" :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="span">
                     评论数 {{article.comment_num}}
                     </router-link>
                 </div>
                 <div class="meta-tags article-info-each hidden-xs" v-show="article.tags.length > 0">
-                  <icon type="tags"></icon>
+                  <icon type="ios-pricetag"></icon>
                   <router-link v-for="tag of article.tags" :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
                                tag="span">
                     {{tag.name}}
@@ -313,11 +313,11 @@
 </style>
 <script type="text/javascript">
   import API from "../config.js"
-  import noData from "../components/nodata.vue"
-  import loading from "../components/loading.vue"
-  import sidebar from '../components/sidebar.vue'
-  import backtop from '../components/back-top.vue'
-  import icon from '../components/icon.vue'
+  import noData from "../components/nodata"
+  import loading from "../components/loading"
+  import sidebar from '../components/sidebar'
+  import backtop from '../components/back-top'
+  import icon from '../components/icon'
   import {GetArticleListForFrontEnd} from "../api/api_article"
   import Vue from 'vue'
   import InfiniteScroll from 'InfiniteScroll';

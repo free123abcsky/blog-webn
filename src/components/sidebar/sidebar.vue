@@ -1,58 +1,57 @@
 <template>
   <aside class="article-aside">
-    <!--最新排行 for 10-->
-    <div class="widget">
-      <div class="title">
-        <h2>最新排行Top{{topNum}}</h2>
-      </div>
-      <ul>
-        <loading :number="3" color="#38b7ea" class="widget-loading" v-if="!articleTop.latest"></loading>
-        <li v-show="articleTop.latest.length>0" class="article-li animated fadeIn"
-            v-for="article of articleTop.latest">
-          <router-link :to="{ name: 'article',params: { articleId: article._id }}"
-                       activeClass="active" tag="a">{{article.title}}
+    <widget>
+       <p slot="title">
+          最新排行Top{{topNum}}
+       </p>
+       <ul>
+         <loading :number="3" color="#38b7ea" class="widget-loading" v-if="!articleTop.latest"></loading>
+         <li v-show="articleTop.latest.length>0" class="article-li animated fadeIn"
+             v-for="article of articleTop.latest">
+           <icon type="ios-arrow-right"></icon>
+           <router-link :to="{ name: 'article',params: { articleId: article._id }}"
+                        activeClass="active" tag="a">{{article.title}}
                 </router-link>
-          <span>({{article.read_num}})</span>
-        </li>
-      </ul>
-    </div>
-    <!--阅读排行 for 10-->
-    <div class="widget">
-      <div class="title">
-        <h2>阅读排行Top{{topNum}}</h2>
-      </div>
+           <span>({{article.read_num}})</span>
+         </li>
+       </ul>
+    </widget>
+    <widget>
+      <p slot="title">
+        阅读排行Top{{topNum}}
+      </p>
       <ul>
         <loading :number="3" color="#38b7ea" class="widget-loading" v-if="!articleTop.read"></loading>
         <li v-show="articleTop.read.length>0" class="article-li animated fadeIn"
             v-for="article of articleTop.read">
+          <icon type="ios-arrow-right"></icon>
           <router-link :to="{ name: 'article',params: { articleId: article._id }}"
                        activeClass="active" tag="a">{{article.title}}
                 </router-link>
           <span>({{article.read_num}})</span>
         </li>
       </ul>
-    </div>
-    <!--标签 最多10个-->
-    <div class="widget tag-cloud">
-      <div class="title">
-        <h2>标签云</h2>
-      </div>
+    </widget>
+    <widget>
+      <p slot="title">
+        标签云
+      </p>
       <ul>
         <loading :number="3" color="#38b7ea" class="widget-loading" v-if="!articleTop.tag"></loading>
         <li v-show="articleTop.tag.length>0" class="meta-tags animated fadeIn" v-for="tag of articleTop.tag">
-          <router-link :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
+         <router-link :to="{ name: 'tagListFindByTagId',query: { listType: 'tagList',tagId: tag._id }}"
                        activeClass="active" tag="a">
             {{tag.name}}<span>{{tag.used_num}}</span>
-                </router-link>
+          </router-link>
         </li>
       </ul>
-    </div>
+    </widget>
   </aside>
 </template>
 
 <style scoped lang="scss">
 
-  @import "../theme/theme.scss";
+  @import "../../theme/theme.scss";
   .article-aside {
     width: 350px;
     box-sizing: border-box;
@@ -64,22 +63,6 @@
     margin-bottom: 15px;
     background-color: #fff;
     box-sizing: border-box;
-    .title {
-      padding: 16px 0px;
-      margin: 0px 20px;
-      border-bottom: 1px solid #90bba8;
-
-      h2 {
-        margin: 0;
-        font-size: 16px;
-        font-weight: normal;
-        color: #1abc9c;
-        @include display-flex;
-        @include justify-content(flex-start);
-        @include align-items(center);
-        transition: all ease 200ms;
-      }
-    }
     ul {
       padding: 8px 20px;
       background: #fff;
@@ -100,14 +83,6 @@
         position: relative;
         padding: 4px 0;
         font-size: 14px;
-        &:before {
-          color: #ccc;
-          content: "\f0da";
-          font-size: 12px;
-          margin-right: 6px;
-          font-family: FontAwesome;
-          transition: all ease 200ms;
-        }
         a {
           color: inherit;
           text-decoration: none;
@@ -130,12 +105,6 @@
           }
         }
       }
-    }
-  }
-
-  .tag-cloud {
-    ul {
-      margin-top:10px;
     }
   }
 
@@ -205,8 +174,10 @@
    * @param color 榜单个数
    */
 
-  import {GetArticleTop} from "../api/api_article"
-  import loading from '../components/loading.vue'
+  import {GetArticleTop} from "../../api/api_article"
+  import loading from '../loading'
+  import icon from '../icon'
+  import widget from '../widget'
   import Toast from 'Toast';
 
   export default{
@@ -244,7 +215,7 @@
       this.getArticleTop(this.topNum);
     },
     components: {
-      loading
+      loading,widget,icon
     },
   }
 </script>

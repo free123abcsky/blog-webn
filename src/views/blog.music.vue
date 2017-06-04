@@ -1,11 +1,6 @@
 <template>
   <div class="musicBox animated fadeIn">
     <div class="music">
-
-      <!--<div class="heart" @click="setAutoPlay" data-toggle="tooltip" data-placement="right" title="希望能自动播放">-->
-      <!--<i class="fa" :class="{true:'fa-heart text-danger',false:'fa-heart-o'}[canAutoPlay]"></i>-->
-      <!--</div>-->
-
       <div class="music--img">
         <img :src="currentMusicInfo.coverUrl">
       </div>
@@ -47,10 +42,6 @@
         </div>
       </div>
     </div>
-    <section class="index-copyright">
-      <copyright></copyright>
-    </section>
-
     <!--<audio src="http://172.20.10.3:8000/Koi.%20-%20Beirut.mp3" controls autoplay> </audio>-->
   </div>
 </template>
@@ -265,14 +256,6 @@
     }
   }
 
-  .index-copyright {
-    position: absolute;
-    bottom: 1%;
-    text-align: center;
-    width: 100%;
-    left: 0;
-  }
-
   @include media("<=phone") {
     .musicBox {
       $musicBoxWidth: 240px;
@@ -456,7 +439,6 @@
 <script type="text/javascript">
   import Vue from 'vue'
   import API from "../config";
-  import copyright from '../components/copyright.vue'
   import {secondsConvert} from "../utils/filters.js";
   Vue.filter('secondsConvert', secondsConvert);
   import {mapState, mapActions} from 'vuex';
@@ -576,7 +558,7 @@
       },
     },
     components: {
-      copyright
+
     },
     created: function () {
       let _this = this;

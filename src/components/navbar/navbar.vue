@@ -1,68 +1,79 @@
 <!--导航条-->
 <template>
+  <div class="app-header" v-show="visible">
   <div class="app-nav" v-togglenav>
     <div class="nav-mask"></div>
     <div class="nav-body">
-      <div class="container">
+      <div class="container-fluid">
         <ul class="nav">
           <li>
             <router-link class="nav-logo" :to="{ name: 'index'}" activeClass="active" exact title="首页">
-              <icon type="home"></icon><span>爱知室</span>
+              <icon type="ios-home-outline"></icon><span>爱知室</span>
             </router-link>
           </li>
           <li>
             <router-link :to="{ name: 'blog'}" activeClass="active" title="博客">
-              <icon type="map-signs"></icon><span>博客</span>
+              <icon type="ios-book-outline"></icon><span>博客</span>
             </router-link>
           </li>
           <li>
+            <router-link class="animated fadeIn" :to="{ name: 'labs'}" activeClass="active" title="实验室">
+              <icon type="ios-flask"></icon><span>实验室</span>
+            </router-link>
+          </li>
+<!--          <li>
             <router-link :to="{ name: 'music'}" activeClass="active" title="音乐">
-              <icon type="music"></icon><span>音乐</span>
+              <icon type="music-note"></icon><span>音乐</span>
               <section class="right-bottom-status">
                 <i class="fa fa-lg" :class="{true:'fa-pause-circle-o',false:' fa-play-circle-o playing'}[!isPlaying]"></i>
               </section>
             </router-link>
-          </li>
+          </li>-->
           <li v-show="isLogin" >
             <router-link class="animated fadeIn" :to="{ name: 'admin-dashboard'}" activeClass="active" title="控制台">
-              <icon type="dashboard"></icon><span>控制台</span>
+              <icon type="ios-speedometer"></icon><span>控制台</span>
             </router-link>
           </li>
           <li v-show="isLogin" >
             <router-link class="animated fadeIn" :to="{ name: 'admin-myinfo'}" activeClass="active" title="我的资料">
-              <icon type="user"></icon><span>我的资料</span>
+              <icon type="person"></icon><span>我的资料</span>
             </router-link>
           </li>
           <li v-show="isLogin">
             <router-link class="animated fadeIn" :to="{ name: 'admin-tag'}" activeClass="active" title="标签管理">
-              <icon type="tag"></icon><span>标签管理</span>
+              <icon type="ios-pricetag"></icon><span>标签管理</span>
             </router-link>
           </li>
           <li v-show="isLogin">
             <router-link class="animated fadeIn" :to="{ name: 'admin-articleManager'}" activeClass="active" title="文章管理">
-              <icon type="list"></icon><span>文章管理</span>
+              <icon type="ios-list"></icon><span>文章管理</span>
             </router-link>
           </li>
           <li v-show="isLogin">
             <router-link class="animated fadeIn" :to="{ name: 'admin-commentList'}" activeClass="active" title="文章评论">
-              <icon type="comments"></icon><span>文章评论</span>
+              <icon type="chatbubbles"></icon><span>文章评论</span>
             </router-link>
           </li>
         </ul>
         <ul class="side">
-          <li v-show="isLogin">
-            <a class="animated fadeIn" title="退出" @click="doLoginout()">
-              <icon type="sign-out"></icon>
+          <li>
+            <a>
+              <icon type="ios-search" size="18" color="#000"></icon>
             </a>
           </li>
-          <li>
+          <li v-show="isLogin">
+            <a class="animated fadeIn" title="退出" @click="doLoginout()">
+              <icon type="log-out" size="18" color="#000"></icon>
+            </a>
+          </li>
+<!--          <li>
             <a class="changebg animated fadeIn" title="切换背景" @click="changeBG()">
               <icon type="photo"></icon>
               <section class="right-bottom-status">
                 <icon type="refresh" :class="{true:'',false:'fa-spin'}[!isChangeBG]"></icon>
               </section>
             </a>
-          </li>
+          </li>-->
           <li>
             <a title="前端英雄榜" href="/directories">前端英雄榜</a>
           </li>
@@ -78,10 +89,15 @@
       <span class="nav-btn-ico nav-btn-ico_3"></span>
     </a>
   </div>
+  </div>
 </template>
 <style scoped lang="scss">
   // base
-  @import "../theme/theme.scss";
+  @import "../../theme/theme.scss";
+
+  .app-header {
+    height: 50px
+  }
 
   .app-nav {
     position: fixed;
@@ -103,7 +119,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: #fff;
     border-top: 2px solid #59bfff;
     box-shadow: 0 0 5px rgba(0,0,0,.4);
     z-index: 2;
@@ -349,7 +365,7 @@
       -webkit-transform: translate(0,-8px) rotate(45deg);
       -o-transform: translate(0,-8px) rotate(45deg)
     }
-    .app_container,.app-footer {
+    .app-container,.app-footer {
       opacity: .4;
       transform: translateY(100px);
       -moz-transform: translateY(100px);
@@ -361,9 +377,9 @@
 </style>
 <script type="text/javascript">
 
-  import icon from './icon.vue'
-  import API from '../config'
-  import {mapState} from 'vuex';
+  import icon from '../icon'
+  import API from '../../config'
+  import {mapState, mapActions} from 'vuex';
   export default{
     data(){
       return {
@@ -377,13 +393,38 @@
         isLogin: 'isLogin',
         isPlaying: 'isPlaying',
       }),
+      visible: function(){
+        return this.$route.path.indexOf('login') == -1;
+      }
     },
     methods: {
+      ...mapActions({
+        setLoginState: 'setLoginState',
+        setCommentInfoStatus: 'setCommentInfoStatus',
+      }),
       navBack: function () {
         this.$router.back();
       },
       doLoginout: function () {
-        $('#logout').modal()
+
+        this.$Modal.confirm({
+          title: '确认对话框标题',
+          content: '<p>确定退出后台管理?</p>',
+          loading: true,
+          onOk: () => {
+            const _this = this;
+            setTimeout(function () {
+              _this.$localStorage.$delete('authorization');
+              _this.$localStorage.$delete('commentInfo');
+              _this.setLoginState(false);// 登录状态
+              _this.setCommentInfoStatus(false);// 评论信息状态
+              _this.$Modal.remove();
+              _this.$router.push({
+                name: 'index'
+              });
+            }, 200);
+          }
+        });
       },
       clearSessionStorage(){
         this.$sessionStorage.$reset();

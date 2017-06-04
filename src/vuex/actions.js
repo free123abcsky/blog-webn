@@ -33,6 +33,13 @@ export const setShowBigAdminStatus = function ({commit}, status) {
 };
 
 /**
+ * 设置-留个名呗弹窗显示隐藏，全局性质
+ * */
+export const setVisitorSetStatus = function ({commit}, status) {
+  commit(types.SET_VISITOR_SET_STATUS, status)
+};
+
+/**
  * 设置-文章评论是否设置了昵称和邮箱，全局性质
  * */
 export const setCommentInfoStatus = function ({commit}, status) {
