@@ -56,11 +56,9 @@
           </li>
         </ul>
         <ul class="side">
-          <li>
-            <a>
-              <icon type="ios-search" size="18" color="#000"></icon>
-            </a>
-          </li>
+<!--          <li>
+            <search></search>
+          </li>-->
           <li v-show="isLogin">
             <a class="animated fadeIn" title="退出" @click="doLoginout()">
               <icon type="log-out" size="18" color="#000"></icon>
@@ -378,6 +376,7 @@
 <script type="text/javascript">
 
   import icon from '../icon'
+  import search from '../search'
   import API from '../../config'
   import {mapState, mapActions} from 'vuex';
   export default{
@@ -391,7 +390,6 @@
     computed: {
       ...mapState({
         isLogin: 'isLogin',
-        isPlaying: 'isPlaying',
       }),
       visible: function(){
         return this.$route.path.indexOf('login') == -1;
@@ -544,7 +542,7 @@
 
     },
     components: {
-      icon
+      icon, search
     }
   }
 

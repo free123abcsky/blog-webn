@@ -4,8 +4,12 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <p>design &amp; code by @kfs<span class="hidden-xs">,base on nodeJS + mongoDB + vue2</span></p>
-        <p><a href="../../login">后台管理</a></p>
-        <p>© 2016-2017。感谢七牛云存储提供静态资源空间。</p>
+        <p v-if="!isLogin">
+          <router-link class="animated fadeIn" :to="{ name: 'login'}">
+            后台管理
+          </router-link>
+        </p>
+        <p>© 2016-2017。感谢七牛云存储提供静态资源空间</p>
       </div>
     </div>
     </div>
@@ -44,6 +48,9 @@
       }
     },
     computed:{
+      ...mapState({
+        isLogin: 'isLogin',
+      }),
       visible: function(){
         return this.$route.path.indexOf('login') == -1;
       }

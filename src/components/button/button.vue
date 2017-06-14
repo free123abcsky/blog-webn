@@ -5,6 +5,29 @@
         <span v-if="showSlot" ref="slot"><slot></slot></span>
     </button>
 </template>
+<style lang="scss">
+
+  /*质感按钮和扁平按钮*/
+  .btn-raised {
+    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.18),0 2px 4px rgba(0,0,0,.21);
+    box-shadow: 0 0 2px rgba(0,0,0,.18),0 2px 4px rgba(0,0,0,.21);
+    -webkit-transition: -webkit-box-shadow .25s cubic-bezier(.4,0,.2,1);
+    -o-transition: box-shadow .25s cubic-bezier(.4,0,.2,1);
+    transition: -webkit-box-shadow .25s cubic-bezier(.4,0,.2,1);
+    transition: box-shadow .25s cubic-bezier(.4,0,.2,1);
+    transition: box-shadow .25s cubic-bezier(.4,0,.2,1),-webkit-box-shadow .25s cubic-bezier(.4,0,.2,1)
+  }
+
+  .btn-raised.active,.btn-raised:active,.btn-raised:hover,.open>.dropdown-toggle.btn-raised {
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.15),0 3px 6px rgba(0,0,0,.2);
+    box-shadow: 0 0 3px rgba(0,0,0,.15),0 3px 6px rgba(0,0,0,.2)
+  }
+
+  .btn-raised.disabled,.btn-raised[disabled],fieldset[disabled] .btn-raised {
+    -webkit-box-shadow: none;
+    box-shadow: none
+  }
+</style>
 <script>
     import icon from '../icon';
     import { oneOf } from '../../utils/assist';
@@ -32,6 +55,10 @@
                 }
             },
             icon: String,
+            raised: {
+              type: Boolean,
+              default: false
+            },
             long: {
                 type: Boolean,
                 default: false
@@ -48,6 +75,8 @@
                     `${prefixCls}`,
                     {
                         [`${prefixCls}-${this.type}`]: !!this.type,
+                        [`${prefixCls}-raised`]: this.raised,
+                        [`${prefixCls}-block`]: this.long,
                         [`${prefixCls}-${this.size}`]: !!this.size,
                         [`${prefixCls}-loading`]: this.loading != null && this.loading,
                         [`${prefixCls}-icon-only`]: !this.showSlot && (!!this.icon || this.loading)

@@ -26,7 +26,10 @@
   &.active {
     &:focus,
     &.focus {
+      /*
       @include tab-focus;
+      */
+      outline:0;
     }
   }
 
@@ -35,13 +38,14 @@
   &.focus {
     color: $btn-default-color;
     text-decoration: none;
+    outline: 0;
   }
 
   &:active,
   &.active {
     outline: 0;
     background-image: none;
-    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+    //@include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
   }
 
   &.disabled,
