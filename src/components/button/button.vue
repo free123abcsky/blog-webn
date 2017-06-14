@@ -59,6 +59,10 @@
               type: Boolean,
               default: false
             },
+            outline: {
+              type: Boolean,
+              default: false
+            },
             long: {
                 type: Boolean,
                 default: false
@@ -76,6 +80,7 @@
                     {
                         [`${prefixCls}-${this.type}`]: !!this.type,
                         [`${prefixCls}-raised`]: this.raised,
+                        [`${prefixCls}-outline`]: this.outline,
                         [`${prefixCls}-block`]: this.long,
                         [`${prefixCls}-${this.size}`]: !!this.size,
                         [`${prefixCls}-loading`]: this.loading != null && this.loading,

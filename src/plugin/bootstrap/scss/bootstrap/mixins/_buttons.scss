@@ -66,3 +66,25 @@
   line-height: $line-height;
   border-radius: $border-radius;
 }
+
+// Button outline
+@mixin button-outline($color, $background) {
+  color: $background;
+  background-color: transparent;
+  &.active,
+  &:active,
+  &:focus,
+  &:hover,.open>&.dropdown-toggle {
+    color: $color;
+    background-color: $background;
+    border-color: $background
+  }
+  &.active .badge,
+  &:active .badge,
+  &:focus .badge,
+  &:hover .badge,
+  .open>&.dropdown-toggle .badge {
+    color: $background;
+    background-color: $color
+  }
+}
