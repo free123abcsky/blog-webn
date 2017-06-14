@@ -1,18 +1,7 @@
 <!--内容区-->
 <template>
   <div class="app-content">
-    <!--导航条-->
-    <blog-nav></blog-nav>
-    <!-- 路由外链 -->
-    <div class="app-container">
       <router-view></router-view>
-    </div>
-    <!--导航条-->
-    <blog-footer></blog-footer>
-    <!--qq,微信弹出层-->
-    <social-info></social-info>
-    <!--游客设置-->
-    <visitor-set></visitor-set>
   </div>
 </template>
 
@@ -148,11 +137,6 @@
       content:'';
       height:50px;
     }*/
-  }
-
-  .app-container {
-    position: relative;
-    overflow: hidden;
   }
 
   @include media(">desktop_small") {

@@ -1,12 +1,13 @@
 <template>
-  <div class="page">
-    <transition name="slide-fade">
-      <router-view></router-view>
-    </transition>
-  </div>
+  <core-layout>
+    <div class="page">
+      <transition name="slide-fade">
+        <router-view></router-view>
+      </transition>
+    </div>
+  </core-layout>
 </template>
 <style scoped lang="scss">
-
   .page {
     padding-top: 15px;
     height: auto;
@@ -15,21 +16,11 @@
   }
 </style>
 <script type="text/javascript">
-  import Vue from "vue";
-  import {mapState} from 'vuex';
+  import coreLayout from "../components/layout/core-layout";
   module.exports = {
-    data: function () {
-      return {
-      }
-    },
-    computed: {
-      ...mapState({
-        isLogin: 'isLogin',
-      }),
-    },
     components: {
-
-    },
+      coreLayout
+    }
   }
 
 

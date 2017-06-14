@@ -1,55 +1,55 @@
 <template>
-  <div class="app-container">
+  <core-layout>
     <div class="app-index">
 
-    <section class="index-aboutme gallayer zoom-show">
-      <div class="aboutme-body">
-        <h3>秋之殇</h3>
-        <p>90后白羊男，前端工程师，全栈开发尝试者</p>
-        <div class="my-sns-links">
-          <a href="https://github.com/bh-lay?from=bh-lay" title="github">
-            <icon type="social-octocat"></icon>
-          </a>
-          <a href="http://www.zhihu.com/people/imju-zhong-ren?from=bh-lay" title="知乎">
-            知
-          </a>
-        </div>
+      <section class="index-aboutme gallayer zoom-show">
+        <div class="aboutme-body">
+          <h3>秋之殇</h3>
+          <p>90后白羊男，前端工程师，全栈开发尝试者</p>
+          <div class="my-sns-links">
+            <a href="https://github.com/bh-lay?from=bh-lay" title="github">
+              <icon type="social-octocat"></icon>
+            </a>
+            <a href="http://www.zhihu.com/people/imju-zhong-ren?from=bh-lay" title="知乎">
+              知
+            </a>
+          </div>
 
-      </div>
-    </section>
-    <section class="index-about-design">
-      <h3>尝试实现响应式设计</h3>
-      <p>配合单页架构提升使用体验</p>
-      <div class="linkindex-aboutmes">
-        单页组件<a href="http://bh-lay.github.io/lofox/index.html">lofox.js</a>
-        <a href="http://bh-lay.github.io/iframer/app.html">iframer</a>
-      </div>
-      <div class="device-cnt">
-        <div class="device mobile"><span></span><i></i><i></i></div>
-        <div class="device pc"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="device pad"><i></i><i></i><i></i><i></i></div>
-      </div>
-    </section>
-    <section class="index-about-backend">
-      <div class="language">
-        <div class="nodeJS-logo"></div>
-        <p>NODEJS强力驱动</p>
-      </div>
-      <div class="frameworks">
-        <p>无耻地没有使用以下框架</p>
-        <p>express hexo bones rrestjs koa hapi<a href="https://github.com/bh-lay/blog/">博客源码</a></p>
-      </div>
-    </section>
-    <section class="index-about-links">
-      <router-link :to="{ name: 'blog'}" title="关于我" class="btn btn-warning">
-        <span>关于我</span>
-      </router-link>
-      <router-link :to="{ name: 'music'}" title="我的音乐" class="btn btn-default">
-        <span>我的音乐</span>
-      </router-link>
-    </section>
-  </div>
-  </div>
+        </div>
+      </section>
+      <section class="index-about-design">
+        <h3>尝试实现响应式设计</h3>
+        <p>配合单页架构提升使用体验</p>
+        <div class="linkindex-aboutmes">
+          单页组件<a href="http://bh-lay.github.io/lofox/index.html">lofox.js</a>
+          <a href="http://bh-lay.github.io/iframer/app.html">iframer</a>
+        </div>
+        <div class="device-cnt">
+          <div class="device mobile"><span></span><i></i><i></i></div>
+          <div class="device pc"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="device pad"><i></i><i></i><i></i><i></i></div>
+        </div>
+      </section>
+      <section class="index-about-backend">
+        <div class="language">
+          <div class="nodeJS-logo"></div>
+          <p>NODEJS强力驱动</p>
+        </div>
+        <div class="frameworks">
+          <p>无耻地没有使用以下框架</p>
+          <p>express hexo bones rrestjs koa hapi<a href="https://github.com/bh-lay/blog/">博客源码</a></p>
+        </div>
+      </section>
+      <section class="index-about-links">
+        <router-link :to="{ name: 'blog'}" title="关于我" class="btn btn-warning">
+          <span>关于我</span>
+        </router-link>
+        <router-link :to="{ name: 'music'}" title="我的音乐" class="btn btn-default">
+          <span>我的音乐</span>
+        </router-link>
+      </section>
+    </div>
+  </core-layout>
 </template>
 <style scoped lang="scss">
     //base
@@ -431,6 +431,7 @@
 <script type="text/javascript">
 
     import icon from '../components/icon'
+    import coreLayout from "../components/layout/core-layout";
 
     module.exports = {
         data: function () {
@@ -450,7 +451,7 @@
             clearInterval(this.clearInterval)
         },
         components: {
-          icon
+          icon, coreLayout
         }
     }
 

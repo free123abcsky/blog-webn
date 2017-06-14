@@ -1,20 +1,22 @@
 <template>
-  <div class="page">
-    <div class="admin-box" :class="{'preview':isShowBigAdmin}">
-      <div class="box-header">
-        <h1 class="text-right text-item">
-          <small class="blue">后台管理</small>
-        </h1>
-      </div>
-      <!--修改信息的内部-->
-      <div class="box-content">
-        <!-- 路由外链 -->
-        <transition name="fade">
-          <router-view></router-view>
-        </transition>
+  <core-layout>
+    <div class="page">
+      <div class="admin-box" :class="{'preview':isShowBigAdmin}">
+        <div class="box-header">
+          <h1 class="text-right text-item">
+            <small class="blue">后台管理</small>
+          </h1>
+        </div>
+        <!--修改信息的内部-->
+        <div class="box-content">
+          <!-- 路由外链 -->
+          <transition name="fade">
+            <router-view></router-view>
+          </transition>
+        </div>
       </div>
     </div>
-  </div>
+  </core-layout>
 </template>
 <style scoped lang="scss">
 
@@ -89,6 +91,7 @@
 </style>
 <script type="text/javascript">
   import {mapState} from 'vuex';
+  import coreLayout from "../components/layout/core-layout";
   export default{
     data(){
       return {
@@ -98,6 +101,9 @@
       ...mapState({
         isShowBigAdmin: 'isShowBigAdmin',
       }),
+    },
+    components: {
+      coreLayout
     }
   }
 

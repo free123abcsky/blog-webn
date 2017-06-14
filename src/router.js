@@ -5,6 +5,7 @@
 'use strict';
 import Vue from 'vue';
 import store from './vuex/store'
+import {setPageTitle} from './utils/assist'
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const routes = [
@@ -12,23 +13,59 @@ const routes = [
     path: '/',
     name: 'index', //命名路由
     component: require('./views/blog.index.vue'),
+    meta: { title: '首页'}
   },
   {
     path: '/labs',
     name: 'labs',
-    component: require('./views/blog.labs.vue')
+    component: require('./views/blog.labs.vue'),
+    meta: { title: '实验室'}
   },
   {
     path: '/music',
     name: 'music',
-    component: require('./views/blog.music.vue')
+    component: require('./views/blog.music.vue'),
+    meta: { title: '享受音乐中'}
   },
   {
     path: '/login',
     name: 'login',
     component: function (resolve) {
-      require(['./views/blog.login.vue'], resolve)
+      require(['./views/login.vue'], resolve)
     },
+    meta: { title: '登录'}
+  },
+  {
+    path: '/noauth',
+    name: 'noauth',
+    component: function (resolve) {
+      require(['./views/noauth.vue'], resolve)
+    },
+    meta: { title: '您没有权限'}
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: function (resolve) {
+      require(['./views/404.vue'], resolve)
+    },
+    meta: { title: '您指定的页面已丢失'}
+  },
+  {
+    path: '/500',
+    name: '500',
+    component: function (resolve) {
+      require(['./views/500.vue'], resolve)
+    },
+    meta: { title: '服务器开小差了，请等等再试试吧'}
+  },
+  {
+    path: '/maintenance',
+    name: 'maintenance',
+    component: function (resolve) {
+      require(['./views/maintenance.vue'], resolve)
+    },
+    meta: { title: '系统正在维护中'}
   },
   {
     path: '/blog',
@@ -161,7 +198,12 @@ const router = new VueRouter({
  * 登录状态检查
  * */
 router.beforeEach((to, from, next) => {
+
+  if(to.meta.title){
+    setPageTitle(to.meta.title)
+  }
   if (to.matched.some(record => record.meta.requiresAuth)) {
+
     // 未登录状态
     if (!store.state.isLogin) {
       //存在authorization信息，则验证下。
