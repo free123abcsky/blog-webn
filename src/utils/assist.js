@@ -112,3 +112,4 @@ export function setPageTitle(title) {
     document.body.appendChild(iframe)
   }
 }
+

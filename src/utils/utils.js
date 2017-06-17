@@ -1,8 +1,14 @@
 /**
- * Created by Hsiang on 2016/11/7.
+ * User: kfs
+ * Date：2017/6/17
+ * Desc：工具类
+ */
+
+
+/**
  * 浏览器环境判断
  */
-function parseUA() {
+let ua = function() {
   var u = navigator.userAgent;
   var u2 = navigator.userAgent.toLowerCase();
   return { //移动终端浏览器版本信息
@@ -20,6 +26,8 @@ function parseUA() {
     weixin: u2.match(/MicroMessenger/i) == "micromessenger",
     ali: u.indexOf('AliApp') > -1,
   };
-}
-module.exports = parseUA();
+}()
 
+export {
+  ua
+}

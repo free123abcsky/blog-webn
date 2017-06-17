@@ -13,7 +13,7 @@ import "bootstrap/js/tooltip.js";
 import "bootstrap/js/modal.js";
 import "bootstrap/js/transition.js";
 import attachFastClick from "fastclick";
-import ua from './plugin/parseUA'
+import {ua} from './utils/utils'
 
 /**
  * $router全局化，便于外部js调用
