@@ -1,7 +1,7 @@
 // Panels
 
 @mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
-  border-color: $border;
+  border: none;
 
   & > .panel-heading {
     color: $heading-text-color;

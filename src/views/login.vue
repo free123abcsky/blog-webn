@@ -32,9 +32,6 @@
   //base
   @import "../theme/theme.scss";
 
-  body {
-    background: url(../assets/login_bg.jpg);
-  }
   .user-avatar {
     height: 140px;
     padding: 30px;
@@ -91,7 +88,8 @@
         email: '990080536@qq.com',
         password: '123456abc',
         errText: '',
-        timer: null
+        timer: null,
+        loading: false
       }
     },
     computed: {
@@ -122,7 +120,7 @@
           _this.errText = "请输入密码!";
           return;
         }
-
+        _this.loading = true;
         Login({
           email: _this.email,
           password: _this.password
@@ -145,9 +143,9 @@
           _this.$router.replace({//跳转
             name: 'index'
           });
-
+          _this.loading = false;
         }, (err)=> {
-
+          _this.loading = false;
           _this.errText = err.msg;
       })
       }

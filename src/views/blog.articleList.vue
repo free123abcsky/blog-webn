@@ -43,9 +43,9 @@
                 </div>
               </div>
               <div class="article-readmore hidden-xs">
-                <router-link :to="{ name: 'article',params: { articleId: article._id }}" activeClass="active" tag="span">
-                  阅读全文
-                </router-link>
+                  <router-link :to="{ name: 'article',params: { articleId: article._id }}" class="btn btn-primary btn-outline"  activeClass="active" tag="span">
+                    阅读全文
+                  </router-link>
               </div>
             </div>
           </article>
@@ -164,23 +164,6 @@
           }
         }
 
-      }
-      //阅读更多
-      .article-readmore {
-        span {
-          background-color: #ccc;
-          border: 1px solid #ccc;
-          transition: all ease 200ms;
-          border-radius: 34px;
-          color: #eee;
-          padding: 4px 22px;
-          font-size: 16px;
-          &:hover {
-            cursor: pointer;
-            border: 1px solid $base-theme-color;
-            background-color: $base-theme-color;
-          }
-        }
       }
     }
 
@@ -318,6 +301,7 @@
   import sidebar from '../components/sidebar'
   import backtop from '../components/back-top'
   import icon from '../components/icon'
+  import kButton from '../components/button'
   import {GetArticleListForFrontEnd} from "../api/api_article"
   import Vue from 'vue'
   import InfiniteScroll from 'InfiniteScroll';
@@ -388,7 +372,7 @@
     destroyed: function () {
     },
     components: {
-      noData, loading,sidebar,backtop, icon
+      noData, loading,sidebar,backtop, icon, kButton
     },
   }
 </script>

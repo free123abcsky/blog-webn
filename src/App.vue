@@ -1,9 +1,15 @@
 <!--内容区-->
 <template>
-  <div class="app-content">
+  <div class="app-content" :class="classes">
       <router-view></router-view>
   </div>
 </template>
+
+<style lang="scss">
+  .login-bg {
+    background: url(./assets/login_bg.jpg);
+  }
+</style>
 
 <script type="text/javascript">
   import Vue from "vue";
@@ -56,7 +62,15 @@
     computed: {
       ...mapState({
         isLogin: 'isLogin',
-      })
+      }),
+      classes () {
+        return [
+          {
+            'login-bg' : this.$route.path.indexOf('login') != -1,
+          }
+        ];
+      }
+
     },
     methods: {
       //vuex

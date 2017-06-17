@@ -431,7 +431,6 @@
 <script type="text/javascript">
 
     import icon from '../components/icon'
-    import kButton from '../components/button'
     import coreLayout from "../components/layout/core-layout";
 
     module.exports = {
@@ -452,7 +451,7 @@
             clearInterval(this.clearInterval)
         },
         components: {
-          icon, kButton, coreLayout
+          icon, coreLayout
         }
     }
 

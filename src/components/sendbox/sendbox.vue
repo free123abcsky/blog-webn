@@ -17,6 +17,7 @@
             <div class="send-count"><b>500</b><i>/</i><span>500</span></div>
           </div>
           <div class="send-footer-right">
+           <!-- <k-button type="warning" :disabled="!content" @click="submit()">发布</k-button>-->
             <button class="btn btn-warning com-send-submit" :disabled="!content" @click="submit()">发布</button>
           </div>
         </div>
@@ -381,6 +382,7 @@
 
   import Vue from 'vue';
   import Toast from 'Toast';
+  import kButton from '../button'
   import {GetArticleComments, SendComment} from "../../api/api_comment"
   import {mapState,mapActions} from 'vuex';
 
@@ -522,6 +524,9 @@
         }
       }
     },
+    components:{
+      kButton
+    }
   }
 
 </script>

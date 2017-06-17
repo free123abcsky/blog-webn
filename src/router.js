@@ -22,6 +22,12 @@ const routes = [
     meta: { title: '实验室'}
   },
   {
+    path: '/video',
+    name: 'video',
+    component: require('./views/lab.video.vue'),
+    meta: { title: 'VIP视频'}
+  },
+  {
     path: '/music',
     name: 'music',
     component: require('./views/blog.music.vue'),

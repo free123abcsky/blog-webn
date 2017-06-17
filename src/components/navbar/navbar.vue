@@ -72,9 +72,9 @@
               </section>
             </a>
           </li>-->
-          <li>
+<!--          <li>
             <a title="前端英雄榜" href="/directories">前端英雄榜</a>
-          </li>
+          </li>-->
         </ul>
       </div>
     </div>
