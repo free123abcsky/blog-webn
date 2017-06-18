@@ -10,9 +10,6 @@
   </div>
 </template>
 <style lang="scss">
-  .panel {
-    min-height: 200px;
-  }
 
 </style>
 <script>
@@ -21,7 +18,7 @@
     const prefixCls = 'panel';
 
     export default {
-        components: {},
+        name: 'Panel',
         props: {
             type: {
               validator (value) {
@@ -51,9 +48,6 @@
                     }
                 ];
             }
-        },
-        methods: {
-
         },
         mounted () {
           this.showHead = this.$slots.header !== undefined;

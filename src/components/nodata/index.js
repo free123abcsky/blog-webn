@@ -1,2 +1,2 @@
-import nodata from './nodata.vue';
-export default nodata;
+import NoData from './nodata.vue';
+export default NoData;

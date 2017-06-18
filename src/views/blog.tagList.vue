@@ -134,9 +134,7 @@
 
 </style>
 <script type="text/javascript">
-  import noData from "../components/nodata"
   import {GetTagsListWithStructure} from '../api/api_tag'
-  import loading from "../components/loading"
   export default{
     data: function () {
       return {
@@ -162,9 +160,6 @@
       const _this = this;
       $(window).scrollTop(0);// 滚到顶部
      _this.getTagsListWithStructure();
-    },
-    components: {
-      noData, loading
     }
   }
 </script>

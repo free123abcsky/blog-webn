@@ -430,7 +430,6 @@
 </style>
 <script type="text/javascript">
 
-    import icon from '../components/icon'
     import coreLayout from "../components/layout/core-layout";
 
     module.exports = {
@@ -451,7 +450,7 @@
             clearInterval(this.clearInterval)
         },
         components: {
-          icon, coreLayout
+          coreLayout
         }
     }
 

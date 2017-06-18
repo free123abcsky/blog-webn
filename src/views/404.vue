@@ -33,31 +33,3 @@
   }
 
 </style>
-<script type="text/javascript">
-  import Vue from 'vue'
-  import icon from '../components/icon'
-  export default{
-    data(){
-      return {
-
-      }
-    },
-    computed: {
-
-    },
-    methods: {
-
-    },
-    created: function () {
-
-    },
-    mounted: function () {
-
-    },
-    components: {
-      icon
-    },
-  }
-
-
-</script>

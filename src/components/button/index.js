@@ -1,3 +1,3 @@
-import Button from './button.vue';
+import KButton from './button.vue';
 
-export default Button;
+export default KButton;

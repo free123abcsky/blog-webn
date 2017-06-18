@@ -59,7 +59,7 @@
         <sidebar></sidebar>
       </div>
     </div>
-    <backtop></backtop>
+    <back-top></back-top>
   </div>
 </template>
 <style scoped lang="scss">
@@ -296,18 +296,14 @@
 </style>
 <script type="text/javascript">
   import API from "../config.js"
-  import noData from "../components/nodata"
-  import loading from "../components/loading"
   import sidebar from '../components/sidebar'
-  import backtop from '../components/back-top'
-  import icon from '../components/icon'
-  import kButton from '../components/button'
   import {GetArticleListForFrontEnd} from "../api/api_article"
   import Vue from 'vue'
   import InfiniteScroll from 'InfiniteScroll';
   Vue.use(InfiniteScroll);
 
   export default{
+    components: { sidebar },
     data: function () {
       return {
         isLoading: true,//loading提示
@@ -370,9 +366,6 @@
       const _this = this;
     },
     destroyed: function () {
-    },
-    components: {
-      noData, loading,sidebar,backtop, icon, kButton
-    },
+    }
   }
 </script>

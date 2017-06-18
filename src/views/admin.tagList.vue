@@ -210,7 +210,6 @@
 <script type="text/javascript">
   import Vue from "vue";
   import _ from "lodash";
-  import icon from '../components/icon'
   import {
     GetTagsList,
     AddTag,
@@ -396,9 +395,6 @@
        * GetTagsList
        * */
       this.getList();
-    },
-    components: {
-        icon
     }
   }
 </script>

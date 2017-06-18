@@ -15,6 +15,7 @@
     const prefixCls = 'btn';
 
     export default {
+        name: 'KButton',
         components: { icon },
         props: {
             type: {

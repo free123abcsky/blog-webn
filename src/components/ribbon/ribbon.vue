@@ -664,6 +664,7 @@
     const prefixCls = 'ribbon';
 
     export default {
+        name: 'Ribbon',
         components: {},
         props: {
             type: {
@@ -703,14 +704,10 @@
                 ];
             }
         },
-        methods: {
-
-        },
         mounted () {
 
           this.showSlot = this.$slots.default !== undefined
           this.$el.parentNode.style.position = 'relative'
-
         }
     };
 </script>

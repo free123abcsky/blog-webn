@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend-line" v-if="showSlot">
+  <div class="line" v-if="showSlot">
     <a>
       <slot></slot>
     </a>
@@ -7,7 +7,7 @@
 </template>
 <style lang="scss">
 
-  .recommend-line{
+  .line{
     position: relative;
     padding: 20px 0;
     text-align: center;
@@ -39,13 +39,13 @@
 <script>
 
     export default {
+        name: 'TitleLine',
         data () {
             return {
               showSlot: false
             };
         },
         mounted () {
-
           this.showSlot = this.$slots.default !== undefined
         }
     };

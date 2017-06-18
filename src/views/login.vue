@@ -75,8 +75,6 @@
 <script type="text/javascript">
   import Vue from "vue";
   import md5 from "js-md5";
-  import icon from '../components/icon'
-  import kButton from '../components/button'
   import API from "../config.js"
   import {Login} from "../api/api_auth";
   import {mapState, mapActions} from 'vuex';
@@ -154,10 +152,6 @@
 
     },
     destroyed: function () {
-    },
-    components: {
-      icon, kButton
-    },
-
+    }
   }
 </script>

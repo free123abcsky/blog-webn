@@ -174,9 +174,7 @@
 </style>
 <script type="text/javascript">
   import Vue from "vue"
-  import noData from "../components/nodata"
   import {GetHistoryList} from "../api/api_article"
-  import loading from "../components/loading"
   export default{
     data: function () {
       return {
@@ -203,9 +201,6 @@
       const _this = this;
       $(window).scrollTop(0);// 滚到顶部
       _this.getHistoryList()
-    },
-    components: {
-      noData, loading
     }
   }
 

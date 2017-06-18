@@ -1,3 +1,3 @@
-import overlay from './overlay.vue'
+import Overlay from './overlay.vue'
 
-export default overlay;
+export default Overlay;

@@ -1,2 +1,2 @@
-import sendbox from './sendbox.vue';
-export default sendbox;
+import SendBox from './sendbox.vue';
+export default SendBox;

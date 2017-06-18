@@ -304,8 +304,6 @@
     SendComment,
   } from "../api/api_comment";
 
-  import noData from "../components/nodata"
-
   import "bootstrap/js/dropdown.js";//放到它出现的位置
   import "bootstrap/scss/bootstrap/_dropdowns.scss";
 
@@ -473,10 +471,6 @@
     }
     ,
     destroyed: function () {
-    }
-    ,
-    components: {
-      noData,
     }
   }
 

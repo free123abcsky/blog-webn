@@ -1,3 +1,3 @@
-import ribbon from './ribbon.vue';
+import Ribbon from './ribbon.vue';
 
-export default ribbon;
+export default Ribbon;

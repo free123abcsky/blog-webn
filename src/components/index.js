@@ -1,12 +1,32 @@
 
-import Message from './message';
-import Modal from './modal/index';
-import Notice from './notice';
+import Message from './message'
+import Modal from './modal/index'
+import Notice from './notice'
+import Affix from './affix'
+import Icon from './icon'
+import Overlay from './overlay'
+import Panel from './panel'
+import BackTop from './back-top'
+import KButton from './button'
+import Loading from './loading'
+import NoData from './nodata'
+import TitleLine from './title-line'
+import Ribbon from './ribbon'
 
 const kComps = {
     Message,
     Modal,
-    Notice
+    Notice,
+    Affix,
+    Icon,
+    Overlay,
+    Panel,
+    BackTop,
+    KButton,
+    Loading,
+    NoData,
+    TitleLine,
+    Ribbon
 };
 
 const install = function (Vue, opts = {}) {

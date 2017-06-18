@@ -1,7 +1,6 @@
 <template>
     <div class="nodata animated fadeIn">
         <div class="logo-left-box">
-            <h2 class="logo"><span class="blue">X</span><span class="white">-SONGTAO</span></h2>
             <h3 class="blue notice">提示!</h3>
             <p class="white">没什么可加载了!</p>
         </div>
@@ -71,3 +70,8 @@
     }
 
 </style>
+<script>
+  export default {
+    name: 'NoData',
+  }
+</script>

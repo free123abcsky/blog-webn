@@ -31,7 +31,7 @@
 
   import blogNav from "../navbar";
   import blogFooter from "../footer";
-  import socialInfo from "../socialInfo";
+  import socialInfo from "../social-info";
   import visitorSet from '../visitor-set'
 
   export default {

@@ -52,7 +52,7 @@
           <section class="commentbox">
 
             <!--评论回复盒子 -->
-            <sendbox :article-id="article._id" :pre-id="article._id"></sendbox>
+            <send-box :article-id="article._id" :pre-id="article._id"></send-box>
             <div class="com-list">
               <div class="com-item" v-for="comment of commentList">
                 <div class="com-body">
@@ -70,7 +70,7 @@
                 </div>
                 <div class="com-reply">
                   <div class="com-reply-box" :class="{'active':(comment._id==selectId && toggle)}">
-                    <sendbox :article-id="comment.article_id" :pre-id="comment._id"></sendbox>
+                    <send-box :article-id="comment.article_id" :pre-id="comment._id"></send-box>
                   </div>
                   <div class="com-reply-each" v-for="reply of comment.next_id">
                     <div class="com-body">
@@ -98,7 +98,7 @@
         <sidebar></sidebar>
       </div>
     </div>
-    <backtop></backtop>
+    <back-top></back-top>
   </div>
 </template>
 <style scoped lang="scss">
@@ -326,33 +326,7 @@
     }
   }
 
-  .backToTop {
-    position: fixed;
-    left: 700px;
-    width: 60px;
-    height: 60px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 100%;
-    font-size: 20px;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all ease 200ms;
-    z-index: 999;
-    margin-left: 40px;
-    bottom: 20px;
-    opacity: 0;
-    &:hover {
-      background: $base-theme-color;
-    }
-  }
-
   @include media("<=desktop") {
-    .backToTop {
-      margin-left: 0;
-    }
     .article-detail{
       margin-left:0px;
     }
@@ -408,10 +382,7 @@
   import API from "../config.js"
   import {GetArticleById, GetArticleTop} from "../api/api_article"
   import {GetArticleComments, SendComment} from "../api/api_comment"
-  import sendbox from '../components/sendbox'
-  import loading from '../components/loading'
-  import backtop from '../components/back-top'
-  import icon from '../components/icon'
+  import sendBox from '../components/sendbox'
   import "../theme/codeHighLight.css";
   import "../theme/markdown.scss";
   import "bootstrap/scss/bootstrap/_breadcrumbs.scss";
@@ -419,6 +390,7 @@
   import Toast from 'Toast';
   module.exports = {
     replace: true,
+    components: { sendBox, sidebar},
     data: function () {
       return {
         article: {},
@@ -533,14 +505,8 @@
       this.$emit('notice')
     },
     destroyed: function () {
-    },
-    components: {
-      sendbox,
-      loading,
-      sidebar,
-      backtop,
-      icon
-    },
+    }
+
   }
 
 </script>

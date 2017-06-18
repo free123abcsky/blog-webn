@@ -11,8 +11,6 @@
 
   .overlay {
     min-height: 200px;
-    //padding: 0;
-    //margin: 0;
     margin-bottom: 20px;
     position: relative;
     box-sizing: border-box;
@@ -160,7 +158,7 @@
     -ms-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
     overflow: hidden;
-    z-index: 1000
+    z-index: 2;
   }
 
   .overlay-border:hover .overlay-body {
@@ -199,7 +197,7 @@
     const prefixCls = 'overlay';
 
     export default {
-        components: {},
+        name: 'Overlay',
         props: {
             type: {
               validator (value) {
@@ -218,10 +216,6 @@
               default: '404'
             }
         },
-        data () {
-            return {
-            };
-        },
         computed: {
             classes () {
                 return [
@@ -232,12 +226,6 @@
                     }
                 ];
             }
-        },
-        methods: {
-
-        },
-        mounted () {
-
         }
     };
 </script>

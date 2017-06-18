@@ -1,3 +1,3 @@
-import panel from './panel.vue'
+import Panel from './panel.vue'
 
-export default panel;
+export default Panel;

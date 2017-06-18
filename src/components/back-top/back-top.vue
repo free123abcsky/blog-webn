@@ -40,6 +40,8 @@
   import icon from '../icon'
 
   export default {
+    name: 'BackTop',
+    components: {icon},
     props: {
       height: {
         type: Number,
@@ -87,7 +89,6 @@
     beforeDestroy () {
       window.removeEventListener('scroll', this.handleScroll, false);
       window.removeEventListener('resize', this.handleScroll, false);
-    },
-    components: {icon}
+    }
   };
 </script>

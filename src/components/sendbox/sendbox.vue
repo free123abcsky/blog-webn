@@ -1,25 +1,23 @@
 <template>
-  <div class="com-sendbox">
-    <div class="sendbox" :class="{'sendbox-active': conmentActive}">
-      <div class="send-side">
-        <div class="send-avatar set-userinfo">
-          <img src="../../assets/default-avatar.png"/></div>
-          <a href="javascript:void(0)" class="send-username set-userinfo" title="留个名呗" @click="setUserInfo()">{{name || '留个名呗'}}</a>
+  <div class="sendbox" :class="{'sendbox-active': conmentActive}">
+    <div class="send-side">
+      <div class="send-avatar set-userinfo">
+        <img src="../../assets/default-avatar.png"/></div>
+      <a href="javascript:void(0)" class="send-username set-userinfo" title="留个名呗" @click="setUserInfo()">{{name || '留个名呗'}}</a>
+    </div>
+    <div class="sendbox-main">
+      <div class="send-textarea">
+        <textarea v-model="content" @blur="commenting" ref="cbox"></textarea>
+        <div class="send-placeholder" @click.stop="commenting">要说点什么嘛...</div>
       </div>
-      <div class="sendbox-main">
-        <div class="send-textarea">
-          <textarea v-model="content" @blur="commenting" ref="cbox"></textarea>
-          <div class="send-placeholder" @click.stop="commenting">要说点什么嘛...</div>
+      <div class="send-footer">
+        <div class="send-footer-left">
+          <a href="javascript:void(0)" title="插入表情" class="send-face"><span class="l-icon l-icon-face"></span></a>
+          <div class="send-count"><b>500</b><i>/</i><span>500</span></div>
         </div>
-        <div class="send-footer">
-          <div class="send-footer-left">
-            <a href="javascript:void(0)" title="插入表情" class="send-face"><span class="l-icon l-icon-face"></span></a>
-            <div class="send-count"><b>500</b><i>/</i><span>500</span></div>
-          </div>
-          <div class="send-footer-right">
-           <!-- <k-button type="warning" :disabled="!content" @click="submit()">发布</k-button>-->
-            <button class="btn btn-warning com-send-submit" :disabled="!content" @click="submit()">发布</button>
-          </div>
+        <div class="send-footer-right">
+          <!-- <k-button type="warning" :disabled="!content" @click="submit()">发布</k-button>-->
+          <button class="btn btn-warning com-send-submit" :disabled="!content" @click="submit()">发布</button>
         </div>
       </div>
     </div>
@@ -29,18 +27,14 @@
   //base
   @import "../../theme/theme.scss";
 
-  .com-sendbox {
-    margin-bottom: 20px;
-    background: #fff;
-    border-radius: 2px;
-    box-shadow: 0 0 2px rgba(0,0,0,.2)
-  }
-
   .sendbox {
-    padding: 20px 20px 20px 80px;
-    background: #fff;
     position: relative;
+    padding: 20px 20px 20px 80px;
     overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,.2);
+    background: #fff;
   }
 
   .send-side {
@@ -230,153 +224,6 @@
     display: none
   }
 
-  .l_sendBox_user {
-    overflow: hidden
-  }
-
-  .l_sendBox_user p {
-    text-align: center;
-    padding: 5px 0;
-    line-height: 18px;
-    font-size: 12px;
-    color: #aaa
-  }
-
-  .l_sendBox_user p a {
-    color: #888
-  }
-
-  .l_sendBox_user p a:hover {
-    text-decoration: underline
-  }
-
-  .l_sendBox_user input {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 10px 20px;
-    line-height: 15px;
-    border: 0;
-    border-bottom: 1px solid #ddd;
-    font-family: inherit;
-    font-size: 16px;
-    color: #333;
-    transition: all .2s linear;
-    -moz-transition: all .2s linear;
-    -webkit-transition: all .2s linear;
-    -o-transition: all .2s linear;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box
-  }
-
-  .l_sendBox_user input:focus {
-    outline: 0;
-    background: #f4f4f4
-  }
-
-  @keyframes insert {
-    0% {
-      opacity: .2;
-      height: 0
-    }
-
-    50% {
-      opacity: .2;
-      height: 110px
-    }
-
-    100% {
-      opacity: 1
-    }
-  }
-
-  @-moz-keyframes insert {
-    0% {
-      opacity: .2;
-      height: 0
-    }
-
-    50% {
-      opacity: .2;
-      height: 110px
-    }
-
-    100% {
-      opacity: 1
-    }
-  }
-
-  @-webkit-keyframes insert {
-    0% {
-      opacity: .2;
-      height: 0
-    }
-
-    50% {
-      opacity: .2;
-      height: 110px
-    }
-
-    100% {
-      opacity: 1
-    }
-  }
-
-  @keyframes commentsActive {
-    0% {
-      background: #fff
-    }
-
-    40% {
-      background: #fa7
-    }
-
-    80% {
-      background: #fa7
-    }
-
-    100% {
-      background: #fff
-    }
-  }
-
-  @-moz-keyframes commentsActive {
-    0% {
-      background: #fff
-    }
-
-    40% {
-      background: #fa7
-    }
-
-    80% {
-      background: #fa7
-    }
-
-    100% {
-      background: #fff
-    }
-  }
-
-  @-webkit-keyframes commentsActive {
-    0% {
-      background: #fff
-    }
-
-    40% {
-      background: #fa7
-    }
-
-    80% {
-      background: #fa7
-    }
-
-    100% {
-      background: #fff
-    }
-  }
-
 </style>
 <script type="text/javascript">
 
@@ -387,6 +234,8 @@
   import {mapState,mapActions} from 'vuex';
 
   export default{
+    name: 'SendBox',
+    components:{ kButton },
     data(){
       return {
         conmentActive: false,  //评论输入框激活
@@ -419,7 +268,6 @@
         setVisitorSetStatus: 'setVisitorSetStatus'
       }),
       setUserInfo: function () {
-        //$('#visitorSet').modal()
         this.setVisitorSetStatus(true);
       },
       commenting: function() {
@@ -523,9 +371,6 @@
           _this.email = commentInfo.email;
         }
       }
-    },
-    components:{
-      kButton
     }
   }
 

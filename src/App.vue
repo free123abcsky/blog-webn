@@ -14,10 +14,6 @@
 <script type="text/javascript">
   import Vue from "vue";
   import API from "./config";
-  import blogNav from "./components/navbar";
-  import blogFooter from "./components/footer";
-  import socialInfo from "./components/socialInfo";
-  import visitorSet from './components/visitor-set'
   import store from './vuex/store'
   import vStorage from './utils/vStorage.js'
   import vueMoment from 'vue-moment';
@@ -97,14 +93,7 @@
     mounted: function () {
       //更改loading状态,，隐藏index中的loading画面
       window.hideLoadingPage();
-    },
-    components: {
-      //小组件挂载集中挂载
-      blogNav,
-      blogFooter,
-      socialInfo,
-      visitorSet
-    },
+    }
   }
 
 

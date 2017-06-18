@@ -144,7 +144,6 @@
 <script type="text/javascript">
   import Vue from "vue";
   import _ from "lodash";
-  import icon from '../components/icon'
   import {
     GetArticleList,
     DeleteArticle,
@@ -194,10 +193,7 @@
       GetArticleList().then((data)=> {
         _this.articleLists = data;
       })
-    },
-    components: {
-      icon
-    },
+    }
   }
 
 </script>

@@ -125,6 +125,7 @@
    * @example <loading :number="3" color="#38b7ea" class="topBar--loading" v-if="!articleTop.latest"></loading>
    */
   export default{
+    name: 'Loading',
     props: {
       // 小球颜色
       color: {
