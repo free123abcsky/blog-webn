@@ -40,7 +40,7 @@ new attachFastClick(document.body);
 //   }
 // }
 
-console.log = function () {}
+//console.log = function () {}
 console.warn = function () {}
 
 

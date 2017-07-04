@@ -6,8 +6,65 @@
 </template>
 
 <style lang="scss">
+
+  @import "./theme/theme.scss";
+
+  * {
+    /*outline: 1px solid #ddd;*/
+  }
+
+  /*解决ie下右侧出现滚动条的情况,因为如果使用modal时,会出现抖动*/
+  @-ms-viewport {
+    width: device-width;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    min-width: 320px;
+    min-height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: $font-family-sans-serif !important;
+    background: #f1f4f9;
+    opacity: 1;
+    &.isLogin {
+      .admin_btn {
+        display: block;
+      }
+    }
+    .admin_btn {
+      display: none;
+    }
+  }
+
   .login-bg {
     background: url(./assets/login_bg.jpg);
+  }
+
+  .app-content {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  @include media(">desktop_small") {
+    body {
+      /*padding-left: 45px;*/
+    }
+  }
+
+  @include media("<=desktop_small") {
+    body {
+      margin-top: 45px;
+    }
+  }
+
+  @include media("<=phone") {
+    html {
+      /*background:#fff;*/
+    }
+
   }
 </style>
 
@@ -98,66 +155,3 @@
 
 
 </script>
-
-<style lang="scss">
-  @import "./theme/theme.scss";
-
-  * {
-    /*outline: 1px solid #ddd;*/
-  }
-
-  /*解决ie下右侧出现滚动条的情况,因为如果使用modal时,会出现抖动*/
-  @-ms-viewport {
-    width: device-width;
-  }
-
-  body {
-    padding: 0;
-    margin: 0;
-    font-size: 16px;
-    min-width: 320px;
-    min-height: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: $font-family-sans-serif !important;
-    background: #f4f4f4 url(./assets/mask.png);
-    opacity: 1;
-    &.isLogin {
-      .admin_btn {
-        display: block;
-      }
-    }
-    .admin_btn {
-      display: none;
-    }
-  }
-
-  .app-content {
-    width: 100%;
-    min-height: 100%;
-/*    &:before{
-      display: block;
-      content:'';
-      height:50px;
-    }*/
-  }
-
-  @include media(">desktop_small") {
-    body {
-      /*padding-left: 45px;*/
-    }
-  }
-
-  @include media("<=desktop_small") {
-    body {
-      margin-top: 45px;
-    }
-  }
-
-  @include media("<=phone") {
-    html {
-      /*background:#fff;*/
-    }
-
-  }
-</style>

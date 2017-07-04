@@ -12,25 +12,41 @@ const routes = [
   {
     path: '/',
     name: 'index', //命名路由
-    component: require('./views/blog.index.vue'),
+    component: require('./views/index.vue'),
     meta: { title: '首页'}
   },
   {
     path: '/labs',
     name: 'labs',
-    component: require('./views/blog.labs.vue'),
-    meta: { title: '实验室'}
-  },
-  {
-    path: '/video',
-    name: 'video',
-    component: require('./views/lab.video.vue'),
-    meta: { title: 'VIP视频'}
+    redirect: {
+      name: 'labsList'
+    },
+    component: require('./views/labs/labs.vue'),
+    children: [
+      {
+        path: 'labsList',
+        name: 'labsList',
+        component: require('./views/labs/lab.list.vue'),
+        meta: { title: '实验室'}
+      },
+      {
+        path: 'video',
+        name: 'video',
+        component: require('./views/labs/video.vue'),
+        meta: { title: 'VIP视频'}
+      },
+      {
+        path: 'waterfall',
+        name: 'waterfall',
+        component: require('./views/labs/waterfall.vue'),
+        meta: { title: '瀑布流'}
+      }
+    ]
   },
   {
     path: '/music',
     name: 'music',
-    component: require('./views/blog.music.vue'),
+    component: require('./views/blog/music.vue'),
     meta: { title: '享受音乐中'}
   },
   {
@@ -45,7 +61,7 @@ const routes = [
     path: '/noauth',
     name: 'noauth',
     component: function (resolve) {
-      require(['./views/noauth.vue'], resolve)
+      require(['./views/page/noauth.vue'], resolve)
     },
     meta: { title: '您没有权限'}
   },
@@ -53,7 +69,7 @@ const routes = [
     path: '/404',
     name: '404',
     component: function (resolve) {
-      require(['./views/404.vue'], resolve)
+      require(['./views/page/404.vue'], resolve)
     },
     meta: { title: '您指定的页面已丢失'}
   },
@@ -61,7 +77,7 @@ const routes = [
     path: '/500',
     name: '500',
     component: function (resolve) {
-      require(['./views/500.vue'], resolve)
+      require(['./views/page/500.vue'], resolve)
     },
     meta: { title: '服务器开小差了，请等等再试试吧'}
   },
@@ -69,9 +85,17 @@ const routes = [
     path: '/maintenance',
     name: 'maintenance',
     component: function (resolve) {
-      require(['./views/maintenance.vue'], resolve)
+      require(['./views/page/maintenance.vue'], resolve)
     },
     meta: { title: '系统正在维护中'}
+  },
+  {
+    path: '/blogn',
+    name: 'blogn',
+    component: function (resolve) {
+      require(['./views/blog/blogn.vue'], resolve)
+    },
+    meta: { title: '博客新'}
   },
   {
     path: '/blog',
@@ -80,24 +104,24 @@ const routes = [
     redirect: {
       name: 'artList'
     },
-    component: require('./views/blog.vue'),
+    component: require('./views/blog/blog.vue'),
     children: [
       {
         path: 'articles',
         name: 'artList',
-        component: require('./views/blog.articleList.vue'),
+        component: require('./views/blog/articleList.vue'),
       },
       {
         path: 'article/:articleId',
         name: 'article',
         component: function (resolve) {
-          require(['./views/blog.article.vue'], resolve)
+          require(['./views/blog/article.vue'], resolve)
         },
       },
       {
         path: 'his-list',
         name: 'historyList',
-        component: require('./views/blog.historyList.vue'),
+        component: require('./views/blog/historyList.vue'),
       },
       {
         path: 'tag-list',
@@ -110,12 +134,12 @@ const routes = [
           {
             path: 'classify',
             name: 'tagListClassify',
-            component: require('./views/blog.tagList.vue'),
+            component: require('./views/blog/tagList.vue'),
           },
           {
             path: 'find-by-tag-id',
             name: 'tagListFindByTagId',
-            component: require('./views/blog.articleList.vue'),
+            component: require('./views/blog/articleList.vue'),
           },
         ]
       }
@@ -125,7 +149,7 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: function (resolve) {
-      require(['./views/admin.vue'], resolve)
+      require(['./views/admin/admin.vue'], resolve)
     },
     meta: {requiresAuth: true},
     children: [
@@ -133,7 +157,7 @@ const routes = [
         path: 'dashboard',
         name: 'admin-dashboard',
         component: function (resolve) {
-          require(['./views/admin.dashboard.vue'], resolve)
+          require(['./views/admin/dashboard.vue'], resolve)
         },
         meta: {requiresAuth: true},
       },
@@ -141,7 +165,7 @@ const routes = [
         path: 'myinfo',
         name: 'admin-myinfo',
         component: function (resolve) {
-          require(['./views/admin.myInfo.vue'], resolve)
+          require(['./views/admin/myInfo.vue'], resolve)
         },
         meta: {requiresAuth: true},
       },
@@ -149,7 +173,7 @@ const routes = [
         path: 'tag',
         name: 'admin-tag',
         component: function (resolve) {
-          require(['./views/admin.tagList.vue'], resolve)
+          require(['./views/admin/tagList.vue'], resolve)
         },
         meta: {requiresAuth: true},
       },
@@ -168,7 +192,7 @@ const routes = [
             path: 'admin-articleList',
             name: 'admin-articleList',
             component: function (resolve) {
-              require(['./views/admin.articleList.vue'], resolve)
+              require(['./views/admin/articleList.vue'], resolve)
             },
             meta: {requiresAuth: true},
           },
@@ -176,7 +200,7 @@ const routes = [
             path: 'admin-article/:articleId',
             name: 'admin-article',
             component: function (resolve) {
-              require(['./views/admin.article.vue'], resolve)
+              require(['./views/admin/article.vue'], resolve)
             },
             meta: {requiresAuth: true},
           },
@@ -186,7 +210,7 @@ const routes = [
         path: 'comments',
         name: 'admin-commentList',
         component: function (resolve) {
-          require(['./views/admin.commentList.vue'], resolve)
+          require(['./views/admin/commentList.vue'], resolve)
         },
         meta: {requiresAuth: true},
       },

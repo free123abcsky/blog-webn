@@ -16,6 +16,11 @@
               <icon type="ios-book-outline"></icon><span>博客</span>
             </router-link>
           </li>
+<!--          <li>
+            <router-link :to="{ name: 'blogn'}" activeClass="active" title="博客">
+              <icon type="ios-book-outline"></icon><span>博客新</span>
+            </router-link>
+          </li>-->
           <li v-show="isLogin" >
             <router-link  :to="{ name: 'admin-dashboard'}" activeClass="active" title="控制台">
               <icon type="ios-speedometer"></icon><span>控制台</span>
