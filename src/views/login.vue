@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="login">
     <button class="reback btn btn-link btn-lg" @click="reback">
         <icon type="chevron-left"></icon>
     </button>
@@ -31,6 +31,12 @@
 <style _thisd lang="scss">
   //base
   @import "../theme/theme.scss";
+
+  .login {
+    height: 100%;
+    min-height: 100%;
+    background: url(../assets/login_bg.jpg);
+  }
 
   .user-avatar {
     height: 140px;

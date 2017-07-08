@@ -1,8 +1,6 @@
 <!--内容区-->
 <template>
-  <div class="app-content" :class="classes">
       <router-view></router-view>
-  </div>
 </template>
 
 <style lang="scss">
@@ -37,15 +35,6 @@
     .admin_btn {
       display: none;
     }
-  }
-
-  .login-bg {
-    background: url(./assets/login_bg.jpg);
-  }
-
-  .app-content {
-    width: 100%;
-    min-height: 100%;
   }
 
   @include media(">desktop_small") {
