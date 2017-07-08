@@ -16,7 +16,7 @@
               <icon type="ios-book-outline"></icon><span>博客</span>
             </router-link>
           </li>
-<!--          <li>
+<!--           <li>
             <router-link :to="{ name: 'blogn'}" activeClass="active" title="博客">
               <icon type="ios-book-outline"></icon><span>博客新</span>
             </router-link>

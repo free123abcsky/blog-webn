@@ -57,46 +57,14 @@ const routes = [
     },
     meta: { title: '登录'}
   },
-  {
-    path: '/noauth',
-    name: 'noauth',
-    component: function (resolve) {
-      require(['./views/page/noauth.vue'], resolve)
-    },
-    meta: { title: '您没有权限'}
-  },
-  {
-    path: '/404',
-    name: '404',
-    component: function (resolve) {
-      require(['./views/page/404.vue'], resolve)
-    },
-    meta: { title: '您指定的页面已丢失'}
-  },
-  {
-    path: '/500',
-    name: '500',
-    component: function (resolve) {
-      require(['./views/page/500.vue'], resolve)
-    },
-    meta: { title: '服务器开小差了，请等等再试试吧'}
-  },
-  {
-    path: '/maintenance',
-    name: 'maintenance',
-    component: function (resolve) {
-      require(['./views/page/maintenance.vue'], resolve)
-    },
-    meta: { title: '系统正在维护中'}
-  },
-  {
+/*  {
     path: '/blogn',
     name: 'blogn',
     component: function (resolve) {
       require(['./views/blog/blogn.vue'], resolve)
     },
     meta: { title: '博客新'}
-  },
+  },*/
   {
     path: '/blog',
     name: 'blog',
@@ -215,8 +183,39 @@ const routes = [
         meta: {requiresAuth: true},
       },
     ]
-  }
-
+  },
+  {
+    path: '/noauth',
+    name: 'noauth',
+    component: function (resolve) {
+      require(['./views/page/noauth.vue'], resolve)
+    },
+    meta: { title: '您没有权限'}
+  },
+  {
+    path: '/500',
+    name: '500',
+    component: function (resolve) {
+      require(['./views/page/500.vue'], resolve)
+    },
+    meta: { title: '服务器开小差了，请等等再试试吧'}
+  },
+  {
+    path: '/maintenance',
+    name: 'maintenance',
+    component: function (resolve) {
+      require(['./views/page/maintenance.vue'], resolve)
+    },
+    meta: { title: '系统正在维护中'}
+  },
+  {
+    path: '*',
+    name: '404',
+    component: function (resolve) {
+      require(['./views/page/404.vue'], resolve)
+    },
+    meta: { title: '您指定的页面已丢失'}
+  },
 ];
 const router = new VueRouter({
   mode: 'history', //  hash 模式  history 模式
