@@ -58,6 +58,8 @@
 </style>
 
 <script type="text/javascript">
+
+  require('./utils/flexible.js')
   import Vue from "vue";
   import API from "./config";
   import store from './vuex/store'
