@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <button class="reback btn btn-link btn-lg" @click="reback">
-        <icon type="chevron-left"></icon>
-    </button>
+    <icon type="chevron-left"></icon>
+  </button>
     <div class="login-box">
       <div class="user-avatar">
         <div class="round-avatar">
