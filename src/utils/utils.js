@@ -28,6 +28,47 @@ let ua = function() {
   };
 }()
 
+/**
+ *
+ * @desc 判断元素是否有某个class
+ * @param {HTMLElement} ele
+ * @param {String} cls
+ * @return {Boolean}
+ */
+let hasClass = function(ele, cls) {
+  return (new RegExp('(\\s|^)' + cls + '(\\s|$)')).test(ele.className);
+}
+
+/**
+ *
+ * @desc   为元素添加class
+ * @param  {HTMLElement} ele
+ * @param  {String} cls
+ */
+let addClass = function(ele, cls) {
+  if (!hasClass(ele, cls)) {
+    ele.className += ' ' + cls;
+  }
+}
+
+/**
+ *
+ * @desc 为元素移除class
+ * @param {HTMLElement} ele
+ * @param {String} cls
+ */
+let removeClass = function (ele, cls) {
+  if (hasClass(ele, cls)) {
+    var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+    ele.className = ele.className.replace(reg, ' ');
+  }
+}
+
+
 export {
-  ua
+  ua,
+  //Class
+  hasClass,
+  addClass,
+  removeClass
 }

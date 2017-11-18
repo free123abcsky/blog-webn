@@ -209,13 +209,21 @@ const routes = [
     meta: { title: '系统正在维护中'}
   },
   {
+    path: '/drawernav',
+    name: 'drawernav',
+    component: function (resolve) {
+      require(['./views/page/drawerNav.vue'], resolve)
+    },
+    meta: { title: '导航组件'}
+  },
+  {
     path: '*',
     name: '404',
     component: function (resolve) {
       require(['./views/page/404.vue'], resolve)
     },
     meta: { title: '您指定的页面已丢失'}
-  },
+  }
 ];
 const router = new VueRouter({
   mode: 'history', //  hash 模式  history 模式

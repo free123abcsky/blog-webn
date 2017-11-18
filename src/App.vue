@@ -6,6 +6,7 @@
 
   require('./utils/flexible.js')
   import Vue from "vue";
+  import oUtils from "./utils/oUtils";
   import API from "./config";
   import store from './vuex/store'
   import vStorage from './utils/vStorage.js'
@@ -15,6 +16,12 @@
   import {num2MMM, uppercase, addImgPrefix} from "./utils/filters.js";
   import {Sign} from "./api/api_statistic";
   import {mapState, mapActions} from 'vuex';
+
+  /**
+   * 添加工具库
+   * */
+  Vue.use(oUtils);
+
   /**
    * 设置本地存储
    * */
