@@ -37,7 +37,7 @@
     </div>
   </core-layout>
 </template>
-<style scoped lang="scss">
+<style lang="scss">
     //base
     @import "../theme/theme.scss";
 

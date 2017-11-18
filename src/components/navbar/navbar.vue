@@ -8,12 +8,12 @@
         <ul class="nav">
           <li>
             <router-link class="nav-logo" :to="{ name: 'index'}" activeClass="active" exact title="首页">
-              <icon type="ios-home-outline"></icon><span>爱知室</span>
+              <icon type="ios-home-outline"></icon><span>首页</span>
             </router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'blog'}" activeClass="active" title="博客">
-              <icon type="ios-book-outline"></icon><span>博客</span>
+            <router-link :to="{ name: 'blog'}" activeClass="active" title="博文">
+              <icon type="ios-book-outline"></icon><span>博文</span>
             </router-link>
           </li>
 <!--           <li>
@@ -70,7 +70,7 @@
   </div>
   </div>
 </template>
-<style scoped lang="scss">
+<style lang="scss">
   // base
   @import "../../theme/theme.scss";
 

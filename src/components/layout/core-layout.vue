@@ -15,21 +15,6 @@
   </div>
 </template>
 
-<style scoped lang="scss">
-
-  @import "../../theme/theme.scss";
-
-  .app {
-    width: 100%;
-    min-height: 100%;
-  }
-
-  .app-container {
-    position: relative;
-    overflow: hidden;
-  }
-</style>
-
 <script type="text/javascript">
 
   import blogNav from "../navbar";
@@ -59,3 +44,17 @@
     },
   };
 </script>
+
+
+<style lang="scss">
+
+  .app {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  .app-container {
+    position: relative;
+    overflow: hidden;
+  }
+</style>

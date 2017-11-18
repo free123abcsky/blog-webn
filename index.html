@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="zh-cn">
 <head>
-  <!--<base href="/">-->
   <meta charset="utf-8">
   <title>爱知室</title>
-  <meta name="keyword" content="孔繁梭的个人博客,前端技术分享,全栈开发,MEAN,Angualrjs,Mongodb,Nodejs,VUE,阿里云">
+  <meta name="keyword" content="个人博客,前端技术分享,全栈开发,MEAN,Angualrjs,Mongodb,Nodejs,VUE,阿里云">
   <meta name="description" content="一个自用的个人博客,记录JavaScript全栈学习的经验及自己的日常感想!">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="shortcut icon" href="//xiangsongtao.com/favicon.ico">
@@ -22,15 +22,9 @@
   <meta name="apple-mobile-web-app-title" content="BLOG_WEB">
   <!--<link rel="apple-touch-icon" href="favicon.ico">-->
   <link rel="apple-touch-icon-precomposed" href="//xiangsongtao.com/favicon.ico">
-  <!--<link rel="apple-touch-startup-image" href="320-640.jpg" />-->
-  <!--<link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">-->
   <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="//xiangsongtao.com/favicon.ico">
-  <meta name="msapplication-TileColor" content="#000000">
   <!-- Color the status bar on mobile devices -->
   <meta name="theme-color" content="#000000">
-
-<!--  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">-->
   <link href="https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
   <style>
 
@@ -49,168 +43,92 @@
 
     html {
       padding: 0;
-      height: 100%;
       min-height: 100%;
     }
 
-    body {
+    html,body {
       height:100%;
     }
 
-    .app-mask {
+    #startLoader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 5000;
-      background: #fff
     }
-
-    .app-mask:before {
-      content: '';
-      position: absolute;
-      width: 104%;
-      height: 1px;
-      top: 50%;
-      left: -2%;
-      background: #aaa;
-      -webkit-transform: rotate(-15deg);
-      -moz-transform: rotate(-15deg);
-      -o-transform: rotate(-15deg);
-      transform: rotate(-15deg)
-    }
-
-    .app-mask .app-mask-cnt {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 52px;
-      height: 52px;
-      margin: -26px 0 0 -26px
-    }
-
-    .app-mask .app-mask-cnt span {
-      background: #fff
-    }
-
-    .app-mask.app-mask_out {
-      opacity: 0;
-      transition: all .2s ease-in;
-      -moz-transition: all .2s ease-in;
-      -webkit-transition: all .2s ease-in;
-      -o-transition: all .2s ease-in;
-      transition-delay: .6s;
-      -moz-transition-delay: .6s;
-      -webkit-transition-delay: .6s;
-      -o-transition-delay: .6s
-    }
-
-    .app-mask.app-mask_out .app-mask-cnt {
-      -webkit-transform: scale(0);
-      -moz-transform: scale(0);
-      -o-transform: scale(0);
-      transform: scale(0);
-      transition: all .15s ease-in;
-      -moz-transition: all .15s ease-in;
-      -webkit-transition: all .15s ease-in;
-      -o-transition: all .15s ease-in
-    }
-
-    .app-mask.app-mask_out:before {
-      width: 0;
-      left: 50%;
-      transition: all .3s ease;
-      -moz-transition: all .3s ease;
-      -webkit-transition: all .3s ease;
-      -o-transition: all .3s ease;
-      transition-delay: .2s;
-      -moz-transition-delay: .2s;
-      -webkit-transition-delay: .2s;
-      -o-transition-delay: .2s
-    }
-
-    .app-mask-cnt {
-      position: absolute;
-      bottom: 50%;
-      left: 50%;
-      width: 200px;
-      height: 70px;
-      margin-left: -100px;
-      z-index: 1
-    }
-
-    .app-mask-cnt p {
-      padding-top: 20px;
-      font-size: 18px;
-      text-align: center
-    }
-
-    .l-loading {
-      position: relative;
+    .loading {
       display: block;
-      margin: auto;
-      height: 50px;
-      width: 50px;
-      border: 1px solid #555;
-      border-radius: 50%;
-      animation: loading-rond 2s infinite;
-      -webkit-animation: loading-rond 2s infinite
-    }
-
-    .l-loading:after {
-      content: '';
-      position: absolute;
-      height: 8px;
-      width: 8px;
-      top: -4px;
+      position: relative;
       left: 50%;
-      margin-left: -4px;
-      background: #555;
-      border-radius: 100%
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #9370DB;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
     }
-
-    @keyframes loading-rond {
-      0% {
-        transform: rotate(0deg)
+    .loading:before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #BA55D3;
+      -webkit-animation: spin 3s linear infinite;
+      animation: spin 3s linear infinite;
+    }
+    .loading:after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #FF00FF;
+      -webkit-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
+    }
+    @-webkit-keyframes spin {
+      0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
       }
-
       100% {
-        transform: rotate(360deg)
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
       }
     }
-
-    @-webkit-keyframes loading-rond {
-      0% {
-        -webkit-transform: rotate(0deg)
+    @keyframes spin {
+      0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
       }
-
       100% {
-        -webkit-transform: rotate(360deg)
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
       }
     }
 
   </style>
-  <script>
-    window.hideLoadingPage = function hideLoadingPage() {
-
-      var appMask = document.getElementById('appMask');
-      appMask.className += ' app_mask_out';
-      setTimeout(function(){
-        appMask.remove();
-      }, 1000)
-
-    };
-  </script>
 </head>
 <body>
 
 <div id="app"></div>
-<div id="appMask" class="app-mask">
-  <div class="app-mask-cnt">
-    <span class="l-loading"></span>
-  </div>
+<div id="startLoader">
+  <div class="loading"></div>
 </div>
-
 </body>
 </html>
