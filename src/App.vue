@@ -4,7 +4,6 @@
 
 <script type="text/javascript">
 
-  require('./utils/flexible.js')
   import Vue from "vue";
   import oUtils from "./utils/oUtils";
   import API from "./config";

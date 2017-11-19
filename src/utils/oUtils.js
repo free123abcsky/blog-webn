@@ -62,7 +62,6 @@ module.exports = {
           var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
           ele.className = ele.className.replace(reg, ' ').trim();
         }
-        debugger
         return this;
       }
 

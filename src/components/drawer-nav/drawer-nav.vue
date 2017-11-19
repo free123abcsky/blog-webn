@@ -83,11 +83,11 @@
       },
       open() {
 
-        if (touches) {
-          this.$wapper.addEventListener('touchmove.drawer', (e) => {
-            e.preventDefault();
-          })
-        }
+//        if (touches) {
+//          this.$wapper.addEventListener('touchmove.drawer', (e) => {
+//            e.preventDefault();
+//          })
+//        }
 
         this.state = true;
         this.oUtils
@@ -97,7 +97,7 @@
       },
       close() {
 
-        if (touches) {this.$wapper.off('touchmove.drawer')};
+//        if (touches) {this.$wapper.off('touchmove.drawer')};
         this.state = false;
         this.oUtils
           .removeClass(document.body, this.drawerClass.open)
@@ -155,7 +155,7 @@
     padding-right: .75rem;
     padding-left: .75rem;
     text-decoration: none;
-    color: #222;
+    color: #5A5454;
   }
 
   .drawer-menu {
@@ -228,15 +228,22 @@
     transition: left .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
   }
 
+  .drawer-left .drawer-navbar-header {
+    left: 0;
+    -webkit-transition: left .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    transition: left .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  }
+
   .drawer-left.drawer-open .drawer-nav,
   .drawer-left .drawer-hamburger,
   .drawer-left.drawer-open .drawer-navbar .drawer-hamburger {
     left: 0;
   }
 
-  .drawer-left.drawer-open .drawer-hamburger {
+  .drawer-left.drawer-open .drawer-navbar-header {
     left: 16.25rem;
   }
+
 
   /*!------------------------------------*\
       Right
@@ -248,13 +255,19 @@
     transition: right .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
   }
 
+  .drawer-right .drawer-navbar-header {
+    right: 0;
+    -webkit-transition: right .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    transition: right .6s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  }
+
   .drawer-right.drawer-open .drawer-nav,
   .drawer-right .drawer-hamburger,
   .drawer-right.drawer-open .drawer-navbar .drawer-hamburger {
     right: 0;
   }
 
-  .drawer-right.drawer-open .drawer-hamburger {
+  .drawer-right.drawer-open .drawer-navbar-header {
     right: 16.25rem;
   }
 
@@ -263,7 +276,7 @@
   \*!------------------------------------*/
 
   .drawer-hamburger {
-    position: fixed;
+    position: absolute;
     z-index: 104;
     top: 0;
     display: block;
@@ -645,6 +658,4 @@
       max-width: 70rem;
     }
   }
-
-
 </style>
