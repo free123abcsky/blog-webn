@@ -20,10 +20,6 @@
 
 <script type="text/javascript">
 
-  import kUtils from "../../utils/utils"
-
-  var touches = typeof document.ontouchstart != 'undefined';
-
   export default{
     name: 'KDrawerNav',
     props: {
@@ -51,6 +47,7 @@
             overlay: 'drawer-overlay',
             open: 'drawer-open',
             close: 'drawer-close',
+            content: 'content-container'
           }
         }
       }
@@ -83,12 +80,6 @@
       },
       open() {
 
-//        if (touches) {
-//          this.$wapper.addEventListener('touchmove.drawer', (e) => {
-//            e.preventDefault();
-//          })
-//        }
-
         this.state = true;
         this.oUtils
           .removeClass(document.body, this.drawerClass.close)
@@ -97,7 +88,6 @@
       },
       close() {
 
-//        if (touches) {this.$wapper.off('touchmove.drawer')};
         this.state = false;
         this.oUtils
           .removeClass(document.body, this.drawerClass.open)
@@ -396,7 +386,7 @@
     background-color: #fff;
   }
 
-  @media (min-width: 64em) {
+  @media (min-width: 640px) {
     .drawer-sidebar .drawer-hamburger {
       display: none;
       visibility: hidden;
@@ -437,7 +427,7 @@
     }
   }
 
-  @media (min-width: 75em) {
+  @media (min-width: 750px) {
     .drawer-sidebar .drawer-nav {
       width: 16.25rem;
     }
@@ -511,7 +501,11 @@
     padding-bottom: 7.5rem;
   }
 
-  @media (min-width: 64em) {
+  @media screen and (max-width: 640px) {
+
+  }
+
+  @media (min-width: 640px) {
     .drawer-navbar {
       height: 3.75rem;
       border-bottom: 1px solid #ddd;
@@ -643,17 +637,16 @@
   \*!------------------------------------*/
 
   .drawer-container {
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
   }
 
-  @media (min-width: 64em) {
+  @media (min-width: 640px) {
     .drawer-container {
       max-width: 60rem;
     }
   }
 
-  @media (min-width: 75em) {
+  @media (min-width: 750px) {
     .drawer-container {
       max-width: 70rem;
     }

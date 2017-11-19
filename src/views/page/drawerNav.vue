@@ -1,7 +1,7 @@
 <template>
   <div>
     <k-drawer-nav type="left" :fixed="false"></k-drawer-nav>
-    <div class="main">
+    <div class="content-container"  style="background: white;">
       数据测试<br>
       数据测试<br>
       数据测试<br>

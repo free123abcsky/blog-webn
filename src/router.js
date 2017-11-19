@@ -217,6 +217,14 @@ const routes = [
     meta: { title: '导航组件'}
   },
   {
+    path: '/drawernav1',
+    name: 'drawernav1',
+    component: function (resolve) {
+      require(['./views/page/drawerNav1.vue'], resolve)
+    },
+    meta: { title: '导航组件1'}
+  },
+  {
     path: '*',
     name: '404',
     component: function (resolve) {
