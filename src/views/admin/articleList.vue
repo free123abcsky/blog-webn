@@ -1,81 +1,80 @@
 <template>
-  <div class="box-content">
-    <div class="articleList">
-      <!--column title-->
-      <h3 class="title">
-        文章列表 / <span class="">ARTICLE</span>
+  <div class="articles-swapper">
+    <div class="head-title">
+      <h3>
+        <icon type="ios-list"></icon>文章管理
       </h3>
-      <div class="text-right">
-        <router-link :to="{ name: 'admin-article',params: { articleId: 0 }}" activeClass="active" tag="button"
-                     class="btn btn-success">
-          <icon type="android-add"></icon>
-        </router-link>
-      </div>
-      <!--修改,启用禁用,查看-->
-      <table class="table" id="table">
-        <thead>
-        <tr class="text-center">
-          <th>#</th>
-          <th @click="order('title')">文章题目/Title
+    </div>
+    <div class="text-right">
+      <router-link :to="{ name: 'admin-article',params: { articleId: 0 }}" activeClass="active" tag="button"
+                   class="btn btn-success">
+        <icon type="android-add"></icon>
+      </router-link>
+    </div>
+    <!--修改,启用禁用,查看-->
+    <table class="table" id="table">
+      <thead>
+      <tr class="text-center">
+        <th>#</th>
+        <th @click="order('title')">文章题目/Title
             <span v-if="predicate == 'title'">
                     <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                     <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                 </span>
-          </th>
-          <th @click="order('publish_time')">发布时间/Time
+        </th>
+        <th @click="order('publish_time')">发布时间/Time
             <span v-if="predicate == 'publish_time'">
                     <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                     <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                 </span>
-          </th>
-          <th @click="order('read_num')">阅读数/Co.
+        </th>
+        <th @click="order('read_num')">阅读数/Co.
             <span v-if="predicate == 'read_num'">
                     <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                     <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                 </span>
-          </th>
-          <th @click="order('comment_num')">评论数/Co.
+        </th>
+        <th @click="order('comment_num')">评论数/Co.
             <span v-if="predicate == 'comment_num'">
                     <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                     <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                 </span>
-          </th>
-          <th @click="order('state')">状态/State
+        </th>
+        <th @click="order('state')">状态/State
             <span v-if="predicate == 'state'">
                     <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                     <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                 </span>
-          </th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <!--<tbody>-->
-        <tbody>
-          <tr  v-for="(article,index) in orderedArticleLists" :key="article._id">
-          <td>{{index+1}}</td>
-          <td>{{article.title}}</td>
-          <td>{{article.publish_time | moment('YYYY/MM/DD')}}</td>
-          <td>{{article.read_num}}</td>
-          <td>{{article.comment_num}}</td>
-          <td>
-            <span v-if="article.state">已发表</span>
-            <span v-else>草稿</span>
-          </td>
-          <td>
-            <router-link :to="{ name: 'admin-article',params: { articleId: article._id }}" tag="button"
-                         activeClass="active"
-                         class="btn btn-default btn-sm">
-              <icon type="edit"></icon>
-            </router-link>
-            <button data-toggle="modal" data-target="#delArticle" @click="delArtBtn(article)" class="btn btn-danger btn-sm">
-                <icon type="ios-trash"></icon>
-            </button>
-          </td>
-          </tr>
-        </tbody>
-        <!--</tbody>-->
-      </table>
-    </div>
+        </th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <!--<tbody>-->
+      <tbody>
+      <tr  v-for="(article,index) in orderedArticleLists" :key="article._id">
+        <td>{{index+1}}</td>
+        <td>{{article.title}}</td>
+        <td>{{article.publish_time | moment('YYYY/MM/DD')}}</td>
+        <td>{{article.read_num}}</td>
+        <td>{{article.comment_num}}</td>
+        <td>
+          <span v-if="article.state">已发表</span>
+          <span v-else>草稿</span>
+        </td>
+        <td>
+          <router-link :to="{ name: 'admin-article',params: { articleId: article._id }}" tag="button"
+                       activeClass="active"
+                       class="btn btn-default btn-sm">
+            <icon type="edit"></icon>
+          </router-link>
+          <button data-toggle="modal" data-target="#delArticle" @click="delArtBtn(article)" class="btn btn-danger btn-sm">
+            <icon type="ios-trash"></icon>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <!--</tbody>-->
+    </table>
     <!--弹出层-删除-->
     <div class="modal fade" id="delArticle" tabindex="-1" role="dialog" @keyup.enter="confirmDelArtBtn()">
       <div class="modal-dialog" role="document">
@@ -98,44 +97,6 @@
     </div>
   </div>
 </template>
-<style scoped lang="scss">
-  //base
-  @import "../../theme/theme.scss";
-
-  .articleList {
-    .title {
-      width: 100%;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .btnBox {
-      //text-align: right;
-    }
-    table {
-      text-align: center;
-      color: #fff;
-      th {
-        text-align: center;
-        color: #00b2e2;
-        position: relative;
-        cursor: pointer;
-        span {
-          position: absolute;
-          margin-left: 5px;
-          top: inherit;
-          left: inherit;
-        }
-      }
-      td {
-        vertical-align: middle !important;
-        //cursor: pointer;
-        max-width: 190px;
-        border-top-color:transparent;
-        border-bottom:1px solid $border-bottom-dark;
-      }
-    }
-  }
-</style>
 <script type="text/javascript">
   import Vue from "vue";
   import _ from "lodash";
@@ -192,3 +153,45 @@
   }
 
 </script>
+<style lang="scss">
+  //base
+  @import "../../theme/theme.scss";
+
+  .head-title{
+    width:100%;
+    margin-bottom: 25px;
+    i {
+      padding-left: 20px;
+      padding-right: 10px;
+    }
+  }
+
+  .articles-swapper {
+    .btnBox {
+      //text-align: right;
+    }
+    table {
+      text-align: center;
+      color: #fff;
+      th {
+        text-align: center;
+        color: #00b2e2;
+        position: relative;
+        cursor: pointer;
+        span {
+          position: absolute;
+          margin-left: 5px;
+          top: inherit;
+          left: inherit;
+        }
+      }
+      td {
+        vertical-align: middle !important;
+        //cursor: pointer;
+        max-width: 190px;
+        border-top-color:transparent;
+        border-bottom:1px solid $border-bottom-dark;
+      }
+    }
+  }
+</style>

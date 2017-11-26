@@ -1,28 +1,28 @@
 <template>
-  <div class="box-content dashboard">
-    <!--我的信息title-->
-    <h3 class="title">
-      <i class="fa fa-fw fa-lg fa-dashboard"></i> 控制台 / <span class="">DASHBOARD</span>
-    </h3>
-
-    <div class="main">
-      <h4 class="main--title"><i class="fa fa-server"></i> 统计/Statistic</h4>
-      <section class="main--statistic">
-        <div class="statisticEach">
+  <div class="dashboard-swapper">
+    <div class="head-title">
+      <h3>
+        <icon type="ios-speedometer"></icon>控制台
+      </h3>
+    </div>
+    <div class="stat-swapper">
+      <h4 class="stat-title"><i class="fa fa-server"></i> 统计/Statistic</h4>
+      <section class="stat-content">
+        <div class="stat-item">
           <h2>Today</h2>
           <p>
             {{total[0]}}
             <small>PV</small>
           </p>
         </div>
-        <div class="statisticEach">
+        <div class="stat-item">
           <h2>Month</h2>
           <p>
             {{total[1]}}
             <small>PV</small>
           </p>
         </div>
-        <div class="statisticEach">
+        <div class="stat-item">
           <h2>Year</h2>
           <p>
             {{total[2]}}
@@ -30,16 +30,16 @@
           </p>
         </div>
       </section>
-      <h4 class="main--title"><i class="fa fa-bar-chart"></i> 今日统计/Charts</h4>
-      <section class="main--statistic">
-        <div class="statistic--chart" id="chart">
+      <h4 class="stat-title"><i class="fa fa-bar-chart"></i> 今日统计/Charts</h4>
+      <section class="stat-content">
+        <div class="stat-chart" id="chart">
           <!--chart here-->
         </div>
       </section>
 
-      <h4 class="main--title"><i class="fa fa-map-o"></i> 访问分布/Maps</h4>
-      <section class="main--statistic">
-        <div class="statistic--map" id="map">
+      <h4 class="stat-title"><i class="fa fa-map-o"></i> 访问分布/Maps</h4>
+      <section class="stat-content">
+        <div class="stat-map" id="map">
           <!--map here-->
         </div>
       </section>
@@ -47,71 +47,6 @@
 
   </div>
 </template>
-<style scoped lang="scss">
-  //base
-  @import "../../theme/theme.scss";
-
-  .dashboard {
-    overflow: hidden;
-    height: 100%;
-    min-height: 500px;
-    .title {
-      width: 100%;
-      color: #fff;
-      margin-bottom: 30px;
-    }
-
-  }
-
-  .main {
-    color: #fff;
-    .main--title {
-      color: $base-theme-color;
-    }
-    .main--statistic {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 35px;
-      .statisticEach {
-        text-align: center;
-        color: #fff;
-        flex: 1;
-        border-right: 1px solid #fff;
-        border-left: 1px solid transparent;
-        &:nth-last-child(1) {
-          border-right: 4px solid transparent;
-        }
-        h2 {
-          margin-bottom: 0;
-          font-size: 20px;
-        }
-        p {
-          color: $base-theme-color;
-          font-size: 35px;
-        }
-      }
-
-      .statistic--chart {
-        width: 100%;
-        height: 400px;
-        border-radius: 5px;
-        padding: 8px;
-        box-sizing: border-box;
-        background: #fff !important;
-      }
-      .statistic--map {
-        width: 100%;
-        height: 500px;
-        padding: 8px;
-        border-radius: 5px;
-        box-sizing: border-box;
-        background: #fff !important;
-      }
-    }
-  }
-
-</style>
 <script type="text/javascript">
   import Vue from "vue";
   import {GetTotal, GetChart, GetMap} from "../../api/api_statistic";
@@ -296,6 +231,74 @@
 
     },
   }
-
-
 </script>
+<style lang="scss">
+  //base
+  @import "../../theme/theme.scss";
+
+  .dashboard-swapper {
+    height: 100%;
+    min-height: 500px;
+  }
+
+  .head-title{
+    width:100%;
+    margin-bottom: 25px;
+    i {
+      padding-left: 20px;
+      padding-right: 10px;
+    }
+  }
+
+  .stat-swapper{
+    .stat-title {
+      color: $base-theme-color;
+    }
+    .stat-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding: 0 5px;
+      .stat-item {
+        text-align: center;
+        color: #fff;
+        flex: 1;
+        border-right: 1px solid #fff;
+        border-left: 1px solid transparent;
+        background: #805c30;
+        &:nth-last-child(1) {
+          border-right: 4px solid transparent;
+        }
+        h2 {
+          margin-bottom: 0;
+          font-size: 20px;
+        }
+        p {
+          color: $base-theme-color;
+          font-size: 35px;
+        }
+      }
+
+      .stat-chart {
+        width: 100%;
+        height: 400px;
+        border-radius: 5px;
+        padding: 8px;
+        box-sizing: border-box;
+        background: #fff !important;
+      }
+      .stat-map {
+        width: 100%;
+        height: 500px;
+        padding: 8px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background: #fff !important;
+      }
+    }
+  }
+
+
+
+</style>

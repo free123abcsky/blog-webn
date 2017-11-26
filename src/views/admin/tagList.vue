@@ -1,72 +1,72 @@
 <template>
-  <div class="box-content">
-    <div class="tags">
-      <h3 class="title">
-        标签管理 / <span class="">TAGS</span>
+  <div class="tags-swapper">
+    <div class="head-title">
+      <h3>
+        <icon type="ios-pricetag"></icon>标签管理
       </h3>
-      <!--增加-->
-      <div class="btnBox text-right">
-        <button data-toggle="modal" data-target="#addTag" @click="addNewTagBtn()" class="btn btn-success">
-          <icon type="android-add"></icon>
-        </button>
-      </div>
-      <div class="tableScrollBox">
-        <div class="table-body">
-          <table class="table table-condensed" id="table">
-            <thead>
-            <tr class="text-center">
-              <th>#</th>
-              <th @click="order('name')">
-                标签名称/Name
-                <span v-if="predicate == 'name'">
+    </div>
+    <!--增加-->
+    <div class="btnBox text-right">
+      <button data-toggle="modal" data-target="#addTag" @click="addNewTagBtn()" class="btn btn-success">
+        <icon type="android-add"></icon>
+      </button>
+    </div>
+    <div class="tableScrollBox">
+      <div class="table-body">
+        <table class="table table-condensed" id="table">
+          <thead>
+          <tr class="text-center">
+            <th>#</th>
+            <th @click="order('name')">
+              标签名称/Name
+              <span v-if="predicate == 'name'">
                         <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                         <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                     </span>
-              </th>
-              <th @click="order('catalogue_name')">
-                分类名称/Cat.
-                <span v-if="predicate == 'catalogue_name'">
+            </th>
+            <th @click="order('catalogue_name')">
+              分类名称/Cat.
+              <span v-if="predicate == 'catalogue_name'">
                         <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                         <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                     </span>
-              </th>
-              <th @click="order('used_num')">引用数/Quote
+            </th>
+            <th @click="order('used_num')">引用数/Quote
                 <span v-if="predicate == 'used_num'">
                         <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                         <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                     </span></th>
-              <th @click="order('create_time')">创建时间/C.T.
+            <th @click="order('create_time')">创建时间/C.T.
                 <span v-if="predicate == 'create_time'">
                         <i v-if="reverse==='asc'" class="fa fa-caret-up"></i>
                         <i v-if="reverse==='desc'" class="fa fa-caret-down"></i>
                     </span>
-              </th>
-              <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(tag,index) in orderedTagList">
-              <!--<tr v-for="tag in tagLists | orderBy predicate reverse">-->
-              <td>{{index+1}}</td>
-              <td>{{tag.name}}</td>
-              <td>{{tag.catalogue_name}}</td>
-              <td>{{tag.used_num}}</td>
-              <td>{{tag.create_time | moment("YYYY/MM/DD")}}</td>
-              <td>
-                <button data-toggle="modal" data-target="#editTag" @click="editTagBtn(tag)" class="btn btn-default btn-sm">
-                  <icon type="edit"></icon>
-                </button>
-                <button data-toggle="modal" data-target="#delTag" @click="delTagBtn(tag._id)" class="btn btn-danger btn-sm">
-                        <i class="fa fa-bitbucket"></i>
-                  <icon type="ios-trash"></icon>
-                </button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-
+            </th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="(tag,index) in orderedTagList">
+            <!--<tr v-for="tag in tagLists | orderBy predicate reverse">-->
+            <td>{{index+1}}</td>
+            <td>{{tag.name}}</td>
+            <td>{{tag.catalogue_name}}</td>
+            <td>{{tag.used_num}}</td>
+            <td>{{tag.create_time | moment("YYYY/MM/DD")}}</td>
+            <td>
+              <button data-toggle="modal" data-target="#editTag" @click="editTagBtn(tag)" class="btn btn-default btn-sm">
+                <icon type="edit"></icon>
+              </button>
+              <button data-toggle="modal" data-target="#delTag" @click="delTagBtn(tag._id)" class="btn btn-danger btn-sm">
+                <i class="fa fa-bitbucket"></i>
+                <icon type="ios-trash"></icon>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+
     </div>
 
     <!--弹出层-增加-->
@@ -158,55 +158,7 @@
 
 
 </template>
-<style scoped lang="scss">
-  //base
-  @import "../../theme/theme.scss";
 
-  .deleteConfirmText {
-    margin: 10px;
-  }
-
-  .tags {
-    height: 100%;
-    .title {
-      width: 100%;
-      color: #fff;
-      margin-bottom: 10px;
-      text-align: left;
-    }
-    .btnBox {
-    }
-    table {
-      color: #fff;
-      th {
-        text-align: center;
-        color: #00b2e2;
-        cursor: pointer;
-        position: relative;
-        span {
-          position: absolute;
-          margin-left: 5px;
-          top: inherit;
-          left: inherit;
-        }
-      }
-      .danger td {
-        background-color: rgba(255, 2, 0, 0.53) !important;
-      }
-      .warning td {
-        background-color: rgba(2, 255, 0, 0.35) !important;
-      }
-      td {
-        vertical-align: middle !important;
-        font-size: 14px;
-        text-align: center;
-        border-top-color:transparent;
-        border-bottom:1px solid $border-bottom-dark;
-      }
-    }
-  }
-
-</style>
 <script type="text/javascript">
   import Vue from "vue";
   import _ from "lodash";
@@ -398,3 +350,62 @@
     }
   }
 </script>
+<style lang="scss">
+  //base
+  @import "../../theme/theme.scss";
+
+  .head-title{
+    width:100%;
+    margin-bottom: 25px;
+    i {
+      padding-left: 20px;
+      padding-right: 10px;
+    }
+  }
+
+
+  .deleteConfirmText {
+    margin: 10px;
+  }
+
+  .tags-swapper {
+    height: 100%;
+    .title {
+      width: 100%;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .btnBox {
+    }
+    table {
+      color: #fff;
+      th {
+        text-align: center;
+        color: #00b2e2;
+        cursor: pointer;
+        position: relative;
+        span {
+          position: absolute;
+          margin-left: 5px;
+          top: inherit;
+          left: inherit;
+        }
+      }
+      .danger td {
+        background-color: rgba(255, 2, 0, 0.53) !important;
+      }
+      .warning td {
+        background-color: rgba(2, 255, 0, 0.35) !important;
+      }
+      td {
+        vertical-align: middle !important;
+        font-size: 14px;
+        text-align: center;
+        border-top-color:transparent;
+        border-bottom:1px solid $border-bottom-dark;
+      }
+    }
+  }
+
+</style>

@@ -117,7 +117,10 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: function (resolve) {
-      require(['./views/admin/admin.vue'], resolve)
+      require(['./views/admin.vue'], resolve)
+    },
+    redirect: {
+      name: 'admin-dashboard'
     },
     meta: {requiresAuth: true},
     children: [
@@ -127,7 +130,7 @@ const routes = [
         component: function (resolve) {
           require(['./views/admin/dashboard.vue'], resolve)
         },
-        meta: {requiresAuth: true},
+        meta: {title: '控制台', requiresAuth: true},
       },
       {
         path: 'myinfo',
@@ -135,7 +138,7 @@ const routes = [
         component: function (resolve) {
           require(['./views/admin/myInfo.vue'], resolve)
         },
-        meta: {requiresAuth: true},
+        meta: {title: '个人信息', requiresAuth: true},
       },
       {
         path: 'tag',
@@ -143,7 +146,15 @@ const routes = [
         component: function (resolve) {
           require(['./views/admin/tagList.vue'], resolve)
         },
-        meta: {requiresAuth: true},
+        meta: {title: '标签管理', requiresAuth: true},
+      },
+      {
+        path: 'articles',
+        name: 'articles',
+        component: function (resolve) {
+          require(['./views/admin/articles.vue'], resolve)
+        },
+        meta: {title: '文章管理', requiresAuth: true},
       },
       {
         path: 'articleManager',
@@ -180,7 +191,7 @@ const routes = [
         component: function (resolve) {
           require(['./views/admin/commentList.vue'], resolve)
         },
-        meta: {requiresAuth: true},
+        meta: {title: '评论管理', requiresAuth: true},
       },
     ]
   },
@@ -209,22 +220,6 @@ const routes = [
     meta: { title: '系统正在维护中'}
   },
   {
-    path: '/drawernav',
-    name: 'drawernav',
-    component: function (resolve) {
-      require(['./views/page/drawerNav.vue'], resolve)
-    },
-    meta: { title: '导航组件'}
-  },
-  {
-    path: '/drawernav1',
-    name: 'drawernav1',
-    component: function (resolve) {
-      require(['./views/page/drawerNav1.vue'], resolve)
-    },
-    meta: { title: '导航组件1'}
-  },
-  {
     path: '*',
     name: '404',
     component: function (resolve) {
@@ -236,6 +231,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history', //  hash 模式  history 模式
   base: '/',//默认值: "/",应用的基路径。例如，如果整个单页应用服务在 /app/ 下，然后 base 就应该设为 "/app/"。
+  linkActiveClass: 'active',
   routes: routes // （缩写）相当于 routes: routes
 });
 

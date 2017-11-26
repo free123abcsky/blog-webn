@@ -28,55 +28,6 @@
     </div>
   </div>
 </template>
-<style _thisd lang="scss">
-  //base
-  @import "../theme/theme.scss";
-
-  .login {
-    height: 100%;
-    min-height: 100%;
-    background: url(../assets/login_bg.jpg);
-  }
-
-  .user-avatar {
-    height: 140px;
-    padding: 30px;
-    .round-avatar {
-      margin: 0 auto;
-      width:80px;
-      height:80px;
-      font-size: 70px;
-      text-align: center;
-      color: #eee;
-      border-radius: 50px;
-      background: #00b2e2;
-    }
-  }
-
-  .login-box {
-    position: absolute;
-    margin: auto;
-    left: 10px;
-    top: 0;
-    right: 10px;
-    bottom: 0;
-    min-width: 300px;
-    max-width: 340px;
-    height:310px;
-    padding: 0px 30px 30px 30px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    .err-text {
-      color: $base-red-color;
-      display: inline-block;
-      width: 100%;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-    }
-  }
-</style>
-
 
 <script type="text/javascript">
   import Vue from "vue";
@@ -145,7 +96,7 @@
           Vue.http.defaults.headers.common['authorization'] = "Bearer " + response.token;
           _this.setLoginState(true);//设置全局登录状态
           _this.$router.replace({//跳转
-            name: 'index'
+            name: 'admin'
           });
           _this.loading = false;
         }, (err)=> {
@@ -161,3 +112,51 @@
     }
   }
 </script>
+<style _thisd lang="scss">
+  //base
+  @import "../theme/theme.scss";
+
+  .login {
+    height: 100%;
+    min-height: 100%;
+    background: url(../assets/login_bg.jpg);
+  }
+
+  .user-avatar {
+    height: 140px;
+    padding: 30px;
+    .round-avatar {
+      margin: 0 auto;
+      width:80px;
+      height:80px;
+      font-size: 70px;
+      text-align: center;
+      color: #eee;
+      border-radius: 50px;
+      background: #00b2e2;
+    }
+  }
+
+  .login-box {
+    position: absolute;
+    margin: auto;
+    left: 10px;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    min-width: 300px;
+    max-width: 340px;
+    height:310px;
+    padding: 0px 30px 30px 30px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    .err-text {
+      color: $base-red-color;
+      display: inline-block;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+  }
+</style>
