@@ -15,7 +15,6 @@
           <span class="publish-time">
              {{article.publish_time | moment('YYYY/MM/DD')}}
           </span>
-
         </li>
       </ul>
     </div>
@@ -28,24 +27,32 @@
           <icon type="ios-pricetag"></icon>
         </span>
       </div>
+      <div>
+        <editor v-model="value"></editor>
+      </div>
     </div>
   </div>
 </template>
 <script type="text/javascript">
   import Vue from "vue";
   import _ from "lodash";
+  import editor from "../../components/editor/editor";
   import {
     GetArticleList,
     DeleteArticle,
   } from "../../api/api_article";
 
   module.exports = {
+    components: {
+      editor
+    },
     data: function () {
       return {
         reverse: 'desc',
         predicate: 'publish_time',
         articleLists: [],
         deleteArticle: {},
+        value: ''
       }
     },
     computed:{
